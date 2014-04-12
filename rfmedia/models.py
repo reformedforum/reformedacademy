@@ -8,6 +8,17 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+class Type(models.Model):
+    name = models.CharField(max_length=255)
+    created = models.DateTimeField()
+    modified = models.DateTimeField()
+    class Meta:
+        db_table = 'types'
+
+    def __unicode__(self):
+        return self.name
+
+
 class Asset(models.Model):
     type = models.ForeignKey(Type)
     tag = models.CharField(max_length=255)
@@ -19,6 +30,12 @@ class Asset(models.Model):
     active = models.IntegerField()
     created = models.DateTimeField()
     modified = models.DateTimeField()
+    class Meta:
+        db_table = 'assets'
+
+    def __unicode__(self):
+        return self.url
+
 
 class Stat(models.Model):
     asset = models.ForeignKey(Asset)
@@ -37,8 +54,8 @@ class Stat(models.Model):
     longitude = models.FloatField(blank=True, null=True)
     created = models.DateTimeField()
     modified = models.DateTimeField()
+    class Meta:
+        db_table = 'stats'
 
-class Type(models.Model):
-    name = models.CharField(max_length=255)
-    created = models.DateTimeField()
-    modified = models.DateTimeField()
+    def __unicode__(self):
+        return '{} {}'.format(self.asset, self.ip)
