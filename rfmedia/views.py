@@ -17,14 +17,24 @@ def download(request, method, type, asset):
     # Choose asset randomly
     asset = random.choice(assets)
 
-    # Log access to file
+    # Grab request META information
     ip = request.META['REMOTE_ADDR']
     useragent = request.META['HTTP_USER_AGENT']
+
+    # If we don't have an IP or user agent throw a 404
+    if not ip or not useragent:
+        throw Http404
+
     referer = None
     if 'HTTP_REFERER' in request.META:
         referer = request.META['HTTP_REFERER']
 
-    Stat.objects.create(asset=asset, ip=ip, useragent=useragent, method=method, referer=referer,
-                        created=timezone.now(), modified=timezone.now())
+    # Create the Stat object
+    stat = Stat.objects.create(asset=asset, ip=ip, useragent=useragent, method=method,
+                               referer=referer, created=timezone.now(), modified=timezone.now())
+
+    # Make sure we have a stat object otherwise throw a 404
+    if not stat:
+        throw Http404
 
     return HttpResponseRedirect(asset.url)
