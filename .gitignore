@@ -51,3 +51,4 @@ reports/
 local_settings.py
 media/
 
+.elasticbeanstalk/
