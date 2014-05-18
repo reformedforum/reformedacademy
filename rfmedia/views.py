@@ -23,7 +23,7 @@ def download(request, method, type, asset):
 
     # If we don't have an IP or user agent throw a 404
     if not ip or not useragent:
-        throw Http404
+        raise Http404
 
     referer = None
     if 'HTTP_REFERER' in request.META:
@@ -35,6 +35,6 @@ def download(request, method, type, asset):
 
     # Make sure we have a stat object otherwise throw a 404
     if not stat:
-        throw Http404
+        raise Http404
 
     return HttpResponseRedirect(asset.url)
