@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.shortcuts import redirect
 import os.path
 import random
+from ipware.ip import get_ip
 
 def download(request, method, type, asset):
     # Remove extension from asset
@@ -18,7 +19,7 @@ def download(request, method, type, asset):
     asset = random.choice(assets)
 
     # Grab request META information
-    ip = request.META['REMOTE_ADDR']
+    ip = get_ip(request)
     useragent = request.META['HTTP_USER_AGENT']
 
     # If we don't have an IP or user agent throw a 404
