@@ -9,8 +9,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'gomoto',                      # Name of the database to connect to.
-        'USER': 'root',                      
-        'PASSWORD': '',                  
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': '',                            # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                            # Set to empty string for default. Not used with sqlite3.
     }
@@ -18,6 +18,10 @@ DATABASES = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# HTTPS
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 LOGGING = {
     'version': 1,
