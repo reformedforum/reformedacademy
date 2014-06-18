@@ -8,7 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 import os
-from S3 import CallingFormat
+from boto.s3.connection import OrdinaryCallingFormat
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'rfmedia',
-    'tastypie'
+    'tastypie',
+    'storages'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -107,4 +108,4 @@ if 'AWS_SECRET_KEY' in os.environ:
 if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_SECURE_URLS = True
-AWS_CALLING_FORMAT = CallingFormat.PATH
+AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
