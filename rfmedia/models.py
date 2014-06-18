@@ -56,7 +56,7 @@ class Stat(models.Model):
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
     created = models.DateTimeField()
-    modified = models.DateTimeField()
+    modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         db_table = 'stats'

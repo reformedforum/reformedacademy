@@ -21,32 +21,32 @@ if 'SECRET_KEY' in os.environ:
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rfmedia-py-env-mg39wqh8v5.elasticbeanstalk.com', 'reformed.academy']
 
 
 # Application definition
 
 INSTALLED_APPS = (
-#     'django.contrib.admin',
-#     'django.contrib.auth',
-#     'django.contrib.messages',
-#     'django.contrib.staticfiles',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
     'rfmedia',
     'tastypie'
 )
 
 MIDDLEWARE_CLASSES = (
-#     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-#     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
