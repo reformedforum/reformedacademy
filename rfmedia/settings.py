@@ -106,3 +106,4 @@ if 'AWS_SECRET_KEY' in os.environ:
 if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_SECURE_URLS = True
+AWS_CALLING_FORMAT = CallingFormat.PATH
