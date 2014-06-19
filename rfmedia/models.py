@@ -1,11 +1,11 @@
-"""models.py
+"""rfmedia models.py
 
-Created by kabucey.
+Defines models for the rfmedia app.
+
+Created by kabucey
 
 """
-
 from __future__ import unicode_literals
-
 from django.db import models
 
 

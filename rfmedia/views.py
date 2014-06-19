@@ -1,4 +1,8 @@
-"""rfmedia/views.py
+"""rfmedia views.py
+
+Defines views for the rfmedia app.
+
+Created by kabucey
 
 """
 from django.shortcuts import render, get_object_or_404, get_list_or_404

@@ -1,7 +1,10 @@
-"""rfmedia/api.py
+"""rfmedia views.py
+
+Defines api resources for the rfmedia app.
+
+Created by kabucey
 
 """
-
 from tastypie.resources import ModelResource
 from tastypie.authentication import ApiKeyAuthentication
 from rfmedia.models import Stat
