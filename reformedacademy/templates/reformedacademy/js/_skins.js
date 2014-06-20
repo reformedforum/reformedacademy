@@ -1,0 +1,2 @@
+var default_skins_data = {"light-blue": {"skin_color": "#279FBB"}, "green": {"skin_color": "#26ae91"}, "red": {"skin_color": "#d14836"}, "pink": {"skin_color": "#bb3b6b"}, "light-purple": {"skin_color": "#bba6bb"}, "orange": {"skin_color": "#dd6153"}, "bright-green": {"skin_color": "#8cbb75"}, "dark-blue": {"skin_color": "#2580b1"}, "oil": {"skin_color": "#9b9e40"}, "black": {"skin_color": "#5f5d5c"}, "light-brown": {"skin_color": "#d06f71"}, "coffee": {"skin_color": "#9d634c"}};
+var skins_data = Object.create(default_skins_data); 

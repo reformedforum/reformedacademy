@@ -1,0 +1,95 @@
+
+
+
+
+
+.navigation > li:hover > a,
+.navigation > li > a:hover,
+.navigation > li > .activelink,.navigation > li:hover > a > i{
+    color: #9b9e40;
+}
+.navigation ul{
+    border-color: #9b9e40;
+}
+.mobile-menu-button, .mobile-nav{   
+    background-color: #9b9e40;    
+}
+
+.navigation > li > a:after, .navigation>li>.activelink:after{
+    background-color: #9b9e40;
+}
+.navigation ul li:hover > a, .navigation ul li a.activelink {
+    background-color: #9b9e40;
+}
+.h1-page-title{
+    color: #9b9e40;
+}
+
+/* Page Content Colors */
+.body-wrapper a:hover , .tab a:hover, accordion .title:hover, .top-body a:hover, .bottom-body a:hover,.content-box.content-style2 h4 i
+, .accordion .title:hover h4, .side-navigation .menu-item.current-menu-item a, .side-navigation .menu-item:hover a:after,
+.side-navigation .menu-item:hover a, .tool-tip, .team-member .team-member-position, .team-member-progress .team-member-position, .item-img-overlay i
+,ul.icon-content-list-container li.icon-content-single .icon-box i{
+    color: #9b9e40;
+}
+
+.callout-box,.team-member .team-member-content, .feature .feature-content
+,.inputStyle:focus, .form-wrapper input[type=text]:focus, .form-wrapper .form-input:focus, .form-wrapper input[type=email]:focus, .form-wrapper textarea:focus {
+    border-color: #9b9e40;
+}
+.team-member-progress-bar{
+    background: #9b9e40;
+}
+.tab a.active:after {
+    background-color:#9b9e40;
+    border-color: #9b9e40;
+}
+.item-img-overlay{
+    background-color: rgba(155,158,64,0.5);
+}
+.item-img-overlay i:hover{
+    background-color: rgba(155,158,64,0.5);
+}
+
+.button, .body-wrapper input[type="submit"], .body-wrapper input[type="button"]
+,button.button-main,.body-wrapper .tags a:hover,.callout-box.callout-box2, .blog-search .blog-search-button{
+    background-color: #9b9e40;
+}
+
+.blog-post-icon,.comments-list .children .comment:before,.portfolio-filter li a.portfolio-selected, 
+.portfolio-filter li a:hover, .dropcaps.dropcaps-color-style, .carousel-container .carousel-icon:hover{
+    background-color: #9b9e40;
+}
+.comments-list .children .comment:after{
+    border-color: transparent transparent transparent #9b9e40;;
+}
+
+.highlighted-text{
+    background-color: #9b9e40;
+    color: #ffffff;
+}
+.icons-list.colored-list li:before, .blog-post-date .day, .blog-post-date .month, strong.colored, span.colored{
+    color: #9b9e40;
+}
+.pagination .prev, .pagination .next, .pagination a:hover, .pagination a.current{
+    background-color: #9b9e40;
+    color: #fff;
+}
+div.pagination a{
+    border-color:   #9b9e40;
+    color:   #9b9e40;
+}
+
+/* Footer Area Colors */
+
+.footer .copyright{
+    border-color: #9b9e40;
+}
+
+.footer .copyright a:hover{
+    color: #9b9e40;
+}
+.flickr_badge_wrapper .flickr_badge_image img:hover{
+    border-color: #9b9e40;
+}
+
