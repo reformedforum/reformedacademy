@@ -10,7 +10,7 @@ v1_api.register(StatResource())
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'reformedacademy.views.home', name='home'),
+    url(r'^$', 'reformedacademy.views.index', name='index'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^assets/download/(?P<method>\w+)/(?P<type>\w+)/(?P<asset>\w+)', 'reformedacademy.views.download'),
