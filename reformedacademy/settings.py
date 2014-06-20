@@ -1,5 +1,5 @@
 """
-Django settings for rfmedia project.
+Django settings for reformedacademy project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -26,7 +26,7 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['rfmedia-py-env-mg39wqh8v5.elasticbeanstalk.com', 'reformed.academy']
+ALLOWED_HOSTS = ['reformedacademy-py-env-mg39wqh8v5.elasticbeanstalk.com', 'reformed.academy']
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'rfmedia',
+    'reformedacademy',
     'tastypie',
     'storages'
 )
@@ -52,9 +52,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'rfmedia.urls'
+ROOT_URLCONF = 'reformedacademy.urls'
 
-WSGI_APPLICATION = 'rfmedia.wsgi.application'
+WSGI_APPLICATION = 'reformedacademy.wsgi.application'
 
 
 # Database

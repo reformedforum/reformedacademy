@@ -10,10 +10,10 @@ v1_api.register(StatResource())
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'rfmedia.views.home', name='home'),
+    # url(r'^$', 'reformedacademy.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^assets/download/(?P<method>\w+)/(?P<type>\w+)/(?P<asset>\w+)', 'rfmedia.views.download'),
+    url(r'^assets/download/(?P<method>\w+)/(?P<type>\w+)/(?P<asset>\w+)', 'reformedacademy.views.download'),
     url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include(v1_api.urls)),
 )

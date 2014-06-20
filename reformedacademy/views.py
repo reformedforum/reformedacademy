@@ -1,12 +1,12 @@
-"""rfmedia views.py
+"""reformedacademy views.py
 
-Defines views for the rfmedia app.
+Defines views for the reformedacademy app.
 
 Created by kabucey
 
 """
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from rfmedia.models import Stat, Asset
+from reformedacademy.models import Stat, Asset
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.shortcuts import redirect

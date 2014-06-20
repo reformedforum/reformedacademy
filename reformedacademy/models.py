@@ -1,6 +1,6 @@
-"""rfmedia models.py
+"""reformedacademy models.py
 
-Defines models for the rfmedia app.
+Defines models for the reformedacademy app.
 
 Created by kabucey
 

@@ -1,6 +1,6 @@
-"""rfmedia views.py
+"""reformedacademy views.py
 
-Administrative configuration for the rfmedia app.
+Administrative configuration for the reformedacademy app.
 
 Created by kabucey
 
