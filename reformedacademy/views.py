@@ -43,3 +43,7 @@ def download(request, method, type, asset):
         raise Http404
 
     return HttpResponseRedirect(asset.url)
+    
+    
+def index(request):
+	return render(request, 'reformedacademy/index.html')
