@@ -26,7 +26,7 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['reformedacademy-py-env-mg39wqh8v5.elasticbeanstalk.com', 'reformed.academy']
+ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy']
 
 
 # Application definition
