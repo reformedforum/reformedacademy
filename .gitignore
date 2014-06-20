@@ -52,5 +52,4 @@ local_settings.py
 media/
 
 .elasticbeanstalk/
-.ebextensions/
 aws_credential_file
