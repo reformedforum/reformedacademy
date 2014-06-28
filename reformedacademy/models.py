@@ -7,12 +7,13 @@ Created by kabucey
 """
 from __future__ import unicode_literals
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Type(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True, null=True)
     created = models.DateTimeField()
-    modified = models.DateTimeField()
+    modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         db_table = 'types'
@@ -23,15 +24,19 @@ class Type(models.Model):
 
 class Asset(models.Model):
     type = models.ForeignKey(Type)
-    tag = models.CharField(max_length=255)
-    url = models.CharField(max_length=255)
+    tag = models.CharField(max_length=255, blank=True, null=True)
+    url = models.CharField(max_length=255, blank=True, null=True)
     filesize = models.BigIntegerField(blank=True, null=True)
-    duration = models.CharField(max_length=255, blank=True)
-    mime_type = models.CharField(max_length=255, blank=True)
-    thumbnail_url = models.CharField(max_length=255, blank=True)
+    duration = models.CharField(max_length=255, blank=True, null=True)
+    mime_type = models.CharField(max_length=255, blank=True, null=True)
+    thumbnail_url = models.CharField(max_length=255, blank=True, null=True)
     active = models.IntegerField()
     created = models.DateTimeField()
-    modified = models.DateTimeField()
+    modified = models.DateTimeField(blank=True, null=True)
+
+    @property
+    def download_url(self):
+        return reverse('download_asset', args=['web', self.type.name, '{}.mp3'.format(self.tag)])
 
     class Meta:
         db_table = 'assets'
