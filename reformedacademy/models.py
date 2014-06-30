@@ -47,7 +47,7 @@ class Asset(models.Model):
 
 class Stat(models.Model):
     asset = models.ForeignKey(Asset)
-    ip = models.CharField(max_length=16, blank=True)
+    ip = models.CharField(max_length=255, blank=True)
     useragent = models.CharField(max_length=255, blank=True)
     referer = models.CharField(max_length=255, blank=True)
     method = models.CharField(max_length=4, blank=True)
