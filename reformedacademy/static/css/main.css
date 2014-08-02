@@ -1,0 +1,460 @@
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+html, body {
+    /* height:100%; */
+    font-family: 'Questrial', sans-serif;
+    letter-spacing: .5px;
+}
+
+html *, body * {
+    /* outline: 1px dotted magenta; */
+}
+
+a {
+    color: #34aadc;
+}
+
+a:hover {
+    color: #34aadc;
+}
+
+a:visited {
+    color: #34aadc;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.menu {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.64);
+    color: #fff;
+    height: 100%;
+    text-transform: uppercase;
+    width: 250px;
+    left: -250px;
+
+    transition: all 300ms;
+    z-index: 1;
+}
+
+.menu.open {
+    left: 0;
+}
+
+.menu ul {
+    list-style: none;
+    margin-left: -10px;
+}
+
+.menu li {
+    font-size: 1.3em;
+    margin: 1.3em 0 1.3em 0;
+    letter-spacing: 1px;
+}
+
+.menu li a {
+    cursor: pointer;
+    color: #fff;
+    display: block;
+}
+
+.menu li a:hover {
+    color: #D1EEFC;
+    text-decoration: none;
+}
+
+.menu li .fa {
+    margin-right: 0.5em;
+    font-size: 2em;
+    position: relative;
+    top: 6px;
+    width: 50px;
+    text-align: center;
+}
+
+.header  {
+    background-color: #34aadc;
+    height: 3em;
+    font-size: 1.2em;
+    padding-top: 0.8em;
+}
+
+.header .logo {
+    @include vertical-align;
+    letter-spacing: 0px;
+}
+
+.header .profile {
+    text-align: right;
+    @include vertical-align;
+    color: gray;
+    font-size: 0.9em;
+    padding-top: 0em;
+}
+
+.header .logo img {
+    height: 3em;
+    /* display: inline-block; */
+    margin-left: 1em;
+}
+.header .search {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+}
+
+.header .profile {
+    float: right;
+}
+
+.header .logo {
+    float: left;
+}
+
+.header .search input[type=text] {
+    background-color: #34aadc;
+    border: 1px solid #fff;
+}
+
+.header .fa {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.header .logo i {
+    color: #ff9500;
+    margin-right: 0em;
+}
+
+.header .logo span.first {
+    color: #ff9500;
+}
+
+.profile-image {
+    height: 3em;
+    width: 3em;
+    margin-top: 4px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    margin-right: 0.5em;
+}
+
+.content .right {
+    height: 100%;
+    padding: 4.6em 0;
+}
+
+.course-top-container, .signup-top-container, .profile-top-container {
+    background-color: #34aadc;
+    color: #fff;
+    padding: 3em 10em 6em 10em;
+}
+
+.course-top-container .inner,
+.signup-top-container .inner,
+.signup-container .inner,
+ profile-top-container .inner {
+    margin: 0 auto;
+    max-width: 650px;
+    /* text-align: center; */
+}
+
+.course-top-container .inner h1,
+.signup-top-container .inner h1,
+.profile-top-container .inner h1 {
+    font-size: 4em;
+    margin-top: 0;
+    margin-bottom: .5em;
+}
+
+.course-top-container .inner .back {
+    text-transform: uppercase;
+    margin-bottom: 1.5em;
+    display: table;
+}
+
+.course-top-container .inner .back a {
+    color: #fff;
+    margin-left: 0.2em;
+}
+
+.course-top-container .inner .back .fa {
+    display: table-cell;
+    width: 0.8em;
+}
+
+.course-top-container .inner .description {
+
+}
+
+.speakers {
+    margin-top: 2.5em;
+}
+
+.speakers h2 {
+    font-size: 2.5em;
+
+    margin-bottom: 0.6em;
+}
+
+.speaker {
+    display: inline-block;
+    margin-right: 3em;
+}
+
+.speaker .profile-image {
+    width: 2em;
+    height: 2em;
+    position: relative;
+    bottom: 3px;
+}
+
+.outline {
+    margin-top: 2.5em;
+}
+
+.outline .h1-container {
+    margin: 0 10em 1.5em 10em;
+}
+
+.outline .h1-container h1 {
+    text-transform: uppercase;
+    color: #888;
+    font-size: 1em;
+    margin: 0 auto;
+    max-width: 650px;
+}
+
+.section {
+    border-top: 1px solid rgba(52, 170, 220, 0.13);
+    border-bottom: 1px solid rgba(52, 170, 220, 0.13);
+    cursor: pointer;
+    padding: 0 10em 0 10em;
+}
+
+.section p {
+    margin-top: 1em;
+}
+
+.outline.lesson .section {
+    cursor: auto;
+}
+
+.section ~ .section {
+    border-top: none;
+}
+
+.section:hover {
+    background-color: rgba(52, 170, 220, 0.13);
+}
+
+.outline.lesson .section:hover {
+    background-color: #fff;
+}
+
+.section .inner {
+    padding: 2em 0 2em 0;
+    font-size: 1.1em;
+    color: #1f1f21;
+    margin: 0 auto;
+    max-width: 650px;
+    display: table;
+    width: 100%;
+}
+
+.section .inner .description {
+    margin-top: 1em;
+}
+
+.section .fa {
+    padding-right: 0.5em;
+    font-size: 1.4em;
+    display: table-cell;
+    color: #34aadc;
+    position: relative;
+    top: 0.1em;
+    width: 1.5em;
+}
+
+.section .inner h1 {
+    font-size: 1.1em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.section.home .inner h1 {
+    font-size: 2em;
+
+    text-transform: none;
+}
+
+.section.home .inner h2 {
+    font-size: 1em;
+    text-transform: uppercase;
+    margin: 0;
+    color: #999;
+    margin-top: 0.2em;
+}
+
+.section-description .description {
+    padding-left: .3em;
+}
+
+.section .inner audio {
+    margin-top: 1em;
+}
+
+@media(max-width:800px) {
+    .course-top-container, .signup-top-container, .profile-top-container {
+        padding: 3em 2em 6em 2em;
+    }
+
+    .header .logo img {
+        margin-left: 1.6em;
+    }
+
+    .profile-image {
+        margin-right: 1.6em;
+    }
+
+    .course-top-container {
+        padding: 3em 2em 3em 2em;
+    }
+
+    .course-top-container .inner h1 {
+        font-size: 3em;
+    }
+
+    .outline .h1-container {
+        margin: 0 2em 1.5em 2em;
+    }
+
+    .section {
+        padding: 0 2em 0 2em;
+    }
+}
+
+.signup-top-container, .profile-top-container {
+    padding-top: 3em;
+    padding-bottom: 3em;
+    text-align: center;
+}
+
+.signup-container .inner label,
+.profile-container .inner label {
+    display: block;
+    text-align: left;
+    text-transform: uppercase;
+    margin-top: 2em;
+}
+
+.signup-top-container .inner img {
+    width: 111px;
+    margin-bottom: 2em;
+}
+
+.signup-top-container .inner {
+    max-width: 300px;
+}
+
+.signup-top-container a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.signup-top-container .inner .description,
+.profile-top-container .inner .description {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.signup-container .inner input[type=text],
+.signup-container .inner input[type=password],
+.profile-container .inner input[type=text],
+.profile-container .inner input[type=password] {
+    border: 1px solid #34aadc;
+    width: 100%;
+    height: 3em;
+    padding: 1em;
+    border-radius: 6px;
+}
+
+.signup-container input[type=button],
+.signup-container input[type=submit],
+.signup-container input[type=email],
+.profile-container input[type=button],
+.profile-container input[type=submit] {
+    margin-top: 0.3em;
+    font-size: 1.7em;
+    background-color: #fff;
+    border: 1px solid #34aadc;
+    width: 100%;
+    padding: 0.3em;
+    color: #34aadc;
+    border-radius: 6px;
+}
+
+
+/* Style placeholder text. */
+::-webkit-input-placeholder {
+    color: #ccc;
+}
+
+:-moz-placeholder {
+    color: #ccc;
+}
+
+::-moz-placeholder {
+    color: #ccc;
+}
+
+:-ms-input-placeholder {
+    color: #eee;
+}
+
+.signup-container .inner .signup-form,
+.profile-container .inner .profile-form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.signup-container .terms-and-conditions {
+    text-align: left;
+    margin-top: 2em;
+    font-size: 0.9em;
+}
+
+.signup-container .previous-account, .signup-container .social {
+    margin-top: 3em;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.signup-container .social {
+    font-size: 3em;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+.signup-container .previous-account a {
+    display: block;
+    font-size: 1.3em;
+}
+
+.profile-container .inner input[type=submit] {
+    margin-top: 2em;
+}
+
+.description div:first-of-type {
+    margin-bottom: 1em;
+}
