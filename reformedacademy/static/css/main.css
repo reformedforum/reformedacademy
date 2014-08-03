@@ -81,6 +81,13 @@ a:visited {
     text-align: center;
 }
 
+ul.profile:before {
+    content: "Profile";
+    position: relative;
+    top: 1em;
+    color: #D1EEFC;
+}
+
 .header  {
     background-color: #34aadc;
     height: 3em;
@@ -380,7 +387,9 @@ a:visited {
 
 .signup-container .inner input[type=text],
 .signup-container .inner input[type=password],
+.signup-container .inner input[type=email],
 .profile-container .inner input[type=text],
+.profile-container .inner input[type=email],
 .profile-container .inner input[type=password] {
     border: 1px solid #34aadc;
     width: 100%;
