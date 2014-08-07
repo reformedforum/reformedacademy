@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'reformedacademy',
+    'media',
     'tastypie',
     'storages'
 )
