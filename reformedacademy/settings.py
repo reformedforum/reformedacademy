@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'reformedacademy',
     'rfmedia',
     'tastypie',
-    'storages'
+    'storages',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,13 +78,9 @@ if 'RDS_DB_NAME' in os.environ:
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 # HTTPS
@@ -111,3 +108,7 @@ if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_SECURE_URLS = True
 AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
+
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_OPEN = False

@@ -385,22 +385,14 @@ ul.profile:before {
     margin: 0 auto;
 }
 
-.signup-container .inner input[type=text],
-.signup-container .inner input[type=password],
-.signup-container .inner input[type=email],
-.profile-container .inner input[type=text],
-.profile-container .inner input[type=email],
-.profile-container .inner input[type=password] {
-    border: 1px solid #34aadc;
-    width: 100%;
-    height: 3em;
-    padding: 1em;
-    border-radius: 6px;
-}
-
+.signup-container input[type=text],
+.signup-container input[type=password],
+.signup-container input[type=email],
+.profile-container input[type=text],
+.profile-container input[type=email],
+.profile-container input[type=password],
 .signup-container input[type=button],
 .signup-container input[type=submit],
-.signup-container input[type=email],
 .profile-container input[type=button],
 .profile-container input[type=submit] {
     margin-top: 0.3em;
@@ -466,4 +458,15 @@ ul.profile:before {
 
 .description div:first-of-type {
     margin-bottom: 1em;
+}
+
+ul.errorlist {
+    border: 1px solid red;
+    border-left: 5px solid red;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+ul.errorlist li {
+    list-style: none;
 }

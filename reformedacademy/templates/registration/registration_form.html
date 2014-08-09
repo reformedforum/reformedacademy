@@ -1,0 +1,30 @@
+{% extends 'reformedacademy/base_no_menu.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="signup-top-container">
+        <div class="inner">
+            <img src="{% static 'images/lion.png' %}" alt="Logo">
+            <h1>Sign Up</h1>
+            <div class="description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+        </div>
+    </div>
+    <div class="signup-container">
+        <div class="inner">
+            <form action="" method="POST" class="signup-form">
+                {% csrf_token %}
+                {{ form }}
+                <div class="terms-and-conditions">
+                    By clicking Sign Up, I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+                </div>
+                <input type="submit" value="Sign Up">
+            </form>
+            <div class="previous-account">
+                Already have an account?
+                <a href="">Log In</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
