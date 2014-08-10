@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     (r'^accounts/', include('registration.backends.default.urls')),
 
     # Reformed Academy
+    url(r'^login/', 'reformedacademy.views.login', name='login'),
 
 
     # Media system
