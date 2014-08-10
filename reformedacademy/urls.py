@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from tastypie.api import Api
 from rfmedia.api import StatResource, AssetResource
 from django.contrib import admin
+from reformedacademy.views import SignUpFormView, LoginFormView
 
 admin.autodiscover()
 
@@ -15,11 +16,12 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include(v1_api.urls)),
 
-    # Registration
-    (r'^accounts/', include('registration.backends.default.urls')),
-
     # Reformed Academy
-    url(r'^login/', 'reformedacademy.views.login', name='login'),
+    url(r'^signup/', SignUpFormView.as_view(), name='signup'),
+    url(r'^email_confirmation/', 'reformedacademy.views.email_confirmation',
+        name='email_confirmation'),
+    url(r'^recover_password/', 'reformedacademy.views.index', name='recover_password'),
+    url(r'^login/', LoginFormView.as_view(), name='login'),
 
 
     # Media system

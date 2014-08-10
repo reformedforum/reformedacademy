@@ -5,7 +5,7 @@
     <div class="signup-top-container">
         <div class="inner">
             <img src="{% static 'images/lion.png' %}" alt="Logo">
-            <h1>Sign Up</h1>
+            <h1>Log In</h1>
             <div class="description">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </div>
@@ -19,8 +19,8 @@
                 <input type="submit" value="Log In">
             </form>
             <div class="previous-account">
-                Already have an account?
-                <a href="">Log In</a>
+                Don't have an account?
+                <a href="{% url 'signup' %}">Sign Up</a>
             </div>
         </div>
     </div>

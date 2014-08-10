@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'rfmedia',
     'tastypie',
     'storages',
-    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,6 +107,11 @@ if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_SECURE_URLS = True
 AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
+
+AUTHENTICATION_BACKENDS = (
+    'reformedacademy.accounts.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend'
+)
 
 # Registration
 ACCOUNT_ACTIVATION_DAYS = 7

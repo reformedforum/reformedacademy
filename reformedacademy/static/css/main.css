@@ -423,8 +423,7 @@ ul.profile:before {
     color: #eee;
 }
 
-.signup-container .inner .signup-form,
-.profile-container .inner .profile-form {
+form {
     max-width: 300px;
     margin: 0 auto;
 }
