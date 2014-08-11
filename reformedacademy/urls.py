@@ -18,8 +18,9 @@ urlpatterns = patterns('',
 
     # Reformed Academy
     url(r'^signup/', SignUpFormView.as_view(), name='signup'),
-    url(r'^email_confirmation/', 'reformedacademy.views.email_confirmation',
-        name='email_confirmation'),
+    url(r'^account_created/', 'reformedacademy.views.account_created', name='account_created'),
+    url(r'^activate/(?P<user_id>[-% \w]+)/(?P<key>[-% \w]+)', 'reformedacademy.views.activate',
+        name='activate'),
     url(r'^recover_password/', 'reformedacademy.views.index', name='recover_password'),
     url(r'^login/', LoginFormView.as_view(), name='login'),
 

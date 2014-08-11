@@ -8,7 +8,6 @@ Created by kabucey
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import widgets
-from django.core.urlresolvers import reverse
 
 
 class SignUpForm(forms.Form):

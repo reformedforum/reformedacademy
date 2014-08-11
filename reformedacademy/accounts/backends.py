@@ -1,5 +1,4 @@
 # http://cramer.io/2008/08/23/logging-in-with-email-addresses-in-django/
-from django.conf import settings
 from django.contrib.auth.models import User
 
 class EmailOrUsernameModelBackend(object):

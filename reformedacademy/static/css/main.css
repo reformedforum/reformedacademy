@@ -170,7 +170,7 @@ ul.profile:before {
 .course-top-container .inner,
 .signup-top-container .inner,
 .signup-container .inner,
- profile-top-container .inner {
+.profile-top-container .inner {
     margin: 0 auto;
     max-width: 650px;
     /* text-align: center; */
@@ -383,6 +383,14 @@ ul.profile:before {
 .profile-top-container .inner .description {
     max-width: 300px;
     margin: 0 auto;
+}
+
+.signup-top-container.activation .inner {
+    max-width: 500px;
+}
+
+.signup-top-container.activation .inner .description {
+    max-width: 500px;
 }
 
 .signup-container input[type=text],
