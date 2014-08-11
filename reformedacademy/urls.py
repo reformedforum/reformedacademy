@@ -23,9 +23,12 @@ urlpatterns = patterns('',
         name='activate'),
     url(r'^recover_password/', 'reformedacademy.views.index', name='recover_password'),
     url(r'^login/', LoginFormView.as_view(), name='login'),
-
+    url(r'^support/', 'reformedacademy.views.support', name='support'),
 
     # Media system
     url(r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)',
         'rfmedia.views.download', name='download_asset'),
 )
+
+# Custom handlers
+handler404 = 'reformedacademy.views.page_not_found'

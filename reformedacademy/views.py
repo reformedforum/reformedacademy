@@ -6,9 +6,10 @@ Created by kabucey
 
 """
 
+from django import forms
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.forms.util import ErrorList
-from django import forms
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
@@ -119,9 +120,34 @@ def account_created(request):
 
 def activate(request, user_id, key):
     """Activates a user account."""
-    return render(request, 'reformedacademy/.html')
+    user = get_object_or_404(User, pk=user_id)
+    activation_key = get_object_or_404(ActivationKey, user=user, key=key)
+
+    # Set user to active
+    user.is_active = True
+    user.save()
+
+    # Delete the activation key
+    activation_key.delete()
+
+    return render(request, 'reformedacademy/welcome.html')
+
+
+def welcome(request, user_id, key):
+    """Displays a welcome page for newly activated users."""
+    return render(request, 'reformedacademy/welcome.html')
 
 
 def index(request):
     """The home page."""
     return render(request, 'reformedacademy/index.html')
+
+
+def support(request):
+    """The support page."""
+    return render(request, 'reformedacademy/support.html')
+
+
+def page_not_found(request):
+    """Custom 404 view."""
+    return render(request, 'reformedacademy/404.html')

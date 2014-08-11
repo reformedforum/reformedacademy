@@ -1,0 +1,14 @@
+{% extends 'reformedacademy/base_no_menu.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="signup-top-container">
+        <div class="inner">
+            <img src="{% static 'images/lion.png' %}" alt="Logo">
+            <h1>Uh Oh.</h1>
+            <div class="description">
+                The page you were looking for cannot be found. Please visit our <a href="{% url 'support' %}">support page</a>.
+            </div>
+        </div>
+    </div>
+{% endblock %}
