@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +18,7 @@
 
 <!--     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -63,7 +64,7 @@
     </nav>
     <div class="header">
         <div class="logo">
-            <img id="logo" src="static/images/lion.png">
+            <img id="logo" src="{% static 'images/lion.png' %}" alt=Logo">
         </div>
         <!--
 <div class="profile">

@@ -14,6 +14,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
@@ -113,6 +114,10 @@ class LoginFormView(View):
         return render(request, self.template_name, {'form': form})
 
 
+def logout(request):
+    return HttpResponseRedirect(reverse('index'))
+
+
 def account_created(request):
     """Shows the account created template."""
     return render(request, 'reformedacademy/account_created.html')
@@ -130,10 +135,16 @@ def activate(request, user_id, key):
     # Delete the activation key
     activation_key.delete()
 
-    return render(request, 'reformedacademy/welcome.html')
+    """Automatically log the user in. Normally authenticate needs to be called
+    before logging a user in. However, in this instance, we know they are coming
+    from their email so user the ModelBackend and automatically log them in."""
+    user.backend = 'django.contrib.auth.backends.ModelBackend'
+    auth_login(request, user)
 
+    return HttpResponseRedirect(reverse('welcome'))
 
-def welcome(request, user_id, key):
+@login_required
+def welcome(request):
     """Displays a welcome page for newly activated users."""
     return render(request, 'reformedacademy/welcome.html')
 

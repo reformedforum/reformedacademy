@@ -111,3 +111,5 @@ AUTHENTICATION_BACKENDS = (
 )
 
 FROM_EMAIL_ADDRESS = 'support@reformed.academy'
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/login'
