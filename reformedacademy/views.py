@@ -8,7 +8,7 @@ Created by kabucey
 
 from django import forms
 from django.shortcuts import get_object_or_404
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.forms.util import ErrorList
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from reformedacademy.models import ActivationKey
+from reformedacademy.models import ActivationKey, Course, Instructor
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
 import uuid
@@ -115,6 +115,7 @@ class LoginFormView(View):
 
 
 def logout(request):
+    auth_logout(request)
     return HttpResponseRedirect(reverse('index'))
 
 
@@ -151,7 +152,11 @@ def welcome(request):
 
 def index(request):
     """The home page."""
-    return render(request, 'reformedacademy/index.html')
+    courses = Course.objects.all()
+    instructors = Instructor.objects.all()
+    return render(request, 'reformedacademy/index.html',
+                  {'courses': courses,
+                   'instructors': instructors})
 
 
 def support(request):
