@@ -81,13 +81,6 @@ a:visited {
     text-align: center;
 }
 
-ul.profile:before {
-    content: "Profile";
-    position: relative;
-    top: 1em;
-    color: #D1EEFC;
-}
-
 .header  {
     background-color: #34aadc;
     height: 3em;
@@ -161,42 +154,46 @@ ul.profile:before {
     padding: 4.6em 0;
 }
 
-.top-container {
+.course-top-container, .signup-top-container, .profile-top-container {
     background-color: #34aadc;
     color: #fff;
     padding: 3em 10em 6em 10em;
 }
 
-.top-container .inner,
-.signup-container .inner {
+.course-top-container .inner,
+.signup-top-container .inner,
+.signup-container .inner,
+ profile-top-container .inner {
     margin: 0 auto;
     max-width: 650px;
     /* text-align: center; */
 }
 
-.top-container .inner h1 {
+.course-top-container .inner h1,
+.signup-top-container .inner h1,
+.profile-top-container .inner h1 {
     font-size: 4em;
     margin-top: 0;
     margin-bottom: .5em;
 }
 
-.top-container .inner .back {
+.course-top-container .inner .back {
     text-transform: uppercase;
     margin-bottom: 1.5em;
     display: table;
 }
 
-.top-container .inner .back a {
+.course-top-container .inner .back a {
     color: #fff;
     margin-left: 0.2em;
 }
 
-.top-container .inner .back .fa {
+.course-top-container .inner .back .fa {
     display: table-cell;
     width: 0.8em;
 }
 
-.top-container .inner .description {
+.course-top-container .inner .description {
 
 }
 
@@ -318,7 +315,7 @@ ul.profile:before {
 }
 
 @media(max-width:800px) {
-    .top-container {
+    .course-top-container, .signup-top-container, .profile-top-container {
         padding: 3em 2em 6em 2em;
     }
 
@@ -347,51 +344,56 @@ ul.profile:before {
     }
 }
 
-.top-container.centered {
+.signup-top-container, .profile-top-container {
     padding-top: 3em;
     padding-bottom: 3em;
     text-align: center;
 }
 
-.main-container .inner label {
+.signup-container .inner label,
+.profile-container .inner label {
     display: block;
     text-align: left;
     text-transform: uppercase;
     margin-top: 2em;
 }
 
-.top-container.centered .inner img {
+.signup-top-container .inner img {
     width: 111px;
     margin-bottom: 2em;
 }
 
-.top-container.centered .inner {
+.signup-top-container .inner {
     max-width: 300px;
 }
 
-.top-container.centered a {
+.signup-top-container a {
     color: #fff;
     text-decoration: underline;
 }
 
-.top-container.centered .inner .description {
+.signup-top-container .inner .description,
+.profile-top-container .inner .description {
     max-width: 300px;
     margin: 0 auto;
 }
 
-.top-container.centered.activation .inner {
-    max-width: 500px;
+.signup-container .inner input[type=text],
+.signup-container .inner input[type=password],
+.profile-container .inner input[type=text],
+.profile-container .inner input[type=password] {
+    border: 1px solid #34aadc;
+    width: 100%;
+    height: 3em;
+    padding: 1em;
+    border-radius: 6px;
 }
 
-.top-container.centered.activation .inner .description {
-    max-width: 500px;
-}
-
-.main-container input[type=text],
-.main-container input[type=password],
-.main-container input[type=email],
-.main-container input[type=button],
-.main-container input[type=submit] {
+.signup-container input[type=button],
+.signup-container input[type=submit],
+.signup-container input[type=email],
+.profile-container input[type=button],
+.profile-container input[type=submit] {
     margin-top: 0.3em;
     font-size: 1.7em;
     background-color: #fff;
@@ -420,30 +422,31 @@ ul.profile:before {
     color: #eee;
 }
 
-form {
+.signup-container .inner .signup-form,
+.profile-container .inner .profile-form {
     max-width: 300px;
     margin: 0 auto;
 }
 
-.main-container.centered .terms-and-conditions {
+.signup-container .terms-and-conditions {
     text-align: left;
     margin-top: 2em;
     font-size: 0.9em;
 }
 
-.main-container.centered .previous-account, .main-container.centered .social {
+.signup-container .previous-account, .signup-container .social {
     margin-top: 3em;
     font-size: 0.9em;
     text-align: center;
 }
 
-.main-container.centered .social {
+.signup-container .social {
     font-size: 3em;
     margin-top: 1.5em;
     margin-bottom: 1em;
 }
 
-.main-container.centered .previous-account a {
+.signup-container .previous-account a {
     display: block;
     font-size: 1.3em;
 }
@@ -454,15 +457,4 @@ form {
 
 .description div:first-of-type {
     margin-bottom: 1em;
-}
-
-ul.errorlist {
-    border: 1px solid red;
-    border-left: 5px solid red;
-    padding: 1em;
-    margin-top: 1em;
-}
-
-ul.errorlist li {
-    list-style: none;
 }

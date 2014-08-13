@@ -2,6 +2,7 @@ from settings import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 TEMPLATE_DEBUG = True
 
 DATABASES = {
@@ -21,9 +22,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-# localhost doesn't have an email backend, so output to console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # HTTPS
 SESSION_COOKIE_SECURE = False
