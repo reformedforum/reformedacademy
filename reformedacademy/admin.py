@@ -28,8 +28,14 @@ class LessonAdmin(admin.ModelAdmin):
     ordering = ('course', 'order')
 
 
+class InstructorAdmin(admin.ModelAdmin):
+    model = models.Instructor
+    prepopulated_fields = {"slug": ("name",)}
+
+
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.Lesson, LessonAdmin)
+admin.site.register(models.Instructor, InstructorAdmin)
 
 

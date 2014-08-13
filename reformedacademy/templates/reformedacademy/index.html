@@ -6,22 +6,16 @@
         <div class="inner">
             <h1>Reformed Academy</h1>
             <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                What is Reformed Academy? How does it work? How much does it cost? All of that information will go here.
             </div>
             <div class="speakers">
                 <h2>Instructors</h2>
+                {% for instructor in instructors %}
                 <div class="speaker">
-                    <img src="{% static 'images/proto/camden.jpeg' %}" class="profile-image">
-                    Camden Bucey
+                    <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}" class="profile-image">
+                    {{ instructor }}
                 </div>
-                <div class="speaker">
-                    <img src="{% static 'images/proto/lane.jpeg' %}" class="profile-image">
-                    Lane Tipton
-                </div>
-                <div class="speaker">
-                    <img src="{% static 'images/proto/oliphint.jpeg' %}" class="profile-image">
-                    Scott Oliphint
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -29,35 +23,17 @@
         <div class="h1-container">
             <h1>Available Courses</h1>
         </div>
+        {% for course in courses %}
         <div class="section home">
             <div class="inner">
                 <i class="fa fa-circle-o"></i>
-                <h1>Vos Group</h1>
-                <h2>Biblical Theology</h2>
+                <h1>{{ course.name }}</h1>
+                <h2>{{ course.category }}</h2>
                 <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    {{ course.description }}
                 </div>
             </div>
         </div>
-        <div class="section home">
-            <div class="inner">
-                <i class="fa fa-circle-o"></i>
-                <h1>Machen</h1>
-                <h2>Church History</h2>
-                <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-            </div>
-        </div>
-        <div class="section home">
-            <div class="inner">
-                <i class="fa fa-circle-o"></i>
-                <h1>The Reformation and Roman Catholicism Today</h1>
-                <h2>Church History</h2>
-                <div class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed do eiusmod tempor.
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}

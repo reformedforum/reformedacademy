@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 from tastypie.api import Api
 from rfmedia.api import StatResource, AssetResource
 from django.contrib import admin
@@ -24,12 +25,24 @@ urlpatterns = patterns('',
     url(r'^welcome/', 'reformedacademy.views.welcome', name='welcome'),
     url(r'^recover_password/', 'reformedacademy.views.index', name='recover_password'),
     url(r'^login/', LoginFormView.as_view(), name='login'),
+    url(r'^logout/', 'reformedacademy.views.logout', name='logout'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
 
     # Media system
     url(r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)',
         'rfmedia.views.download', name='download_asset'),
 )
+
+if settings.DEBUG:
+    # static files (images, css, javascript, etc.)
+    urlpatterns += patterns(
+        '',
+        url(
+            r'^media/(?P<path>.*)$',
+            'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT}
+        )
+    )
 
 # Custom handlers
 handler404 = 'reformedacademy.views.page_not_found'
