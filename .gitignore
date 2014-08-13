@@ -53,3 +53,6 @@ media/
 
 .elasticbeanstalk/
 aws_credential_file
+
+# PyCharm
+.idea

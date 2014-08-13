@@ -1,0 +1,30 @@
+{% extends 'reformedacademy/base_no_menu.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="top-container centered">
+        <div class="inner">
+            <img src="{% static 'images/lion.png' %}" alt="Logo">
+            <h1>Sign Up</h1>
+            <div class="description">
+                Sign up for a Reformed Academy account to track your personal learning progress and more.
+            </div>
+        </div>
+    </div>
+    <div class="main-container centered">
+        <div class="inner">
+            <form action="" method="POST" class="signup-form">
+                {% csrf_token %}
+                {{ form }}
+                <div class="terms-and-conditions">
+                    By clicking Sign Up, I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+                </div>
+                <input type="submit" value="Sign Up">
+            </form>
+            <div class="previous-account">
+                Already have an account?
+                <a href="{% url 'login' %}">Log In</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
