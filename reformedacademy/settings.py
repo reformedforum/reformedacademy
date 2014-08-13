@@ -15,17 +15,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY is an environment variable specified in the console
-# if 'SECRET_KEY' in os.environ:
-SECRET_KEY = os.environ.get('SECRET_KEY')
+if 'SECRET_KEY' in os.environ:
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy']
+TEMPLATE_DEBUG = True
+
+ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy']
+
 
 # Application definition
 
@@ -37,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'reformedacademy',
-    'rfmedia',
     'tastypie',
     'storages'
 )
@@ -75,9 +76,13 @@ if 'RDS_DB_NAME' in os.environ:
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
+
 USE_L10N = True
+
 USE_TZ = True
 
 # HTTPS
@@ -95,21 +100,13 @@ STATIC_ROOT = os.path.join(
   os.path.dirname(
    os.path.abspath(__file__))), 'static')
 
-# Amazon storage settings
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+if 'AWS_ACCESS_KEY_ID' in os.environ:
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+if 'AWS_SECRET_KEY' in os.environ:
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
+if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_SECURE_URLS = True
 AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
-
-# Provide custom backend because we authenticate with email addresses
-AUTHENTICATION_BACKENDS = (
-    'reformedacademy.accounts.backends.EmailOrUsernameModelBackend',
-    'django.contrib.auth.backends.ModelBackend'
-)
-
-FROM_EMAIL_ADDRESS = 'support@reformed.academy'
-LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/login'

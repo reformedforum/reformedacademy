@@ -1,13 +1,13 @@
-"""rfmedia views.py
+"""reformedacademy views.py
 
-Defines api resources for the rfmedia app.
+Defines api resources for the reformedacademy app.
 
 Created by kabucey
 
 """
 from tastypie.resources import ModelResource
 from tastypie.authentication import ApiKeyAuthentication
-from models import Stat, Asset, Type
+from reformedacademy.models import Stat, Asset, Type
 
 
 class StatResource(ModelResource):

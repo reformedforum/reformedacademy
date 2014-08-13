@@ -1,35 +1,13 @@
-"""reformedacademy admin.py
+"""reformedacademy views.py
 
-Defines admin functionality for the reformedacademy app.
+Administrative configuration for the reformedacademy app.
 
 Created by kabucey
 
 """
 from django.contrib import admin
-from reformedacademy import models
+from models import Stat, Asset, Type
 
-
-class CategoryAdmin(admin.ModelAdmin):
-    model = models.Category
-    prepopulated_fields = {"slug": ("name",)}
-
-
-class CourseAdmin(admin.ModelAdmin):
-    model = models.Course
-    prepopulated_fields = {"slug": ("name",)}
-
-
-class LessonAdmin(admin.ModelAdmin):
-    model = models.Lesson
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ('__unicode__', 'course', 'order')
-    list_filter = ('course',)
-    list_editable = ('order',)
-    ordering = ('course', 'order')
-
-
-admin.site.register(models.Category, CategoryAdmin)
-admin.site.register(models.Course, CourseAdmin)
-admin.site.register(models.Lesson, LessonAdmin)
-
-
+admin.site.register(Stat)
+admin.site.register(Asset)
+admin.site.register(Type)
