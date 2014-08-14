@@ -26,11 +26,13 @@
         </div>
         {% for lesson in course.lesson_set.all %}
         <div class="section">
-            <div class="inner">
-                <!--fa-check-circle-o-->
-                <i class="fa fa-circle-o"></i>
-                <h1>{{ lesson.name }}</h1>
-            </div>
+            <a href="{% url 'lesson' lesson.slug %}">
+                <div class="inner">
+                    <!--fa-check-circle-o-->
+                    <i class="fa fa-circle-o"></i>
+                    <h1>{{ lesson.name }}</h1>
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>

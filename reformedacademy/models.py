@@ -57,6 +57,9 @@ class Lesson(models.Model):
     description = models.TextField()
     order = models.PositiveIntegerField()
 
+    class Meta:
+        ordering = ['order']
+
     def __unicode__(self):
         return self.name
 
@@ -68,6 +71,8 @@ class Task(models.Model):
     """
     lesson = models.ForeignKey(Lesson)
     asset = models.ForeignKey(Asset, on_delete=models.PROTECT)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
     order = models.PositiveIntegerField()
 
     def __unicode__(self):

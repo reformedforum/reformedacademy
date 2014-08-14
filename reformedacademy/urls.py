@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^login/', LoginFormView.as_view(), name='login'),
     url(r'^logout/', 'reformedacademy.views.logout', name='logout'),
     url(r'^course/(?P<slug>[\w-]+)/$', 'reformedacademy.views.course', name='course'),
+    url(r'^lesson/(?P<slug>[\w-]+)/$', 'reformedacademy.views.lesson', name='lesson'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
 
     # Media system

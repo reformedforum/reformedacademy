@@ -19,8 +19,15 @@ class CourseAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
+class TaskInline(admin.StackedInline):
+    model = models.Task
+    extra = 1
+    raw_id_fields = ('asset',)
+
+
 class LessonAdmin(admin.ModelAdmin):
     model = models.Lesson
+    inlines = [TaskInline]
     prepopulated_fields = {"slug": ("name",)}
     list_display = ('__unicode__', 'course', 'order')
     list_filter = ('course',)

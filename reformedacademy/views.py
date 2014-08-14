@@ -19,7 +19,7 @@ from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from reformedacademy.models import ActivationKey, Course, Instructor
+from reformedacademy.models import ActivationKey, Course, Instructor, Lesson
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
 import uuid
@@ -164,6 +164,13 @@ def course(request, slug):
     course = get_object_or_404(Course, slug=slug)
     return render(request, 'reformedacademy/course.html',
                   {'course': course})
+
+
+def lesson(request, slug):
+    """The lesson page."""
+    lesson = get_object_or_404(Lesson, slug=slug)
+    return render(request, 'reformedacademy/lesson.html',
+                  {'lesson': lesson})
 
 
 def support(request):
