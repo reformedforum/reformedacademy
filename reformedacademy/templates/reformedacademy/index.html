@@ -8,11 +8,11 @@
             <div class="description">
                 What is Reformed Academy? How does it work? How much does it cost? All of that information will go here.
             </div>
-            <div class="speakers">
+            <div class="instructors">
                 <h2>Instructors</h2>
                 {% for instructor in instructors %}
-                <div class="speaker">
-                    <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}" class="profile-image">
+                <div class="instructor">
+                    <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}" class="profile-image" alt="{{ instructor }} profile image">
                     {{ instructor }}
                 </div>
                 {% endfor %}
@@ -24,16 +24,18 @@
             <h1>Available Courses</h1>
         </div>
         {% for course in courses %}
-        <div class="section home">
-            <div class="inner">
-                <i class="fa fa-circle-o"></i>
-                <h1>{{ course.name }}</h1>
-                <h2>{{ course.category }}</h2>
-                <div class="description">
-                    {{ course.description }}
+        <a href="{% url 'course' course.slug %}">
+            <div class="section home">
+                <div class="inner">
+                    <i class="fa fa-circle-o"></i>
+                    <h1>{{ course.name }}</h1>
+                    <h2>{{ course.category }}</h2>
+                    <div class="description">
+                        {{ course.description }}
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 {% endblock %}

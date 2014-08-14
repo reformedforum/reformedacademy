@@ -1,0 +1,37 @@
+{% extends 'reformedacademy/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="top-container">
+        <div class="inner">
+            <h1>{{ course }}</h1>
+            <div class="description">
+                {{ course.description }}
+            </div>
+            <div class="instructors">
+                {% for instructor in course.instructor_set.all %}
+                <div class="instructor">
+                    <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}"
+                         class="profile-image"
+                         alt="{{ instructor }} profile image">
+                    {{ instructor }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="outline">
+        <div class="h1-container">
+            <h1>Lessons</h1>
+        </div>
+        {% for lesson in course.lesson_set.all %}
+        <div class="section">
+            <div class="inner">
+                <!--fa-check-circle-o-->
+                <i class="fa fa-circle-o"></i>
+                <h1>{{ lesson.name }}</h1>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

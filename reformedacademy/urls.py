@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^recover_password/', 'reformedacademy.views.index', name='recover_password'),
     url(r'^login/', LoginFormView.as_view(), name='login'),
     url(r'^logout/', 'reformedacademy.views.logout', name='logout'),
+    url(r'^course/(?P<slug>[\w-]+)/$', 'reformedacademy.views.course', name='course'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
 
     # Media system

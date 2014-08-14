@@ -200,22 +200,22 @@ ul.profile:before {
 
 }
 
-.speakers {
+.instructors {
     margin-top: 2.5em;
 }
 
-.speakers h2 {
+.instructors h2 {
     font-size: 2.5em;
 
     margin-bottom: 0.6em;
 }
 
-.speaker {
+.instructor {
     display: inline-block;
     margin-right: 3em;
 }
 
-.speaker .profile-image {
+.instructor .profile-image {
     width: 2em;
     height: 2em;
     position: relative;

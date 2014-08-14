@@ -159,6 +159,13 @@ def index(request):
                    'instructors': instructors})
 
 
+def course(request, slug):
+    """The course page."""
+    course = get_object_or_404(Course, slug=slug)
+    return render(request, 'reformedacademy/course.html',
+                  {'course': course})
+
+
 def support(request):
     """The support page."""
     return render(request, 'reformedacademy/support.html')
