@@ -1,6 +1,19 @@
 Reformed Academy
 ======
 
+Reformed Academy is a project of Reformed Forum, a 501(c)(3) organization.
+
+License Information
+---------------------------
+Reformed Academy is licensed under GPLv3. You are free to modify the source code and
+use it in your own project, however you must also adopt GPLv3. Reformed Academy is a free and open
+learning experience, and we believe the software should match those values.
+
+NOTICE: ALL COURSE CONTENT ON THE REFORMED ACADEMY WEBSITE AND THE REFORMED ACADEMY LOGO ARE
+PROPERTY OF REFORMED FORUM AND DO NOT FALL UNDER GPLV3. WHEN DISTRIBUTING THIS SOFTWARE,
+THE LOGO MUST BE REPLACED.
+
+
 Check out the project
 ---------------------------
 
@@ -27,6 +40,10 @@ Fix any errors if need be.
 ###Create a MySQL database 'academy'
 
 For a fresh MySQL install run the commands below. Otherwise ignore the commands below and just create an 'academy' database.
+
+    mysql.server start
+
+If MySQL doesn't start for you, give this a try: http://stackoverflow.com/a/11061487
 
     mysql -u root
     mysql> create database academy;
