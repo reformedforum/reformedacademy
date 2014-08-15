@@ -49,6 +49,7 @@ urlpatterns = patterns('',
     url(r'^logout/', 'reformedacademy.views.logout', name='logout'),
     url(r'^course/(?P<slug>[\w-]+)/$', 'reformedacademy.views.course', name='course'),
     url(r'^lesson/(?P<slug>[\w-]+)/$', 'reformedacademy.views.lesson', name='lesson'),
+    url(r'^courses/$', 'reformedacademy.views.courses', name='courses'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
 
     # Media system

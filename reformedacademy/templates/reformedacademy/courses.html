@@ -1,0 +1,42 @@
+{% extends 'reformedacademy/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="top-container">
+        <div class="inner">
+            <h1>Courses</h1>
+            <div class="description">
+                {% for category in categories %}
+                    <a href="">{{ category }}</a>
+                    {% if not forloop.last %}
+                        |
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="outline">
+        {% for course in courses %}
+        <a href="{% url 'course' course.slug %}">
+            <div class="section home">
+                <div class="inner">
+                    <i class="fa fa-circle-o"></i>
+                    <h1>{{ course.name }}</h1>
+                    <h2>{{ course.category }}</h2>
+                    <div class="description">
+                        {{ course.description }}
+                    </div>
+                    <div class="instructors">
+                        {% for instructor in course.instructor_set.all %}
+                        <div class="instructor">
+                            <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}" class="profile-image" alt="{{ instructor }} profile image">
+                            {{ instructor }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}

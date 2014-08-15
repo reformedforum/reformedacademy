@@ -21,7 +21,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from django import forms
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.forms.util import ErrorList
 from django.shortcuts import render
@@ -33,7 +33,7 @@ from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from reformedacademy.models import ActivationKey, Course, Instructor, Lesson
+from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
 import uuid
@@ -185,6 +185,15 @@ def lesson(request, slug):
     lesson = get_object_or_404(Lesson, slug=slug)
     return render(request, 'reformedacademy/lesson.html',
                   {'lesson': lesson})
+
+
+def courses(request):
+    """Displays all available courses."""
+    categories = get_list_or_404(Category)
+    courses = get_list_or_404(Course)
+    return render(request, 'reformedacademy/courses.html',
+                  {'categories': categories,
+                   'courses': courses})
 
 
 def support(request):

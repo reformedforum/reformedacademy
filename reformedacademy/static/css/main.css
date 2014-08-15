@@ -200,6 +200,13 @@ ul.profile:before {
 
 }
 
+.top-container a {
+    color: #fff;
+    text-transform: uppercase;
+    margin-right: .5em;
+    margin-left: .5em;
+}
+
 .instructors {
     margin-top: 2.5em;
 }
