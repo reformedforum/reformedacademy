@@ -1,6 +1,7 @@
 Reformed Academy
 ======
 
+Reformed Academy is a free and open learning experience.
 Reformed Academy is a project of Reformed Forum, a 501(c)(3) organization.
 
 License Information
