@@ -7,7 +7,7 @@ License Information
 ---------------------------
 Reformed Academy is licensed under GPLv3. You are free to modify the source code and
 use it in your own project, however you must also adopt GPLv3. Reformed Academy is a free and open
-learning experience, and we believe the software should match those values.
+learning experience, and we believe the software should coincide with these values.
 
 NOTICE: ALL COURSE CONTENT ON THE REFORMED ACADEMY WEBSITE AND THE REFORMED ACADEMY LOGO ARE
 PROPERTY OF REFORMED FORUM AND DO NOT FALL UNDER GPLV3. WHEN DISTRIBUTING THIS SOFTWARE,
