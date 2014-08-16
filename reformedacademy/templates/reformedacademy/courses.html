@@ -2,20 +2,32 @@
 {% load staticfiles %}
 
 {% block content %}
-    <div class="top-container">
+    <div class="top-container courses">
         <div class="inner">
-            <h1>Courses</h1>
-            <div class="description">
-                {% for category in categories %}
-                    <a href="">{{ category }}</a>
-                    {% if not forloop.last %}
-                        |
-                    {% endif %}
-                {% endfor %}
-            </div>
+            <h1>Reformed Academy Courses</h1>
         </div>
     </div>
     <div class="outline">
+        <nav class="h1-container">
+            <ul>
+                <li{% if category_slug == None %} class="selected"{% endif %}>
+                    <a href="{% url 'courses' %}">
+                        All
+                    </a>
+                </li>
+                <i class="fa fa-circle"></i>
+                {% for category in categories %}
+                    <li{% if category_slug == category.slug %} class="selected"{% endif %}>
+                        <a href="{% url 'courses-category' category.slug %}">
+                            {{ category }}
+                        </a>
+                    </li>
+                    {% if not forloop.last %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
         {% for course in courses %}
         <a href="{% url 'course' course.slug %}">
             <div class="section home">

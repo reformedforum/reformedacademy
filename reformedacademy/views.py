@@ -187,13 +187,21 @@ def lesson(request, slug):
                   {'lesson': lesson})
 
 
-def courses(request):
-    """Displays all available courses."""
+def courses(request, category_slug=None):
+    """Displays all available courses.
+
+    If category_slug is define, only grab courses for that category.
+
+    """
     categories = get_list_or_404(Category)
-    courses = get_list_or_404(Course)
+    if category_slug:
+        courses = get_list_or_404(Course, category__slug=category_slug)
+    else:
+        courses = get_list_or_404(Course)
     return render(request, 'reformedacademy/courses.html',
                   {'categories': categories,
-                   'courses': courses})
+                   'courses': courses,
+                   'category_slug': category_slug})
 
 
 def support(request):

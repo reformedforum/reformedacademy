@@ -164,7 +164,7 @@ ul.profile:before {
 .top-container {
     background-color: #34aadc;
     color: #fff;
-    padding: 3em 10em 6em 10em;
+    padding: 3em 0 6em 0;
 }
 
 .top-container .inner,
@@ -203,8 +203,10 @@ ul.profile:before {
 .top-container a {
     color: #fff;
     text-transform: uppercase;
-    margin-right: .5em;
-    margin-left: .5em;
+}
+
+.top-container.courses {
+    padding-bottom: 1em;
 }
 
 .instructors {
@@ -234,10 +236,10 @@ ul.profile:before {
 }
 
 .outline .h1-container {
-    margin: 0 10em 1.5em 10em;
+    margin: 0 0 1.5em 0;
 }
 
-.outline .h1-container h1 {
+.outline .h1-container h1, .outline .h1-container ul {
     text-transform: uppercase;
     color: #888;
     font-size: 1em;
@@ -245,14 +247,39 @@ ul.profile:before {
     max-width: 650px;
 }
 
+.outline .h1-container i {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.outline .h1-container .fa-circle {
+    font-size: .3em;
+    position: relative;
+    bottom: 3px;
+}
+
+.outline .h1-container ul {
+    padding: 0;
+}
+
+.outline .h1-container ul li {
+    display: inline;
+}
+
+.outline .h1-container ul li.selected {
+    font-weight: 700;
+    letter-spacing: 0px;
+    font-size: 1.4em;
+}
+
 .section {
     border-top: 1px solid rgba(52, 170, 220, 0.13);
-    border-bottom: 1px solid rgba(52, 170, 220, 0.13);
+    /* border-bottom: 1px solid rgba(52, 170, 220, 0.13); */
     cursor: pointer;
 }
 
 .section a {
-  display: block;
+    display: block;
 }
 
 .section p {
@@ -261,10 +288,6 @@ ul.profile:before {
 
 .outline.lesson .section {
     cursor: auto;
-}
-
-.section ~ .section {
-    border-top: none;
 }
 
 .section:hover {
@@ -336,8 +359,7 @@ ul.profile:before {
         margin-left: 1.6em;
     }
 
-    .profile-image {
-        margin-right: 1.6em;
+     {
     }
 
     .course-top-container {
@@ -475,4 +497,8 @@ ul.errorlist {
 
 ul.errorlist li {
     list-style: none;
+}
+
+.login-form input[type="submit"] {
+    margin-top: 1em;
 }
