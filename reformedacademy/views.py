@@ -130,6 +130,7 @@ class LoginFormView(View):
 
 def logout(request):
     auth_logout(request)
+    messages.info(request, 'You are now logged out.')
     return HttpResponseRedirect(reverse('index'))
 
 
