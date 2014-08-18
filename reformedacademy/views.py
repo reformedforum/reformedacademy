@@ -160,6 +160,7 @@ def activate(request, user_id, key):
 
     return HttpResponseRedirect(reverse('welcome'))
 
+
 @login_required
 def welcome(request):
     """Displays a welcome page for newly activated users."""
