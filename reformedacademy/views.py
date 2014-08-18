@@ -116,6 +116,7 @@ class LoginFormView(View):
             if user is not None:
                 if user.is_active:
                     auth_login(request, user)
+                    messages.info(request, 'You are now logged in.')
                     return HttpResponseRedirect(reverse('index'))
                 else:
                     errors = form._errors.setdefault(forms.forms.NON_FIELD_ERRORS, ErrorList())

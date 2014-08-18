@@ -1,0 +1,24 @@
+{
+  "name": "reformedacademy",
+  "version": "1.0.0",
+  "description": "Reformed Academy ======",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bowercopy": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reformedforum/reformedacademy.git"
+  },
+  "author": "",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/reformedforum/reformedacademy/issues"
+  },
+  "homepage": "https://github.com/reformedforum/reformedacademy"
+}

@@ -51,8 +51,15 @@ reports/
 local_settings.py
 media/
 
+# Amazon
 .elasticbeanstalk/
 aws_credential_file
 
 # PyCharm
 .idea
+
+# Bower
+bower_components/
+
+# NPM
+node_modules/
