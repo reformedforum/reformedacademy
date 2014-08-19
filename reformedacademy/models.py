@@ -89,6 +89,9 @@ class Task(models.Model):
     description = models.TextField()
     order = models.PositiveIntegerField()
 
+    class Meta:
+        ordering = ['order']
+
     def __unicode__(self):
         return '{} {}'.format(self.lesson, self.asset.tag)
 

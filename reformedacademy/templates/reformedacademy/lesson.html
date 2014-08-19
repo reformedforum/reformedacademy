@@ -28,31 +28,22 @@
         <div class="h1-container">
             <h1>Outline</h1>
         </div>
+        {% for task in lesson.task_set.all %}
         <div class="section">
             <div class="inner">
                 <i class="fa fa-circle-o"></i>
-                <h1>Listen</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-{#                <audio controls="controls">#}
-{#                    <source src="/static/audio/pc019.mp3" type="audio/mpeg" />#}
-{#                    Your browser does not support the audio element.#}
-{#                </audio>#}
-            </div>
-        </div>
-        <div class="section">
-            <div class="inner">
-                <i class="fa fa-circle-o"></i>
-                <h1>Read John 5:1-4</h1>
+                <h1>{{ task.name }}</h1>
                 <p>
-                    Everyone who believes that Jesus is the Christ is born of God, and everyone who loves the father loves his child as well. 2 This is how we know that we love the children of God: by loving God and carrying out his commands. 3 In fact, this is love for God: to keep his commands. And his commands are not burdensome, 4 for everyone born of God overcomes the world. This is the victory that has overcome the world, even our faith.
+                    {{ task.description }}
                 </p>
+                {% if task.asset and 'audio' in task.asset.mime_type %}
+                    <audio controls="controls">
+                    <source src="{{ task.asset.download_url }}" type="{{ task.asset.mime_type }}" />
+                        Your browser does not support the audio element.
+                    </audio>
+                {% endif %}
             </div>
         </div>
-        <div class="section">
-            <div class="inner">
-                <i class="fa fa-circle-o"></i>
-                <h1>Take Personal Assessment</h1>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}
