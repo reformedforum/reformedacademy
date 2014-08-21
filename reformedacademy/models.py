@@ -19,6 +19,7 @@ You should have received a copy of the GNU General Public License
 along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
+from bible.djangoforms import VerseField
 from django.db import models
 from django.contrib.auth.models import User
 from rfmedia.models import Asset
@@ -106,3 +107,15 @@ class Instructor(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Passage(models.Model):
+    start_verse = VerseField()
+    end_verse = VerseField()
+
+    class Meta:
+        abstract = True
+
+
+class TaskPassage(Passage):
+    task = models.ForeignKey(Task)
