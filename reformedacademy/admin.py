@@ -20,6 +20,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 from django.contrib import admin
+from django.core.urlresolvers import reverse
 from reformedacademy import models
 
 
@@ -33,10 +34,39 @@ class CourseAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
-class TaskInline(admin.StackedInline):
+class TaskInline(admin.TabularInline):
     model = models.Task
     extra = 1
+    fields = ('name', 'order', 'changeform_link')
+    readonly_fields = ('changeform_link', )
+
+    def changeform_link(self, instance):
+        if instance.id:
+            changeform_url = reverse(
+                'admin:reformedacademy_task_change', args=(instance.id,)
+            )
+            print changeform_url
+            return u'<a href="{}" onclick="return showAddAnotherPopup(this);">Details</a>'.format(changeform_url)
+        return u'Details (save first)'
+
+    changeform_link.allow_tags = True
+    changeform_link.short_description = ''
+
+
+class TaskAssetInline(admin.TabularInline):
+    model = models.TaskAsset
+    extra = 1
     raw_id_fields = ('asset',)
+
+
+class TaskPassageInline(admin.TabularInline):
+    model = models.TaskPassage
+    extra = 1
+
+
+class TaskAdmin(admin.ModelAdmin):
+    mode = models.Task
+    inlines = [TaskAssetInline, TaskPassageInline]
 
 
 class LessonAdmin(admin.ModelAdmin):
@@ -57,6 +87,7 @@ class InstructorAdmin(admin.ModelAdmin):
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.Lesson, LessonAdmin)
+admin.site.register(models.Task, TaskAdmin)
 admin.site.register(models.Instructor, InstructorAdmin)
 
 
