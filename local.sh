@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 #
-# Runs the development server for Reformed Academy.
+# Convenience script to run manage.py commands using local settings.
 #
 # Copyright (C) 2014 by Reformed Forum <reformedforum.org>
 #
@@ -20,4 +20,4 @@
 # along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 source env/bin/activate
-./manage.py runserver --settings=reformedacademy.local_settings
+./manage.py $1 --settings=reformedacademy.local_settings

@@ -69,18 +69,18 @@ Updated local_settings.py.
 
 ###Sync the database
 
-    ./manage.py syncdb --settings=reformedacademy.local_settings
+    ./local.py syncdb
 
 ###Run the local web server
 
-    ./runserver.sh
+    ./local.sh runserver
 
 ###Post installation instructions
 
 After everything is set up, all that needs to be done is run runserver.sh
 
     cd /path/to/project/directory
-    ./runserver.sh
+    ./local.sh runserver
 
 If there are database changes after you pull the latest from the repo you'll have to perform a database migration.
 
@@ -96,5 +96,4 @@ Scripts
 
 * create_migration.sh - Creates a migration. Run this after model changes, but before deploying to production!
 * migrate.sh - Applies a migration. Run this when another developer updates the database and you pull the changes. Also, run this after you create a migration using create_migration.sh.
-* runserver.sh - Starts a development server.
-* test.sh - Runs all unit tests.
+* local.sh - Runs manage.py commands using local settings. (e.g. ./local.sh runserver
