@@ -70,7 +70,7 @@ class Lesson(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     description = models.TextField()
-    order = models.PositiveIntegerField()
+    order = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['order']
@@ -85,16 +85,35 @@ class Task(models.Model):
     A task could be a many things, including reading, listening, or watching something.
     """
     lesson = models.ForeignKey(Lesson)
-    asset = models.ForeignKey(Asset, on_delete=models.PROTECT)
     name = models.CharField(max_length=255)
     description = models.TextField()
-    order = models.PositiveIntegerField()
+    order = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['order']
 
     def __unicode__(self):
-        return '{} {}'.format(self.lesson, self.asset.tag)
+        return '{}'.format(self.name)
+
+
+class Passage(models.Model):
+    """Describes a passage."""
+    start_verse = VerseField()
+    end_verse = VerseField()
+
+    class Meta:
+        abstract = True
+
+
+class TaskPassage(Passage):
+    """Describes a passage that is associated with a task."""
+    task = models.ForeignKey(Task)
+
+
+class TaskAsset(models.Model):
+    """Describes an asset that is associated with a task."""
+    task = models.ForeignKey(Task)
+    asset = models.ForeignKey(Asset, on_delete=models.PROTECT)
 
 
 class Instructor(models.Model):
@@ -107,15 +126,3 @@ class Instructor(models.Model):
 
     def __unicode__(self):
         return self.name
-
-
-class Passage(models.Model):
-    start_verse = VerseField()
-    end_verse = VerseField()
-
-    class Meta:
-        abstract = True
-
-
-class TaskPassage(Passage):
-    task = models.ForeignKey(Task)
