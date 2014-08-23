@@ -126,3 +126,44 @@ class Instructor(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Author(models.Model):
+    """Describes an author."""
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Book(models.Model):
+    """Describes a book."""
+    title = models.CharField(max_length=255)
+    task = models.ManyToManyField(Task, blank=True)
+    author = models.ManyToManyField(Author, blank=True)
+
+
+    def __unicode__(self):
+        return self.title
+
+
+class BookURL(models.Model):
+    """Describes a book url.
+
+    There are multiple urls to a book that may want to be linked to.
+
+    """
+    book = models.ForeignKey(Book)
+    url = models.URLField()
+
+
+class BookISBN(models.Model):
+    """Describes a book ISBN.
+
+    There may be multiple versions of a book and I want them all pointing to the same book.
+    This is a one to many relationship.
+
+    """
+    book = models.ForeignKey(Book)
+    isbn10 = models.IntegerField(max_length=10)
+    isbn13 = models.IntegerField(max_length=13)
