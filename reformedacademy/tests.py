@@ -22,7 +22,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 from bible.models import Verse
 
 from django.test import TestCase
-from reformedacademy.models import Category, Course, Lesson, Task, TaskPassage
+from reformedacademy.models import Category, Course, Lesson, Task, TaskPassage, Passage
 
 
 class TaskTest(TestCase):
@@ -58,3 +58,17 @@ class TaskTest(TestCase):
         task_passage = TaskPassage.objects.get(pk=task_passage.pk)
         self.assertEqual(start_verse, task_passage.start_verse)
         self.assertEqual(end_verse, task_passage.end_verse)
+
+
+class PassageTest(TestCase):
+    def test_passage_extract(self):
+        text = "Read Genesis 1:1-10 and Luke 2:3-5"
+        passages = Passage.extract_from_string(text)
+        self.assertEqual(len(passages), 2)
+        passage1 = passages[0]
+        self.assertEqual(passage1.start_verse, Verse('Genesis 1:1'))
+        self.assertEqual(passage1.end_verse, Verse('Genesis 1:10'))
+        passage2 = passages[1]
+        self.assertEqual(passage2.start_verse, Verse('Luke 2:3'))
+        self.assertEqual(passage2.end_verse, Verse('Luke 2:5'))
+

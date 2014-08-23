@@ -23,6 +23,7 @@ from bible.djangoforms import VerseField
 from django.db import models
 from django.contrib.auth.models import User
 from rfmedia.models import Asset
+import scriptures
 
 
 class ActivationKey(models.Model):
@@ -89,6 +90,19 @@ class Task(models.Model):
     description = models.TextField()
     order = models.PositiveIntegerField(default=0)
 
+    def save(self, *args, **kwargs):
+        super(Task, self).save(*args, **kwargs)
+
+        # Get passages from the lesson name
+        passages = TaskPassage.extract_from_string(self, self.name)
+
+        # Check to see if passages are in taskpassage_set. If they aren't, add them.
+        for p in passages:
+            if p not in self.taskpassage_set.all():
+                p.save()
+
+        return self
+
     class Meta:
         ordering = ['order']
 
@@ -101,6 +115,39 @@ class Passage(models.Model):
     start_verse = VerseField()
     end_verse = VerseField()
 
+    def __eq__(self, other):
+        if not isinstance(other, Passage):
+            return False
+        return self.start_verse == other.start_verse and self.end_verse == other.end_verse
+
+    @staticmethod
+    def extract_from_string(value):
+        """Extracts passages from a string.
+
+         @:returns List of passages.
+
+         """
+
+        # Extract scriptures from the name of the task to automatically add
+        # scripture relationships.
+        # e.g. [('Romans', 3, 23, 3, 28), ('I John', 2, 1, 2, 29)]
+        passages = []
+        references = scriptures.extract(value)
+        for (book, from_chapter, from_verse, to_chapter, to_verse) in references:
+            start_verse = '{book} {chapter}:{verse}'.format(
+                book=book,
+                chapter=from_chapter,
+                verse=from_verse
+            )
+            end_verse = '{book} {chapter}:{verse}'.format(
+                book=book,
+                chapter=to_chapter,
+                verse=to_verse
+            )
+            passages.append(Passage(start_verse=start_verse, end_verse=end_verse))
+
+        return passages
+
     class Meta:
         abstract = True
 
@@ -108,6 +155,18 @@ class Passage(models.Model):
 class TaskPassage(Passage):
     """Describes a passage that is associated with a task."""
     task = models.ForeignKey(Task)
+
+    @staticmethod
+    def extract_from_string(task, value):
+        """Calls Passage.extract_from_string and puts the results into TaskPassage objects."""
+        passages = Passage.extract_from_string(value)
+        task_passages = []
+        for passage in passages:
+            task_passage = TaskPassage(task=task, start_verse=passage.start_verse,
+                                       end_verse=passage.end_verse)
+            task_passages.append(task_passage)
+
+        return task_passages
 
 
 class TaskAsset(models.Model):
