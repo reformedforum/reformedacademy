@@ -67,6 +67,7 @@ class TaskPassageInline(admin.TabularInline):
 class TaskAdmin(admin.ModelAdmin):
     mode = models.Task
     inlines = [TaskAssetInline, TaskPassageInline]
+    filter_horizontal = ('books',)
 
 
 class LessonAdmin(admin.ModelAdmin):
@@ -89,10 +90,15 @@ class BookISBNInline(admin.TabularInline):
     extra = 1
 
 
+class BookPassageInline(admin.TabularInline):
+    model = models.BookPassage
+    extra = 1
+
+
 class BookAdmin(admin.ModelAdmin):
     model = models.Book
-    inlines = [BookISBNInline]
-    filter_horizontal = ('task', 'author',)
+    inlines = [BookISBNInline, BookPassageInline]
+    filter_horizontal = ('authors',)
 
 
 admin.site.register(models.Category, CategoryAdmin)

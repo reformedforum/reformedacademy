@@ -80,6 +80,45 @@ class Lesson(models.Model):
         return self.name
 
 
+class Author(models.Model):
+    """Describes an author."""
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Book(models.Model):
+    """Describes a book."""
+    title = models.CharField(max_length=255)
+    authors = models.ManyToManyField(Author, blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+
+class BookURL(models.Model):
+    """Describes a book url.
+
+    There are multiple urls to a book that may want to be linked to.
+
+    """
+    book = models.ForeignKey(Book)
+    url = models.URLField()
+
+
+class BookISBN(models.Model):
+    """Describes a book ISBN.
+
+    There may be multiple versions of a book and I want them all pointing to the same book.
+    This is a one to many relationship.
+
+    """
+    book = models.ForeignKey(Book)
+    isbn10 = models.IntegerField(max_length=10)
+    isbn13 = models.IntegerField(max_length=13)
+
+
 class Task(models.Model):
     """Describes a task.
 
@@ -87,8 +126,9 @@ class Task(models.Model):
     """
     lesson = models.ForeignKey(Lesson)
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     order = models.PositiveIntegerField(default=0)
+    books = models.ManyToManyField(Book, blank=True)
 
     def save(self, *args, **kwargs):
         super(Task, self).save(*args, **kwargs)
@@ -101,8 +141,6 @@ class Task(models.Model):
             if p not in self.taskpassage_set.all():
                 p.save()
 
-        return self
-
     class Meta:
         ordering = ['order']
 
@@ -114,6 +152,10 @@ class Passage(models.Model):
     """Describes a passage."""
     start_verse = VerseField()
     end_verse = VerseField()
+
+    def __init__(self, *args, **kwargs):
+        super(Passage, self).__init__(*args, **kwargs)
+        self.entry = None
 
     def __eq__(self, other):
         if not isinstance(other, Passage):
@@ -169,6 +211,23 @@ class TaskPassage(Passage):
         return task_passages
 
 
+class BookPassage(Passage):
+    """Describes a passage that is associated with a book."""
+    book = models.ForeignKey(Book)
+
+    @staticmethod
+    def extract_from_string(book, value):
+        """Calls Passage.extract_from_string and puts the results into BookPassage objects."""
+        passages = Passage.extract_from_string(value)
+        book_passages = []
+        for passage in passages:
+            book_passage = BookPassage(book=book, start_verse=passage.start_verse,
+                                       end_verse=passage.end_verse)
+            book_passages.append(book_passage)
+
+        return book_passages
+
+
 class TaskAsset(models.Model):
     """Describes an asset that is associated with a task."""
     task = models.ForeignKey(Task)
@@ -185,44 +244,3 @@ class Instructor(models.Model):
 
     def __unicode__(self):
         return self.name
-
-
-class Author(models.Model):
-    """Describes an author."""
-    name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.name
-
-
-class Book(models.Model):
-    """Describes a book."""
-    title = models.CharField(max_length=255)
-    task = models.ManyToManyField(Task, blank=True)
-    author = models.ManyToManyField(Author, blank=True)
-
-
-    def __unicode__(self):
-        return self.title
-
-
-class BookURL(models.Model):
-    """Describes a book url.
-
-    There are multiple urls to a book that may want to be linked to.
-
-    """
-    book = models.ForeignKey(Book)
-    url = models.URLField()
-
-
-class BookISBN(models.Model):
-    """Describes a book ISBN.
-
-    There may be multiple versions of a book and I want them all pointing to the same book.
-    This is a one to many relationship.
-
-    """
-    book = models.ForeignKey(Book)
-    isbn10 = models.IntegerField(max_length=10)
-    isbn13 = models.IntegerField(max_length=13)
