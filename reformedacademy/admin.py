@@ -60,8 +60,9 @@ class TaskAssetInline(admin.TabularInline):
 
 
 class TaskPassageInline(admin.TabularInline):
-    model = models.TaskPassage
+    model = models.PassageIndex
     extra = 1
+    exclude = ('book',)
 
 
 class TaskAdmin(admin.ModelAdmin):
@@ -91,8 +92,9 @@ class BookISBNInline(admin.TabularInline):
 
 
 class BookPassageInline(admin.TabularInline):
-    model = models.BookPassage
+    model = models.PassageIndex
     extra = 1
+    exclude = ('task',)
 
 
 class BookAdmin(admin.ModelAdmin):

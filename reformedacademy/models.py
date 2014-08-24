@@ -134,11 +134,12 @@ class Task(models.Model):
         super(Task, self).save(*args, **kwargs)
 
         # Get passages from the lesson name
-        passages = TaskPassage.extract_from_string(self, self.name)
+        passages = PassageIndex.extract_from_string(self.name)
 
         # Check to see if passages are in taskpassage_set. If they aren't, add them.
         for p in passages:
-            if p not in self.taskpassage_set.all():
+            if p not in self.passageindex_set.all():
+                p.task = self
                 p.save()
 
     class Meta:
@@ -148,17 +149,19 @@ class Task(models.Model):
         return '{}'.format(self.name)
 
 
-class Passage(models.Model):
-    """Describes a passage."""
+class PassageIndex(models.Model):
+    """Describes a passage index.
+
+    This is used to index passages associated with different things for searching.
+
+    """
     start_verse = VerseField()
     end_verse = VerseField()
-
-    def __init__(self, *args, **kwargs):
-        super(Passage, self).__init__(*args, **kwargs)
-        self.entry = None
+    task = models.ForeignKey(Task, blank=True, null=True)
+    book = models.ForeignKey(Book, blank=True, null=True)
 
     def __eq__(self, other):
-        if not isinstance(other, Passage):
+        if not isinstance(other, PassageIndex):
             return False
         return self.start_verse == other.start_verse and self.end_verse == other.end_verse
 
@@ -186,46 +189,9 @@ class Passage(models.Model):
                 chapter=to_chapter,
                 verse=to_verse
             )
-            passages.append(Passage(start_verse=start_verse, end_verse=end_verse))
+            passages.append(PassageIndex(start_verse=start_verse, end_verse=end_verse))
 
         return passages
-
-    class Meta:
-        abstract = True
-
-
-class TaskPassage(Passage):
-    """Describes a passage that is associated with a task."""
-    task = models.ForeignKey(Task)
-
-    @staticmethod
-    def extract_from_string(task, value):
-        """Calls Passage.extract_from_string and puts the results into TaskPassage objects."""
-        passages = Passage.extract_from_string(value)
-        task_passages = []
-        for passage in passages:
-            task_passage = TaskPassage(task=task, start_verse=passage.start_verse,
-                                       end_verse=passage.end_verse)
-            task_passages.append(task_passage)
-
-        return task_passages
-
-
-class BookPassage(Passage):
-    """Describes a passage that is associated with a book."""
-    book = models.ForeignKey(Book)
-
-    @staticmethod
-    def extract_from_string(book, value):
-        """Calls Passage.extract_from_string and puts the results into BookPassage objects."""
-        passages = Passage.extract_from_string(value)
-        book_passages = []
-        for passage in passages:
-            book_passage = BookPassage(book=book, start_verse=passage.start_verse,
-                                       end_verse=passage.end_verse)
-            book_passages.append(book_passage)
-
-        return book_passages
 
 
 class TaskAsset(models.Model):
