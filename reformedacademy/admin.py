@@ -97,9 +97,14 @@ class BookPassageInline(admin.TabularInline):
     exclude = ('task',)
 
 
+class BookURLInline(admin.TabularInline):
+    model = models.BookURL
+    extra = 1
+
+
 class BookAdmin(admin.ModelAdmin):
     model = models.Book
-    inlines = [BookISBNInline, BookPassageInline]
+    inlines = [BookURLInline, BookISBNInline, BookPassageInline]
     filter_horizontal = ('authors',)
 
 
