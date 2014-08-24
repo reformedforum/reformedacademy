@@ -51,7 +51,8 @@ INSTALLED_APPS = (
     'reformedacademy',
     'rfmedia',
     'tastypie',
-    'storages'
+    'storages',
+    'django_cleanup'
 )
 
 MIDDLEWARE_CLASSES = (
