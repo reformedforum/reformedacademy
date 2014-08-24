@@ -92,6 +92,7 @@ class Book(models.Model):
     """Describes a book."""
     title = models.CharField(max_length=255)
     authors = models.ManyToManyField(Author, blank=True)
+    cover_image = models.ImageField(upload_to='cover_images')
 
     def __unicode__(self):
         return self.title
@@ -115,8 +116,8 @@ class BookISBN(models.Model):
 
     """
     book = models.ForeignKey(Book)
-    isbn10 = models.IntegerField(max_length=10)
-    isbn13 = models.IntegerField(max_length=13)
+    isbn10 = models.CharField(max_length=10)
+    isbn13 = models.CharField(max_length=14)
 
 
 class Task(models.Model):
