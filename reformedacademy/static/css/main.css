@@ -502,3 +502,25 @@ ul.errorlist li {
 .login-form input[type="submit"] {
     margin-top: 1em;
 }
+
+.book img {
+    float: left;
+    width: 6em;
+    margin-right: 1em;
+}
+
+.book h2 {
+    font-size: 1.5em;   
+}
+
+.sources {
+    padding-top: 1em;
+}
+
+.sources:before {
+    content: "SOLD BY";
+    color: #888;
+    position:relative;
+    bottom: .3em;
+    font-size: .9em
+}

@@ -23,6 +23,7 @@ from bible.djangoforms import VerseField
 from django.db import models
 from django.contrib.auth.models import User
 from rfmedia.models import Asset
+from urlparse import urlparse
 import scriptures
 
 
@@ -107,6 +108,11 @@ class BookURL(models.Model):
     book = models.ForeignKey(Book)
     url = models.URLField()
 
+    @property
+    def website(self):
+        parse = urlparse(self.url)
+        return parse.netloc.replace('www.', '')
+
 
 class BookISBN(models.Model):
     """Describes a book ISBN.
@@ -129,7 +135,8 @@ class Task(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     order = models.PositiveIntegerField(default=0)
-    books = models.ManyToManyField(Book, blank=True)
+    book = models.ForeignKey(Book, blank=True, null=True, on_delete=models.PROTECT)
+    asset = models.ForeignKey(Asset, blank=True, null=True, on_delete=models.PROTECT)
 
     def save(self, *args, **kwargs):
         super(Task, self).save(*args, **kwargs)
@@ -193,12 +200,6 @@ class PassageIndex(models.Model):
             passages.append(PassageIndex(start_verse=start_verse, end_verse=end_verse))
 
         return passages
-
-
-class TaskAsset(models.Model):
-    """Describes an asset that is associated with a task."""
-    task = models.ForeignKey(Task)
-    asset = models.ForeignKey(Asset, on_delete=models.PROTECT)
 
 
 class Instructor(models.Model):

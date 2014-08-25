@@ -53,12 +53,6 @@ class TaskInline(admin.TabularInline):
     changeform_link.short_description = ''
 
 
-class TaskAssetInline(admin.TabularInline):
-    model = models.TaskAsset
-    extra = 1
-    raw_id_fields = ('asset',)
-
-
 class TaskPassageInline(admin.TabularInline):
     model = models.PassageIndex
     extra = 1
@@ -67,8 +61,8 @@ class TaskPassageInline(admin.TabularInline):
 
 class TaskAdmin(admin.ModelAdmin):
     mode = models.Task
-    inlines = [TaskAssetInline, TaskPassageInline]
-    filter_horizontal = ('books',)
+    inlines = [TaskPassageInline]
+    raw_id_fields = ('book', 'asset')
 
 
 class LessonAdmin(admin.ModelAdmin):
@@ -106,6 +100,7 @@ class BookAdmin(admin.ModelAdmin):
     model = models.Book
     inlines = [BookURLInline, BookISBNInline, BookPassageInline]
     filter_horizontal = ('authors',)
+    search_fields = ['title']
 
 
 admin.site.register(models.Category, CategoryAdmin)

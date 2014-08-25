@@ -42,6 +42,17 @@
                         Your browser does not support the audio element.
                     </audio>
                 {% endif %}
+                {% if task.book %}
+                    <div class="book">
+                        <img src="{{ MEDIA_URL }}{{ task.book.cover_image }}" alt="{{ task.book }} Book Image">
+                        <h2>{{ task.book.title }}</h2>
+                        <div class="sources">
+                            {% for book_url in task.book.bookurl_set.all %}
+                                <a href="{{ book_url.url }}">{{ book_url.website }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
