@@ -33,9 +33,11 @@
             <div class="inner">
                 <i class="fa fa-circle-o"></i>
                 <h1>{{ task.name }}</h1>
+                {% if task.description %}
                 <p>
                     {{ task.description }}
                 </p>
+                {% endif %}
                 {% if task.asset and 'audio' in task.asset.mime_type %}
                     <audio controls="controls">
                     <source src="{{ task.asset.download_url }}" type="{{ task.asset.mime_type }}" />
