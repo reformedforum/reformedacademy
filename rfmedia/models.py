@@ -51,7 +51,17 @@ class Asset(models.Model):
 
     @property
     def download_url(self):
-        return reverse('download_asset', args=['web', self.type.name, '{}.mp3'.format(self.tag)])
+        if 'audio' in self.mime_type:
+            # Currently we only have 2 audio types, mp3 and ogg
+            extension = 'mp3' if 'mpeg' in self.mime_type else 'ogg'
+        elif 'video' in self.mime_type:
+            extension = 'video'
+
+        return reverse('download_asset', args=['web', self.type.name,
+                                               '{tag}.{extension}'.format(
+                                                   tag=self.tag,
+                                                   extension=extension
+                                               )])
 
     class Meta:
         db_table = 'assets'
