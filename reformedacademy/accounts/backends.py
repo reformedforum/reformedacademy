@@ -20,7 +20,8 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 # http://cramer.io/2008/08/23/logging-in-with-email-addresses-in-django/
-from django.contrib.auth.models import User
+from reformedacademy.models import User
+
 
 class EmailOrUsernameModelBackend(object):
     def authenticate(self, username=None, password=None):

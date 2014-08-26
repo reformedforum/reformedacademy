@@ -20,21 +20,12 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 from bible.djangoforms import VerseField
+from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from rfmedia.models import Asset
 from urlparse import urlparse
 import scriptures
-
-
-class ActivationKey(models.Model):
-    """Describes an activation key.
-
-    This is used for activating a user after they sign up with an email address.
-    """
-    user = models.ForeignKey(User)
-    key = models.CharField(max_length=255)
-    sent = models.DateTimeField(auto_now=True)
 
 
 class Category(models.Model):
@@ -61,6 +52,27 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class User(AbstractUser):
+    courses = models.ManyToManyField(Course, through="Membership")
+
+
+class Membership(models.Model):
+    user = models.ForeignKey(User)
+    course = models.ForeignKey(Course)
+    dropped = models.BooleanField()
+    completed = models.BooleanField()
+
+
+class ActivationKey(models.Model):
+    """Describes an activation key.
+
+    This is used for activating a user after they sign up with an email address.
+    """
+    user = models.ForeignKey(User)
+    key = models.CharField(max_length=255)
+    sent = models.DateTimeField(auto_now=True)
 
 
 class Lesson(models.Model):
