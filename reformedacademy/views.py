@@ -33,7 +33,7 @@ from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category
+from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category, Enrollment
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
 import uuid
@@ -205,6 +205,21 @@ def courses(request, category_slug=None):
                   {'categories': categories,
                    'courses': courses,
                    'category_slug': category_slug})
+
+
+@login_required
+def enroll(request, course_id):
+    course = get_object_or_404(Course, pk=course_id)
+    user = request.user
+    enrollment = user.enrollment_for_course(course)
+    if enrollment:
+        enrollment.dropped = False
+        enrollment.completed = False
+        enrollment.save()
+    else:
+        Enrollment.objects.create(user=user, course=course)
+
+    return HttpResponseRedirect(reverse('course', args=(course.slug,)))
 
 
 def support(request):

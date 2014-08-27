@@ -52,6 +52,7 @@ urlpatterns = patterns('',
     url(r'^courses/$', 'reformedacademy.views.courses', name='courses'),
     url(r'^courses/(?P<category_slug>[\w-]+)/$', 'reformedacademy.views.courses',
         name='courses-category'),
+    url(r'^enroll/(?P<course_id>\d+)/$', 'reformedacademy.views.enroll', name='enroll'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
 
     # Media system

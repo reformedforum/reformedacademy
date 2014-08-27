@@ -510,7 +510,7 @@ ul.errorlist li {
 }
 
 .book h2 {
-    font-size: 1.5em;   
+    font-size: 1.5em;
 }
 
 .sources {
@@ -523,4 +523,24 @@ ul.errorlist li {
     position:relative;
     bottom: .3em;
     font-size: .9em
+}
+
+.enrollment {
+    text-align: center;
+    margin-top: 3em;
+}
+
+.enrollment a {
+    border: 1px solid white;
+    padding: 1em;
+    border-radius: 2em;
+    font-size: 1.3em;
+    text-transform: none;
+    letter-spacing: 0.07em;
+}
+
+.enrollment a:hover {
+    background: #fff;
+    color: #34aadc;
+    text-decoration: none;
 }

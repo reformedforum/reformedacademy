@@ -55,14 +55,27 @@ class Course(models.Model):
 
 
 class User(AbstractUser):
-    courses = models.ManyToManyField(Course, through="Membership")
+    courses = models.ManyToManyField(Course, through="Enrollment")
+
+    def enrollment_for_course(self, course):
+        """Gets the Enrollment object for a specific course a User has enrolled in.
+
+        Returns Enrollment if found, otherwise None.
+
+        """
+        return self.courses.filter(pk=course.pk).first()
+
+    def is_enrolled(self, course):
+        """Checks to see if a User is currently enrolled in a course."""
+        return self.courses.filter(pk=course.pk, enrollment__dropped=False,
+                                   enrollment__completed=False).exists()
 
 
-class Membership(models.Model):
+class Enrollment(models.Model):
     user = models.ForeignKey(User)
     course = models.ForeignKey(Course)
-    dropped = models.BooleanField()
-    completed = models.BooleanField()
+    dropped = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
 
 
 class ActivationKey(models.Model):

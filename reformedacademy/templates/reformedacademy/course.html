@@ -1,5 +1,6 @@
 {% extends 'reformedacademy/base.html' %}
 {% load staticfiles %}
+{% load userutils %}
 
 {% block content %}
     <div class="top-container">
@@ -18,6 +19,12 @@
                 </div>
                 {% endfor %}
             </div>
+            {% is_user_enrolled course as user_enrolled %}
+            {% if not user_enrolled %}
+            <div class="enrollment">
+                <a href="{% url 'enroll' course.pk %}">Enroll</a>
+            </div>
+            {% endif %}
         </div>
     </div>
     <div class="outline">
