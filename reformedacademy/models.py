@@ -50,32 +50,28 @@ class Course(models.Model):
     slug = models.SlugField(max_length=255)
     description = models.TextField()
 
+    def progress_for_user(self, user):
+        """Gets the progress for this course for user."""
+        if user.is_authenticated():
+            return self.courseprogress_set.filter(user=user).first()
+
+        return None
+
     def __unicode__(self):
         return self.name
 
+    def __eq__(self, other):
+        if isinstance(other, CourseProgress):
+            return other.course.id == self.id
+        elif isinstance(other, Course):
+            return other.id == self.id
+
 
 class User(AbstractUser):
-    courses = models.ManyToManyField(Course, through="Enrollment")
-
-    def enrollment_for_course(self, course):
-        """Gets the Enrollment object for a specific course a User has enrolled in.
-
-        Returns Enrollment if found, otherwise None.
-
-        """
-        return self.courses.filter(pk=course.pk).first()
-
-    def is_enrolled(self, course):
-        """Checks to see if a User is currently enrolled in a course."""
-        return self.courses.filter(pk=course.pk, enrollment__dropped=False,
-                                   enrollment__completed=False).exists()
-
-
-class Enrollment(models.Model):
-    user = models.ForeignKey(User)
-    course = models.ForeignKey(Course)
-    dropped = models.BooleanField(default=False)
-    completed = models.BooleanField(default=False)
+    pass
+    # def progress_for_course(self, course):
+    #     """Gets the progress for a course."""
+    #     return self.courseprogress_set.filter(course=course).first()
 
 
 class ActivationKey(models.Model):
@@ -98,6 +94,13 @@ class Lesson(models.Model):
     slug = models.SlugField(max_length=255)
     description = models.TextField()
     order = models.PositiveIntegerField(default=0)
+
+    def progress_for_user(self, user):
+        """Gets the progress for this lesson for user."""
+        if user.is_authenticated():
+            return self.lessonprogress_set.filter(user=user).first()
+
+        return None
 
     class Meta:
         ordering = ['order']
@@ -175,6 +178,13 @@ class Task(models.Model):
                 p.task = self
                 p.save()
 
+    def progress_for_user(self, user):
+        """Gets the progress for this task for user."""
+        if user.is_authenticated():
+            return self.taskprogress_set.filter(user=user).first()
+
+        return None
+
     class Meta:
         ordering = ['order']
 
@@ -237,3 +247,52 @@ class Instructor(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class CourseProgress(models.Model):
+    user = models.ForeignKey(User)
+    course = models.ForeignKey(Course)
+    started = models.DateTimeField(auto_now=True)
+    completed = models.DateTimeField(null=True)
+
+    def __unicode__(self):
+        return '{user} {course}'.format(user=self.user, course=self.course)
+
+
+class LessonProgress(models.Model):
+    user = models.ForeignKey(User)
+    lesson = models.ForeignKey(Lesson)
+    started = models.DateTimeField()
+    completed = models.DateTimeField(null=True)
+
+
+class TaskProgress(models.Model):
+    user = models.ForeignKey(User)
+    task = models.ForeignKey(Task)
+    completed = models.DateTimeField(auto_now=True)
+
+
+class CourseLog(models.Model):
+    user = models.ForeignKey(User)
+    title = models.CharField(max_length=255)
+
+    COURSE = 'course'
+    LESSON = 'lesson'
+    TASK = 'task'
+    TYPE_CHOICES = (
+        (COURSE, 'Course'),
+        (LESSON, 'Lesson'),
+        (TASK, 'Task')
+    )
+    type = models.CharField(max_length=255, choices=TYPE_CHOICES)
+
+    STARTED = 'started'
+    COMPLETED = 'completed'
+    DROPPED = 'dropped'
+    ACTION_CHOICES = (
+        (STARTED, 'Started'),
+        (COMPLETED, 'Completed'),
+        (DROPPED, 'Dropped')
+    )
+    action = models.CharField(max_length=255, choices=ACTION_CHOICES)
+    date = models.DateTimeField(auto_now=True)

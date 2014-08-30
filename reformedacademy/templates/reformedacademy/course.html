@@ -1,6 +1,6 @@
 {% extends 'reformedacademy/base.html' %}
 {% load staticfiles %}
-{% load userutils %}
+{% load courseutils %}
 
 {% block content %}
     <div class="top-container">
@@ -19,10 +19,18 @@
                 </div>
                 {% endfor %}
             </div>
-            {% is_user_enrolled course as user_enrolled %}
-            {% if not user_enrolled %}
+            {% progress course as progress %}
+            {% if progress == None %}
             <div class="enrollment">
                 <a href="{% url 'enroll' course.pk %}">Enroll</a>
+            </div>
+            {% else %}
+            <div class="enrollment enrolled">
+                {% if progress.completed %}
+                <i class="fa fa-tasks"></i> Completed on {{ progress.completed|date:'DATE_FORMAT' }}
+                {% else %}
+                <i class="fa fa-tasks"></i> Enrolled on {{ progress.started|date:'DATE_FORMAT' }}
+                {% endif %}
             </div>
             {% endif %}
         </div>
@@ -32,11 +40,15 @@
             <h1>Lessons</h1>
         </div>
         {% for lesson in course.lesson_set.all %}
+        {% progress lesson as progress %}
         <div class="section">
             <a href="{% url 'lesson' lesson.slug %}">
                 <div class="inner">
-                    <!--fa-check-circle-o-->
+                    {% if progress.completed %}
+                    <i class="fa fa-check-circle-o"></i>
+                    {% else %}
                     <i class="fa fa-circle-o"></i>
+                    {% endif %}
                     <h1>{{ lesson.name }}</h1>
                 </div>
             </a>

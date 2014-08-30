@@ -530,6 +530,15 @@ ul.errorlist li {
     margin-top: 3em;
 }
 
+.enrollment.enrolled {
+    text-align: left;
+    margin-top: 2.5em;
+}
+
+.enrollment.enrolled i {
+    margin-right: 0.5em;
+}
+
 .enrollment a {
     border: 1px solid white;
     padding: 1em;
@@ -543,4 +552,13 @@ ul.errorlist li {
     background: #fff;
     color: #34aadc;
     text-decoration: none;
+}
+
+.section .enrollment.enrolled i {
+    color: #000;
+    display: inline;
+    margin-right: 0;
+}
+.section .enrollment.enrolled {
+    margin-top: 1em;
 }

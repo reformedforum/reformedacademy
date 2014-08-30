@@ -23,10 +23,10 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 from django import template
 
 register = template.Library()
-__all__ = ['user_is_enrolled']
+__all__ = ['course_progress']
 
 @register.assignment_tag(takes_context=True)
-def is_user_enrolled(context, course):
-    """Returns a url for the side image of a vehicle trim."""
+def progress(context, obj):
+    """Returns the progress object for obj."""
     user = context.get('user')
-    return user.is_enrolled(course)
+    return obj.progress_for_user(user)
