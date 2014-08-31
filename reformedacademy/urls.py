@@ -55,6 +55,7 @@ urlpatterns = patterns('',
     url(r'^enroll/(?P<course_id>\d+)/$', 'reformedacademy.views.enroll', name='enroll'),
     url(r'^complete_task/(?P<task_id>\d+)/$', 'reformedacademy.views.complete_task',
         name='complete_task'),
+    url(r'^progress/$', 'reformedacademy.views.progress', name='progress'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
 
     # Media system

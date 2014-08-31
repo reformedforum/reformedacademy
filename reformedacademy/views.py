@@ -244,6 +244,15 @@ def complete_task(request, task_id):
 
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 
+@login_required
+def progress(request):
+    """Displays course progress for the logged in user."""
+
+    # Get all courses for the logged in user
+    courses = Course.objects.filter(courseprogress__user=request.user)
+    return render(request, 'reformedacademy/progress.html',
+                  {'courses': courses})
+
 
 def support(request):
     """The support page."""

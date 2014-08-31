@@ -278,6 +278,10 @@ ul.profile:before {
     cursor: pointer;
 }
 
+.section:hover {
+    background-color: rgba(52, 170, 220, 0.13);
+}
+
 .section a {
     display: block;
 }
@@ -288,10 +292,6 @@ ul.profile:before {
 
 .outline.lesson .section {
     cursor: auto;
-}
-
-.section:hover {
-    background-color: rgba(52, 170, 220, 0.13);
 }
 
 .outline.lesson .section:hover {
@@ -577,4 +577,14 @@ ul.errorlist li {
 }
 .section .enrollment.enrolled {
     margin-top: 1em;
+}
+
+.progress-bar {
+    background-color: #34aadc;
+}
+
+.progress {
+    box-shadow: none;
+    margin-top: 1.5em;
+    margin-bottom: 0;
 }
