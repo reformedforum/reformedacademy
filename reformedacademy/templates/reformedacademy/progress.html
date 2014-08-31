@@ -27,9 +27,15 @@
                     {% endif %}
                     <h1>{{ course.name }}</h1>
                     <h2>{{ course.category }}</h2>
+                    <h3>Enrolled {{ progress.started|date:'DATE_FORMAT' }}</h3>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                            60%
+                        <div class="progress-bar"
+                             role="progressbar"
+                             aria-valuenow="{{ progress.percentage_complete }}"
+                             aria-valuemin="0"
+                             aria-valuemax="100"
+                             style="width: {{ progress.percentage_complete }}%;">
+                            {{ progress.percentage_complete }}%
                         </div>
                     </div>
                 </div>

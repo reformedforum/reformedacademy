@@ -254,6 +254,7 @@ class CourseProgress(models.Model):
     course = models.ForeignKey(Course)
     started = models.DateTimeField(auto_now=True)
     completed = models.DateTimeField(null=True)
+    percentage_complete = models.PositiveIntegerField(max_length=3, default=0)
 
     def __unicode__(self):
         return '{user} {course}'.format(user=self.user, course=self.course)

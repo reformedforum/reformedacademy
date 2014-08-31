@@ -342,6 +342,10 @@ ul.profile:before {
     margin-top: 0.2em;
 }
 
+.section.home .inner h3 {
+    font-size: 1em;
+}
+
 .section-description .description {
     padding-left: .3em;
 }
