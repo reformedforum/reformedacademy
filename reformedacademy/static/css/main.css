@@ -539,8 +539,12 @@ ul.errorlist li {
     margin-right: 0.5em;
 }
 
-.enrollment a {
-    border: 1px solid white;
+.task-completion {
+    text-align: center;
+}
+
+.enrollment a, .task-completion a {
+    border: 1px solid #fff;
     padding: 1em;
     border-radius: 2em;
     font-size: 1.3em;
@@ -548,10 +552,22 @@ ul.errorlist li {
     letter-spacing: 0.07em;
 }
 
-.enrollment a:hover {
-    background: #fff;
+.task-completion a {
+    border: 1px solid #34aadc;
+    margin: 0 auto;
+    width: 150px;
+    margin-top: 2em;
+}
+
+.enrollment a:hover, .task-completion a:hover {
+    background-color: #fff;
     color: #34aadc;
     text-decoration: none;
+}
+
+.task-completion a:hover {
+    background-color: #34aadc;
+    color: #fff;
 }
 
 .section .enrollment.enrolled i {
