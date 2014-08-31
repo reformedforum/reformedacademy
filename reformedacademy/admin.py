@@ -102,7 +102,7 @@ class BookAdmin(admin.ModelAdmin):
     filter_horizontal = ('authors',)
     search_fields = ['title']
 
-
+admin.site.register(models.User)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.Lesson, LessonAdmin)

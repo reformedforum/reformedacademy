@@ -1,5 +1,6 @@
 {% extends 'reformedacademy/base.html' %}
 {% load staticfiles %}
+{% load courseutils %}
 
 {% block content %}
     <div class="top-container">
@@ -29,9 +30,14 @@
             <h1>Outline</h1>
         </div>
         {% for task in lesson.task_set.all %}
+        {% progress task as progress %}
         <div class="section">
             <div class="inner">
+                {% if progress.completed %}
+                <i class="fa fa-check-circle-o"></i>
+                {% else %}
                 <i class="fa fa-circle-o"></i>
+                {% endif %}
                 <h1>{{ task.name }}</h1>
                 {% if task.description %}
                 <p>
@@ -57,6 +63,11 @@
                             {% endfor %}
                         </div>
                     </div>
+                {% endif %}
+                {% if not progress.completed %}
+                <div class="task-completion">
+                    <a href="{% url 'complete_task' task.pk %}">Complete</a>
+                </div>
                 {% endif %}
             </div>
         </div>

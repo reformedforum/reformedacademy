@@ -20,6 +20,9 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 
+import uuid
+import random
+
 from django import forms
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
@@ -33,11 +36,10 @@ from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category
+from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category, \
+    CourseProgress, Task, TaskProgress
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
-import uuid
-import random
 
 
 class SignUpFormView(View):
@@ -171,9 +173,14 @@ def index(request):
     """The home page."""
     courses = Course.objects.all()
     instructors = Instructor.objects.all()
+    if request.user.is_authenticated():
+        progresses = request.user.courseprogress_set.all
+    else:
+        progresses = None
     return render(request, 'reformedacademy/index.html',
                   {'courses': courses,
-                   'instructors': instructors})
+                   'instructors': instructors,
+                   'progresses': progresses})
 
 
 def course(request, slug):
@@ -205,6 +212,37 @@ def courses(request, category_slug=None):
                   {'categories': categories,
                    'courses': courses,
                    'category_slug': category_slug})
+
+
+@login_required
+def enroll(request, course_id):
+    course = get_object_or_404(Course, pk=course_id)
+
+    # Check to see if a user isn't already enrolled in the course.
+    # If they are just ignore and redirect.
+    progress = course.progress_for_user(request.user)
+    if not progress:
+        # Create progress object
+        CourseProgress.objects.create(user=request.user, course=course)
+
+    messages.info(request, 'You are now enrolled in {}!'.format(course))
+    return HttpResponseRedirect(reverse('course', args=(course.slug,)))
+
+@login_required
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+
+    # Check to see if a user isn't already enrolled in the course
+    course_progress = task.lesson.course.progress_for_user(user=request.user)
+
+    # Check to see if a user hasn't already completed the task.
+    # If they are just ignore and redirect.
+    progress = task.progress_for_user(request.user)
+    if course_progress and not progress:
+        # Create progress object
+        TaskProgress.objects.create(user=request.user, task=task)
+
+    return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 
 
 def support(request):
