@@ -256,6 +256,19 @@ class CourseProgress(models.Model):
     completed = models.DateTimeField(null=True)
     percentage_complete = models.PositiveIntegerField(max_length=3, default=0)
 
+    def calc_progress(self):
+        """TODO:
+
+        Get the course for which the task was completed.
+        Get all user course, lesson, and task progress for a course
+        Loop through all course lessons, and all lesson tasks and count completed tasks.
+        Keep track of total tasks and do simple division to calculate progress.
+
+        Saved progress in percentage_complete
+
+        """
+        pass
+
     def __unicode__(self):
         return '{user} {course}'.format(user=self.user, course=self.course)
 

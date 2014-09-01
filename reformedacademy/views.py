@@ -239,8 +239,9 @@ def complete_task(request, task_id):
     # If they are just ignore and redirect.
     progress = task.progress_for_user(request.user)
     if course_progress and not progress:
-        # Create progress object
+        # Create progress object to log completion of the task
         TaskProgress.objects.create(user=request.user, task=task)
+        course_progress.calc_progress()
 
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 
