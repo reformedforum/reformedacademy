@@ -19,12 +19,14 @@ You should have received a copy of the GNU General Public License
 along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
+from urlparse import urlparse
+import math
+
 from bible.djangoforms import VerseField
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from reformedacademy import utils
 from rfmedia.models import Asset
-from urlparse import urlparse
 import scriptures
 
 
@@ -254,20 +256,30 @@ class CourseProgress(models.Model):
     course = models.ForeignKey(Course)
     started = models.DateTimeField(auto_now=True)
     completed = models.DateTimeField(null=True)
-    percentage_complete = models.PositiveIntegerField(max_length=3, default=0)
+    percentage_complete = models.PositiveIntegerField(max_length=3, default=0,
+                                                      help_text="Always a whole number.")
 
-    def calc_progress(self):
-        """TODO:
+    def calc_progress(self, user):
+        """Calculates the percentage complete for a course and saves to percentage_complete."""
 
-        Get the course for which the task was completed.
-        Get all user course, lesson, and task progress for a course
-        Loop through all course lessons, and all lesson tasks and count completed tasks.
-        Keep track of total tasks and do simple division to calculate progress.
+        # Get all tasks for a course
+        tp_qs = TaskProgress.objects.filter(user=user, task__lesson__course=self.course).all()
+        # Convert the queryset to a list so we can do cached operations
+        tp_list = list(tp_qs)
 
-        Saved progress in percentage_complete
+        total_tasks = 0
+        completed_tasks = 0
+        # Loop through all lessons and tasks while keeping track of total_tasks and completed_tasks
+        for lesson in self.course.lesson_set.all():
+            for task in lesson.task_set.all():
+                total_tasks += 1
+                task_progress = utils.find_using_property(tp_list, task, 'task')
+                if task_progress and task_progress.completed:
+                    completed_tasks += 1
 
-        """
-        pass
+        # Calculate the percentage completed and save to the database
+        self.percentage_complete = math.ceil(completed_tasks / float(total_tasks) * 100)
+        self.save()
 
     def __unicode__(self):
         return '{user} {course}'.format(user=self.user, course=self.course)

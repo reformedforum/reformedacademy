@@ -241,7 +241,8 @@ def complete_task(request, task_id):
     if course_progress and not progress:
         # Create progress object to log completion of the task
         TaskProgress.objects.create(user=request.user, task=task)
-        course_progress.calc_progress()
+        # Calculate course progress to cache in database
+        course_progress.calc_progress(request.user)
 
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 

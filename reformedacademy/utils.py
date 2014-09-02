@@ -28,8 +28,21 @@ def str2bool(v):
 
 
 def send_html_mail(subject, message, sender, to_list):
-    """This method won't be necessary in Django 1.7, but currently there isn't a way to
+    """This function won't be necessary in Django 1.7, but currently there isn't a way to
     send html email."""
     msg = EmailMessage(subject, message, sender, to_list)
     msg.content_subtype = "html"  # Main content is now text/html
     return msg.send()
+
+
+def find_using_property(list, object, property):
+    """This function finds an object in a list by comparing iterating object's property to object.
+
+    Returns None if not found.
+
+    """
+    for obj in list:
+        if getattr(obj, property) == object:
+            return obj
+
+    return None
