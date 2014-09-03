@@ -37,7 +37,7 @@ from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category, \
-    CourseProgress, Task, TaskProgress
+    CourseProgress, Task, TaskProgress, LessonProgress
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
 
@@ -233,12 +233,18 @@ def complete_task(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
 
     # Check to see if a user isn't already enrolled in the course
-    course_progress = task.lesson.course.progress_for_user(user=request.user)
+    course_progress = task.lesson.course.progress_for_user(request.user)
+
+    # Grab the lesson progress
+    lesson_progress = task.lesson.progress_for_user(request.user)
+    if not lesson_progress:
+        # If the lesson progress doesn't exist, create it
+        LessonProgress.objects.create(user=request.user, lesson=task.lesson)
 
     # Check to see if a user hasn't already completed the task.
     # If they are just ignore and redirect.
-    progress = task.progress_for_user(request.user)
-    if course_progress and not progress:
+    task_progress = task.progress_for_user(request.user)
+    if course_progress and not task_progress:
         # Create progress object to log completion of the task
         TaskProgress.objects.create(user=request.user, task=task)
         # Calculate course progress to cache in database

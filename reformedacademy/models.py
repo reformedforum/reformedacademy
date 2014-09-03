@@ -60,6 +60,29 @@ class Course(models.Model):
 
         return None
 
+    def check_complete(self, user):
+        """Checks if a course is complete, and if it is, marks it complete in the database."""
+
+        # Get course progress
+        course_progress = self.progress_for_user(user)
+
+        # Get all lesson progress for this course
+        lp_qs = LessonProgress.objects.filter(user=user, lesson__course=self).all()
+        # Convert the queryset to a list so we can do cached operations
+        lp_list = list(lp_qs)
+
+        # Assume course complete until we reach a task that isn't complete
+        course_complete = True
+        for lesson in self.lesson_set.all():
+            lesson_progress = utils.find_using_property(lp_list, lesson, 'lesson')
+            # If lesson progress was not found, or if lesson progress completed is False,
+            # the course isn't complete.
+            if not lesson_progress or not lesson_progress.completed:
+                course_complete = False
+
+        if course_complete:
+            course_progress.complete()
+
     def __unicode__(self):
         return self.name
 
@@ -127,6 +150,8 @@ class Lesson(models.Model):
 
         if lesson_complete:
             lesson_progress.complete()
+
+        self.course.check_complete(user)
 
     class Meta:
         ordering = ['order']
@@ -317,7 +342,7 @@ class CourseProgress(models.Model):
 class LessonProgress(models.Model):
     user = models.ForeignKey(User)
     lesson = models.ForeignKey(Lesson)
-    started = models.DateTimeField()
+    started = models.DateTimeField(auto_now_add=True)
     completed = models.DateTimeField(null=True)
 
     def complete(self):
