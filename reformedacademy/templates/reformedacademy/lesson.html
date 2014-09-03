@@ -23,6 +23,12 @@
             </div>
             {% endfor %}
             </div>
+            {% progress lesson as progress %}
+            {% if progress and progress.completed %}
+            <div class="enrollment enrolled">
+                <i class="fa fa-tasks"></i> Completed on {{ progress.completed|date:'DATE_FORMAT' }}
+            </div>
+            {% endif %}
         </div>
     </div>
     <div class="outline lesson">

@@ -25,6 +25,7 @@ import math
 from bible.djangoforms import VerseField
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 from reformedacademy import utils
 from rfmedia.models import Asset
 import scriptures
@@ -103,6 +104,29 @@ class Lesson(models.Model):
             return self.lessonprogress_set.filter(user=user).first()
 
         return None
+
+    def check_complete(self, user):
+        """Checks if a lesson is complete, and if it is, marks it complete in the database."""
+
+        # Get lesson progress
+        lesson_progress = self.progress_for_user(user)
+
+        # Get all task progress for this lesson
+        tp_qs = TaskProgress.objects.filter(user=user, task__lesson=self).all()
+        # Convert the queryset to a list so we can do cached operations
+        tp_list = list(tp_qs)
+
+        # Assume lesson complete until we reach a task that isn't complete
+        lesson_complete = True
+        for task in self.task_set.all():
+            task_progress = utils.find_using_property(tp_list, task, 'task')
+            # If task progress was not found, or if task progress completed is False,
+            # the lesson isn't complete.
+            if not task_progress or not task_progress.completed:
+                lesson_complete = False
+
+        if lesson_complete:
+            lesson_progress.complete()
 
     class Meta:
         ordering = ['order']
@@ -281,6 +305,11 @@ class CourseProgress(models.Model):
         self.percentage_complete = math.ceil(completed_tasks / float(total_tasks) * 100)
         self.save()
 
+    def complete(self):
+        """Marks this course as complete."""
+        self.completed = True
+        self.save()
+
     def __unicode__(self):
         return '{user} {course}'.format(user=self.user, course=self.course)
 
@@ -290,6 +319,11 @@ class LessonProgress(models.Model):
     lesson = models.ForeignKey(Lesson)
     started = models.DateTimeField()
     completed = models.DateTimeField(null=True)
+
+    def complete(self):
+        """Marks this lesson as complete."""
+        self.completed = timezone.now()
+        self.save()
 
 
 class TaskProgress(models.Model):

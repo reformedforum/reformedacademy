@@ -243,6 +243,8 @@ def complete_task(request, task_id):
         TaskProgress.objects.create(user=request.user, task=task)
         # Calculate course progress to cache in database
         course_progress.calc_progress(request.user)
+        # Check if a lesson is complete, and complete if it is
+        task.lesson.check_complete(request.user)
 
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 
