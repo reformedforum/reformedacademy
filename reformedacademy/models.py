@@ -307,7 +307,7 @@ class CourseProgress(models.Model):
 
     def complete(self):
         """Marks this course as complete."""
-        self.completed = True
+        self.completed = timezone.now()
         self.save()
 
     def __unicode__(self):
