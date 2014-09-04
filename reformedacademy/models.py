@@ -55,9 +55,7 @@ class Course(models.Model):
 
     def progress_for_user(self, user):
         """Gets the progress for this course for user."""
-        if user.is_authenticated():
-            return self.courseprogress_set.filter(user=user).first()
-
+        return self.courseprogress_set.filter(user=user).first()
         return None
 
     def check_complete(self, user):
@@ -123,9 +121,7 @@ class Lesson(models.Model):
 
     def progress_for_user(self, user):
         """Gets the progress for this lesson for user."""
-        if user.is_authenticated():
-            return self.lessonprogress_set.filter(user=user).first()
-
+        return self.lessonprogress_set.filter(user=user).first()
         return None
 
     def check_complete(self, user):
@@ -231,9 +227,7 @@ class Task(models.Model):
 
     def progress_for_user(self, user):
         """Gets the progress for this task for user."""
-        if user.is_authenticated():
-            return self.taskprogress_set.filter(user=user).first()
-
+        return self.taskprogress_set.filter(user=user).first()
         return None
 
     class Meta:
