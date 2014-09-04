@@ -238,9 +238,7 @@ class Task(models.Model):
 
     def uncomplete_task(self, user):
         """Deletes TaskProgress object from database"""
-        if user.is_authenticated():
-            TaskProgress.objects.get(user__exact=user, task__exact=self).delete()
-        return None
+        TaskProgress.objects.get(user=user, task=self).delete()
 
     class Meta:
         ordering = ['order']
