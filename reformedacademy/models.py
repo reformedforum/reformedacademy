@@ -80,6 +80,8 @@ class Course(models.Model):
 
         if course_complete:
             course_progress.complete()
+            # Log course complete
+            CourseLog.complete_course(user)
 
     def __unicode__(self):
         return self.name
@@ -146,6 +148,8 @@ class Lesson(models.Model):
 
         if lesson_complete:
             lesson_progress.complete()
+            # Log the lesson is complete
+            CourseLog.complete_lesson(user)
 
         self.course.check_complete(user)
 
@@ -353,7 +357,6 @@ class TaskProgress(models.Model):
 
 class CourseLog(models.Model):
     user = models.ForeignKey(User)
-    title = models.CharField(max_length=255)
 
     COURSE = 'course'
     LESSON = 'lesson'
@@ -375,3 +378,31 @@ class CourseLog(models.Model):
     )
     action = models.CharField(max_length=255, choices=ACTION_CHOICES)
     date = models.DateTimeField(auto_now=True)
+
+    @staticmethod
+    def start_course(user):
+        CourseLog.objects.create(user=user, type=CourseLog.COURSE, action=CourseLog.STARTED)
+
+    @staticmethod
+    def complete_course(user):
+        CourseLog.objects.create(user=user, type=CourseLog.COURSE, action=CourseLog.COMPLETED)
+
+    @staticmethod
+    def drop_course(user):
+        CourseLog.objects.create(user=user, type=CourseLog.COURSE, action=CourseLog.DROPPED)
+
+    @staticmethod
+    def start_lesson(user):
+        CourseLog.objects.create(user=user, type=CourseLog.LESSON, action=CourseLog.STARTED)
+
+    @staticmethod
+    def complete_lesson(user):
+        CourseLog.objects.create(user=user, type=CourseLog.LESSON, action=CourseLog.COMPLETED)
+
+    @staticmethod
+    def complete_task(user):
+        CourseLog.objects.create(user=user, type=CourseLog.TASK, action=CourseLog.COMPLETED)
+
+    @staticmethod
+    def drop_task(user):
+        CourseLog.objects.create(user=user, type=CourseLog.TASK, action=CourseLog.DROPPED)

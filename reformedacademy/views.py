@@ -37,7 +37,7 @@ from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category, \
-    CourseProgress, Task, TaskProgress, LessonProgress
+    CourseProgress, Task, TaskProgress, LessonProgress, CourseLog
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
 
@@ -224,6 +224,8 @@ def enroll(request, course_id):
     if not progress:
         # Create progress object
         CourseProgress.objects.create(user=request.user, course=course)
+        # Log the course was started
+        CourseLog.start_course(request.user)
 
     messages.info(request, 'You are now enrolled in {}!'.format(course))
     return HttpResponseRedirect(reverse('course', args=(course.slug,)))
@@ -240,6 +242,8 @@ def complete_task(request, task_id):
     if not lesson_progress:
         # If the lesson progress doesn't exist, create it
         LessonProgress.objects.create(user=request.user, lesson=task.lesson)
+        # Log the course was started
+        CourseLog.start_lesson(request.user)
 
     # Check to see if a user hasn't already completed the task.
     # If they are just ignore and redirect.
@@ -247,6 +251,8 @@ def complete_task(request, task_id):
     if course_progress and not task_progress:
         # Create progress object to log completion of the task
         TaskProgress.objects.create(user=request.user, task=task)
+        # Log the task was completed
+        CourseLog.complete_task(request.user)
         # Calculate course progress to cache in database
         course_progress.calc_progress(request.user)
         # Check if a lesson is complete, and complete if it is
@@ -260,6 +266,8 @@ def uncomplete_task(request, task_id):
     task_progress = task.progress_for_user(request.user)
     if task_progress:
         task_progress.delete()
+        # Log dropping of task
+        CourseLog.drop_task(request.user)
 
         # Uncomplete the lesson if it has already been completed
         lesson_progress = task.lesson.progress_for_user(request.user)
