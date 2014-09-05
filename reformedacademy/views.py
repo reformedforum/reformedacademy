@@ -255,6 +255,27 @@ def complete_task(request, task_id):
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 
 @login_required
+def uncomplete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task_progress = task.progress_for_user(request.user)
+    if task_progress:
+        task_progress.delete()
+
+        # Uncomplete the lesson if it has already been completed
+        lesson_progress = task.lesson.progress_for_user(request.user)
+        if lesson_progress and lesson_progress.completed:
+            lesson_progress.completed = None
+            lesson_progress.save()
+
+        # Uncomplete the course if it has already been completed
+        course_progress = task.lesson.course.progress_for_user(request.user)
+        if course_progress and course_progress.completed:
+            course_progress.completed = None
+            course_progress.save()
+
+    return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
+
+@login_required
 def progress(request):
     """Displays course progress for the logged in user."""
 

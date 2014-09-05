@@ -236,10 +236,6 @@ class Task(models.Model):
 
         return None
 
-    def uncomplete_task(self, user):
-        """Deletes TaskProgress object from database"""
-        TaskProgress.objects.get(user=user, task=self).delete()
-
     class Meta:
         ordering = ['order']
 

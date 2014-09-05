@@ -70,11 +70,13 @@
                         </div>
                     </div>
                 {% endif %}
-                {% if not progress.completed %}
                 <div class="task-completion">
+                    {% if not progress.completed %}
                     <a href="{% url 'complete_task' task.pk %}">Complete</a>
+                    {% else %}
+                    <a href="{% url 'uncomplete_task' task.pk %}">Uncomplete</a>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
         {% endfor %}
