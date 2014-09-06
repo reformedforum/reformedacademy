@@ -82,6 +82,18 @@ class Course(models.Model):
             # Log course complete
             CourseLog.complete_course(user)
 
+    def enroll(self, user):
+        """Enrolls a user in this course.
+
+        @:return CourseProgress
+
+        """
+        course_progress = CourseProgress.objects.create(user=user,
+                                                        course=self)
+        # Log the course was started
+        CourseLog.start_course(user)
+        return course_progress
+
     def __unicode__(self):
         return self.name
 
@@ -230,6 +242,23 @@ class Task(models.Model):
     def progress_for_user(self, user):
         """Gets the progress for this task for user."""
         return self.taskprogress_set.filter(user=user).first()
+
+    def complete(self, user, course_progress):
+        """Completes a task.
+
+        @:return TaskProgress
+
+        """
+        # Create progress object to log completion of the task
+        task_progress = TaskProgress.objects.create(user=user, task=self)
+        # Log the task was completed
+        CourseLog.complete_task(user)
+        # Calculate course progress to cache in database
+        course_progress.calc_progress(user)
+        # Check if a lesson is complete, and complete if it is
+        self.lesson.check_complete(user)
+
+        return task_progress
 
     class Meta:
         ordering = ['order']

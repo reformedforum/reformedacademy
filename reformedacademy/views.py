@@ -222,10 +222,7 @@ def enroll(request, course_id):
     # If they are just ignore and redirect.
     progress = course.progress_for_user(request.user)
     if not progress:
-        # Create progress object
-        CourseProgress.objects.create(user=request.user, course=course)
-        # Log the course was started
-        CourseLog.start_course(request.user)
+        course.enroll(request.user)
 
     messages.info(request, 'You are now enrolled in {}!'.format(course))
     return HttpResponseRedirect(reverse('course', args=(course.slug,)))
@@ -236,6 +233,8 @@ def complete_task(request, task_id):
 
     # Check to see if a user isn't already enrolled in the course
     course_progress = task.lesson.course.progress_for_user(request.user)
+    if not course_progress:
+        course_progress = task.lesson.course.enroll(request.user)
 
     # Grab the lesson progress
     lesson_progress = task.lesson.progress_for_user(request.user)
@@ -248,15 +247,8 @@ def complete_task(request, task_id):
     # Check to see if a user hasn't already completed the task.
     # If they are just ignore and redirect.
     task_progress = task.progress_for_user(request.user)
-    if course_progress and not task_progress:
-        # Create progress object to log completion of the task
-        TaskProgress.objects.create(user=request.user, task=task)
-        # Log the task was completed
-        CourseLog.complete_task(request.user)
-        # Calculate course progress to cache in database
-        course_progress.calc_progress(request.user)
-        # Check if a lesson is complete, and complete if it is
-        task.lesson.check_complete(request.user)
+    if not task_progress:
+        task.complete(request.user, course_progress)
 
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 
