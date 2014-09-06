@@ -13,19 +13,43 @@
         <div class="h1-container">
             <h1>Enrolled Courses</h1>
         </div>
-        {% for course in courses %}
+        {% for course in enrolled %}
         {% progress course as progress %}
         <a href="{% url 'course' course.slug %}">
             <div class="section home">
                 <div class="inner">
-                    {% if progress.completed %}
-                    <i class="fa fa-check-circle-o"></i>
-                    {% else %}
                     <i class="fa fa-circle-o"></i>
-                    {% endif %}
                     <h1>{{ course.name }}</h1>
                     <h2>{{ course.category }}</h2>
                     <h3>Enrolled {{ progress.started|date:'DATE_FORMAT' }}</h3>
+                    <div class="progress">
+                        <div class="progress-bar"
+                             role="progressbar"
+                             aria-valuenow="{{ progress.percentage_complete }}"
+                             aria-valuemin="0"
+                             aria-valuemax="100"
+                             style="width: {{ progress.percentage_complete }}%;">
+                            {{ progress.percentage_complete }}%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="outline lesson">
+        <div class="h1-container">
+            <h1>Completed Courses</h1>
+        </div>
+        {% for course in completed %}
+        {% progress course as progress %}
+        <a href="{% url 'course' course.slug %}">
+            <div class="section home">
+                <div class="inner">
+                    <i class="fa fa-check-circle-o"></i>
+                    <h1>{{ course.name }}</h1>
+                    <h2>{{ course.category }}</h2>
+                    <h3>Completed {{ progress.completed|date:'DATE_FORMAT' }}</h3>
                     <div class="progress">
                         <div class="progress-bar"
                              role="progressbar"

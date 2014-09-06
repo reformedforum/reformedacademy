@@ -289,8 +289,18 @@ def progress(request):
 
     # Get all courses for the logged in user
     courses = Course.objects.filter(courseprogress__user=request.user)
+    # Separate courses into enrolled courses and completed courses
+    enrolled = []
+    completed = []
+    for course in list(courses):
+        progress = course.progress_for_user(request.user)
+        if progress.completed:
+            completed.append(course)
+        else:
+            enrolled.append(course)
+
     return render(request, 'reformedacademy/progress.html',
-                  {'courses': courses})
+                  {'enrolled': enrolled, 'completed': completed})
 
 
 def support(request):
