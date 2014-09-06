@@ -20,8 +20,8 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 from django import forms
-from django.contrib.auth.models import User
 from django.forms import widgets
+from reformedacademy.models import User
 
 
 class SignUpForm(forms.Form):

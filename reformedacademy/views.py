@@ -25,19 +25,19 @@ import random
 
 from django import forms
 from django.shortcuts import get_object_or_404, get_list_or_404
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, \
+    get_user_model
 from django.forms.util import ErrorList
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category, \
-    CourseProgress, Task, TaskProgress, LessonProgress, CourseLog
+    Task, LessonProgress, CourseLog, User
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
 
