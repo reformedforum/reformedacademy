@@ -484,6 +484,10 @@ form {
     font-size: 1.3em;
 }
 
+.previous-account {
+    margin-bottom: 4em;
+}
+
 .profile-container .inner input[type=submit] {
     margin-top: 2em;
 }
@@ -529,7 +533,7 @@ ul.errorlist li {
     font-size: .9em
 }
 
-.enrollment {
+.enrollment, .signup {
     text-align: center;
     margin-top: 3em;
 }
@@ -547,7 +551,7 @@ ul.errorlist li {
     text-align: center;
 }
 
-.enrollment a, .task-completion a {
+.enrollment a, .task-completion a, .signup a {
     border: 1px solid #fff;
     padding: 1em;
     border-radius: 2em;
@@ -563,7 +567,7 @@ ul.errorlist li {
     margin-top: 2em;
 }
 
-.enrollment a:hover, .task-completion a:hover {
+.enrollment a:hover, .task-completion a:hover, .signup a:hover {
     background-color: #fff;
     color: #34aadc;
     text-decoration: none;
