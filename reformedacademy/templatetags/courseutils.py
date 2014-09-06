@@ -29,4 +29,7 @@ __all__ = ['course_progress']
 def progress(context, obj):
     """Returns the progress object for obj."""
     user = context.get('user')
-    return obj.progress_for_user(user)
+    if user.is_authenticated():
+        return obj.progress_for_user(user)
+
+    return None

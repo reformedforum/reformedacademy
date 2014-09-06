@@ -56,7 +56,6 @@ class Course(models.Model):
     def progress_for_user(self, user):
         """Gets the progress for this course for user."""
         return self.courseprogress_set.filter(user=user).first()
-        return None
 
     def check_complete(self, user):
         """Checks if a course is complete, and if it is, marks it complete in the database."""
@@ -124,7 +123,6 @@ class Lesson(models.Model):
     def progress_for_user(self, user):
         """Gets the progress for this lesson for user."""
         return self.lessonprogress_set.filter(user=user).first()
-        return None
 
     def check_complete(self, user):
         """Checks if a lesson is complete, and if it is, marks it complete in the database."""
@@ -232,7 +230,6 @@ class Task(models.Model):
     def progress_for_user(self, user):
         """Gets the progress for this task for user."""
         return self.taskprogress_set.filter(user=user).first()
-        return None
 
     class Meta:
         ordering = ['order']
