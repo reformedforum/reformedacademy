@@ -59,6 +59,8 @@ urlpatterns = patterns('',
         name='uncomplete_task'),
     url(r'^progress/$', 'reformedacademy.views.progress', name='progress'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
+    url(r'^service/', 'reformedacademy.views.service', name='service'),
+    url(r'^privacy/', 'reformedacademy.views.privacy', name='privacy'),
 
     # Media system
     url(r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)',
