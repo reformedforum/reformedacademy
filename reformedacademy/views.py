@@ -141,6 +141,13 @@ def account_created(request):
     """Shows the account created template."""
     return render(request, 'reformedacademy/account_created.html')
 
+def service(request):
+    """Shows the service template."""
+    return render(request, 'reformedacademy/service.html')
+
+def privacy(request):
+    """Shows the privacy template."""
+    return render(request, 'reformedacademy/privacy.html')
 
 def activate(request, user_id, key):
     """Activates a user account."""

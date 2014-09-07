@@ -17,7 +17,7 @@
                 {% csrf_token %}
                 {{ form }}
                 <div class="terms-and-conditions">
-                    By clicking Sign Up, I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>.
+                    By clicking Sign Up, I agree to the <a href="{% url 'service' %}">Terms of Service</a> and <a href="{% url 'privacy' %}">Privacy Policy</a>.
                 </div>
                 <input type="submit" value="Sign Up">
             </form>
