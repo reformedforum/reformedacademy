@@ -354,35 +354,6 @@ ul.profile:before {
     margin-top: 1em;
 }
 
-@media(max-width:800px) {
-    .top-container {
-        padding: 3em 2em 6em 2em;
-    }
-
-    .header .logo img {
-        margin-left: 1.6em;
-    }
-
-     {
-    }
-
-    .course-top-container {
-        padding: 3em 2em 3em 2em;
-    }
-
-    .course-top-container .inner h1 {
-        font-size: 3em;
-    }
-
-    .outline .h1-container {
-        margin: 0 2em 1.5em 2em;
-    }
-
-    .section {
-        padding: 0 2em 0 2em;
-    }
-}
-
 .top-container.centered {
     padding-top: 3em;
     padding-bottom: 3em;
@@ -415,11 +386,11 @@ ul.profile:before {
     margin: 0 auto;
 }
 
-.top-container.centered.activation .inner {
+.top-container.centered.wide .inner {
     max-width: 500px;
 }
 
-.top-container.centered.activation .inner .description {
+.top-container.centered.wide .inner .description {
     max-width: 500px;
 }
 
@@ -595,4 +566,38 @@ ul.errorlist li {
     box-shadow: none;
     margin-top: 1.5em;
     margin-bottom: 0;
+}
+
+.content {
+    margin: 6em;
+}
+
+@media(max-width:800px) {
+    .top-container {
+        padding: 3em 2em 6em 2em;
+    }
+
+    .header .logo img {
+        margin-left: 1.6em;
+    }
+
+    .course-top-container {
+        padding: 3em 2em 3em 2em;
+    }
+
+    .course-top-container .inner h1 {
+        font-size: 3em;
+    }
+
+    .outline .h1-container {
+        margin: 0 2em 1.5em 2em;
+    }
+
+    .section {
+        padding: 0 2em 0 2em;
+    }
+
+    .content {
+        margin: 2em;
+    }
 }
