@@ -18,8 +18,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
+from reformedacademy.models import User
 
-from django.contrib.auth.models import User
 if User.objects.count() == 0:
     admin = User.objects.create(username='admin')
     admin.set_password('admin')
