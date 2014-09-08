@@ -1,3 +1,0 @@
-[submodule "bible"]
-	path = bible
-	url = git@github.com:reformedforum/python-bible.git
