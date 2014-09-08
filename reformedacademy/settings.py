@@ -37,7 +37,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'reformedacademy-env-52wzhrapqv.elasticbeanstalk.com',
+                 'reformed.academy', 'reformedacademy-develop-pmcfdpkypx.elasticbeanstalk.com',
+                 'develop.reformed.academy']
 
 # Application definition
 
