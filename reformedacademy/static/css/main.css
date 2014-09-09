@@ -577,6 +577,14 @@ ul.errorlist li {
         padding: 3em 2em 6em 2em;
     }
 
+    .top-container.centered .inner img {
+        width: 85px;
+    }
+
+    .top-container.centered .inner h1 {
+        font-size: 3em;
+    }
+
     .header .logo img {
         margin-left: 1.6em;
     }
