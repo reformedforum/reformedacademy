@@ -51,7 +51,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'reformedacademy',
     'rfmedia',
-    'tastypie',
+    'rest_framework',
+    # 'tastypie',
     'storages',
     'django_cleanup'
 )

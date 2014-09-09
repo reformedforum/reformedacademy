@@ -21,22 +21,18 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 """
 from django.conf.urls import patterns, include, url
 from django.conf import settings
-from tastypie.api import Api
-from rfmedia.api import StatResource, AssetResource
 from django.contrib import admin
 from reformedacademy.views import SignUpFormView, LoginFormView
 
 admin.autodiscover()
 
-v1_api = Api(api_name='v1')
-v1_api.register(StatResource())
-v1_api.register(AssetResource())
-
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'reformedacademy.views.index', name='index'),
     url(r'^admin/', include(admin.site.urls)),
-    (r'^api/', include(v1_api.urls)),
+
+    # Django REST framework
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # Reformed Academy
     url(r'^signup/', SignUpFormView.as_view(), name='signup'),
