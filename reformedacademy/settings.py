@@ -103,9 +103,9 @@ CSRF_COOKIE_SECURE = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/'
-
 STATIC_ROOT = '/static/'
 
+MEDIA_URL = '/'
 MEDIA_ROOT = '/media/'
 
 # Amazon storage settings
