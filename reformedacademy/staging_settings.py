@@ -26,3 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['reformedacademy-develop-pmcfdpkypx.elasticbeanstalk.com',
                  'staging.reformed.academy']
+
+SECURE_PROXY_SSL_HEADER = None
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
