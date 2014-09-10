@@ -104,14 +104,13 @@ CSRF_COOKIE_SECURE = True
 
 STATIC_URL = '/'
 
-STATIC_ROOT = os.path.join(
- os.path.dirname(
-  os.path.dirname(
-   os.path.abspath(__file__))), 'static')
+STATIC_ROOT = '/static/'
+
+MEDIA_ROOT = '/media/'
 
 # Amazon storage settings
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'reformedacademy.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'reformedacademy.s3utils.StaticRootS3BotoStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
