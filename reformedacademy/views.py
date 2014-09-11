@@ -25,8 +25,7 @@ import random
 
 from django import forms
 from django.shortcuts import get_object_or_404, get_list_or_404
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, \
-    get_user_model
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.forms.util import ErrorList
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
@@ -36,7 +35,7 @@ from django.contrib import messages
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from reformedacademy.models import ActivationKey, Course, Instructor, Lesson, Category, \
+from reformedacademy.models import ActivationKey, Course, Lesson, Category, \
     Task, LessonProgress, CourseLog, User
 from reformedacademy.forms import SignUpForm, LoginForm
 from reformedacademy.utils import send_html_mail
@@ -179,7 +178,7 @@ def welcome(request):
 def index(request):
     """The home page."""
     courses = Course.objects.all()
-    instructors = Instructor.objects.all()
+    instructors = User.objects.filter(course__isnull=False)
     if request.user.is_authenticated():
         progresses = request.user.courseprogress_set.all
     else:

@@ -75,11 +75,6 @@ class LessonAdmin(admin.ModelAdmin):
     ordering = ('course', 'order')
 
 
-class InstructorAdmin(admin.ModelAdmin):
-    model = models.Instructor
-    prepopulated_fields = {"slug": ("name",)}
-
-
 class BookISBNInline(admin.TabularInline):
     model = models.BookISBN
     extra = 1
@@ -107,7 +102,6 @@ admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.Lesson, LessonAdmin)
 admin.site.register(models.Task, TaskAdmin)
-admin.site.register(models.Instructor, InstructorAdmin)
 admin.site.register(models.Author)
 admin.site.register(models.Book, BookAdmin)
 

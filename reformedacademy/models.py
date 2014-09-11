@@ -105,7 +105,15 @@ class Course(models.Model):
 
 
 class User(AbstractUser):
-    pass
+    course = models.ManyToManyField(Course, blank=True)
+    name = models.CharField(max_length=255, blank=True)
+    slug = models.SlugField(max_length=255, blank=True)
+    biography = models.TextField(blank=True)
+    profile_image = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __unicode__(self):
+        return self.name;
+
     # def progress_for_course(self, course):
     #     """Gets the progress for a course."""
     #     return self.courseprogress_set.filter(course=course).first()
@@ -310,18 +318,6 @@ class PassageIndex(models.Model):
             passages.append(PassageIndex(start_verse=start_verse, end_verse=end_verse))
 
         return passages
-
-
-class Instructor(models.Model):
-    """Describes an instructor of a course."""
-    course = models.ManyToManyField(Course, blank=True)
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255)
-    biography = models.TextField(blank=True)
-    profile_image = models.ImageField(upload_to='profile_images/instructors')
-
-    def __unicode__(self):
-        return self.name
 
 
 class CourseProgress(models.Model):
