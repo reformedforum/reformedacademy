@@ -20,4 +20,4 @@
 # along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 source env/bin/activate
-./manage.py $1 --settings=reformedacademy.local_settings
+./manage.py $@ --settings=reformedacademy.local_settings
