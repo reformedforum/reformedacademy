@@ -31,9 +31,6 @@ urlpatterns = patterns('',
     url(r'^$', 'reformedacademy.views.index', name='index'),
     url(r'^admin/', include(admin.site.urls)),
 
-    # Django REST framework
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
     # Reformed Academy
     url(r'^signup/', SignUpFormView.as_view(), name='signup'),
     url(r'^account_created/', 'reformedacademy.views.account_created', name='account_created'),

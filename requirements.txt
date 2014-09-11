@@ -7,8 +7,7 @@ django-cleanup==0.1.10
 django-filter==0.7
 django-ipware==0.0.8
 django-storages==1.1.8
-django-tastypie==0.11.1
-djangorestframework==2.4.2
+-e git://github.com/coagulant/django-tastypie.git@170008dd16552c3875d34ebe2163b39723af4b93#egg=django_tastypie-origin/feature/django-1.7
 python-dateutil==2.2
 python-mimeparse==0.1.4
 pytz==2014.7
