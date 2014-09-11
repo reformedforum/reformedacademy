@@ -138,8 +138,9 @@ ul.profile:before {
 }
 
 .header .logo i {
-    color: #ff9500;
+    color: #fff;
     margin-right: 0em;
+    margin-left: 0.3em;
 }
 
 .header .logo span.first {

@@ -99,24 +99,23 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-STATIC_URL = '/'
-
-STATIC_ROOT = os.path.join(
- os.path.dirname(
-  os.path.dirname(
-   os.path.abspath(__file__))), 'static')
-
 # Amazon storage settings
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'reformedacademy.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'reformedacademy.s3utils.StaticRootS3BotoStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_SECURE_URLS = True
 AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
+STATIC_ROOT = '/static/'
+MEDIA_ROOT = '/media/'
+
+S3_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = S3_URL + STATIC_ROOT
+MEDIA_URL = S3_URL + MEDIA_ROOT
 
 # Provide custom backend because we authenticate with email addresses
 AUTHENTICATION_BACKENDS = (
