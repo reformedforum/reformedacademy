@@ -178,18 +178,10 @@ class Lesson(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    """Describes an author."""
-    name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return self.name
-
-
 class Book(models.Model):
     """Describes a book."""
     title = models.CharField(max_length=255)
-    authors = models.ManyToManyField(Author, blank=True)
+    authors = models.ManyToManyField(User, blank=True)
     cover_image = models.ImageField(upload_to='cover_images')
 
     def __unicode__(self):
