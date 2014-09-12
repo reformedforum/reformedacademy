@@ -22,9 +22,9 @@ if 'SECRET_KEY' in os.environ:
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy',
                  'media.reformedforum.org']
