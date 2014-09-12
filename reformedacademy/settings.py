@@ -26,7 +26,8 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy']
+ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy',
+                 'media.reformedforum.org']
 
 
 # Application definition
