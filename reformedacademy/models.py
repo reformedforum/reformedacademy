@@ -106,13 +106,11 @@ class Course(models.Model):
 
 class User(AbstractUser):
     course = models.ManyToManyField(Course, blank=True)
-    name = models.CharField(max_length=255, blank=True)
-    slug = models.SlugField(max_length=255, blank=True)
     biography = models.TextField(blank=True)
     profile_image = models.ImageField(upload_to='profile_images', blank=True)
 
     def __unicode__(self):
-        return self.name;
+        return '{} {}'.format(self.first_name, self.last_name);
 
     # def progress_for_course(self, course):
     #     """Gets the progress for a course."""
