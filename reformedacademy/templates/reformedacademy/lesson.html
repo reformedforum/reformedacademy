@@ -14,7 +14,7 @@
                 {{ lesson.description }}
             </div>
             <div class="instructors">
-            {% for instructor in lesson.course.instructor_set.all %}
+            {% for instructor in lesson.course.instructors.all %}
             <div class="instructor">
                 <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}"
                      class="profile-image"

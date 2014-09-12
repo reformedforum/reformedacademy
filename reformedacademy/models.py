@@ -105,7 +105,7 @@ class Course(models.Model):
 
 
 class User(AbstractUser):
-    course = models.ManyToManyField(Course, blank=True)
+    course = models.ManyToManyField(Course, blank=True, related_name='instructors')
     biography = models.TextField(blank=True)
     profile_image = models.ImageField(upload_to='profile_images', blank=True)
 
