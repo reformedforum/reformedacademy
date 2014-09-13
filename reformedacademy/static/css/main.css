@@ -491,6 +491,13 @@ ul.errorlist li {
 
 .book h2 {
     font-size: 1.5em;
+    margin-bottom: 0.2em;
+}
+
+.book h3 {
+    font-size: 1em;
+    color: gray;
+    margin-top: 0;
 }
 
 .sources {

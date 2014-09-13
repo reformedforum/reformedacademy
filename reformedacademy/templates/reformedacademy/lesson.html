@@ -63,6 +63,11 @@
                     <div class="book">
                         <img src="{{ MEDIA_URL }}{{ task.book.cover_image }}" alt="{{ task.book }} Book Image">
                         <h2>{{ task.book.title }}</h2>
+                        <h3>
+                            {% for user in task.book.authors.all %}
+                                {{ user }}
+                            {% endfor %}
+                        </h3>
                         <div class="sources">
                             {% for book_url in task.book.bookurl_set.all %}
                                 <a href="{{ book_url.url }}">{{ book_url.website }}</a>
