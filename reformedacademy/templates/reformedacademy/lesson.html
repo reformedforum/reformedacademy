@@ -68,11 +68,13 @@
                                 {{ user }}
                             {% endfor %}
                         </h3>
+                        {% if task.book.bookurl_set.all|length > 0 %}
                         <div class="sources">
                             {% for book_url in task.book.bookurl_set.all %}
                                 <a href="{{ book_url.url }}">{{ book_url.website }}</a>
                             {% endfor %}
                         </div>
+                        {% endif %}
                     </div>
                 {% endif %}
                 <div class="task-completion">
