@@ -528,6 +528,7 @@ ul.errorlist li {
 
 .task-completion {
     text-align: center;
+    clear: both;
 }
 
 .enrollment a, .task-completion a, .signup a {
