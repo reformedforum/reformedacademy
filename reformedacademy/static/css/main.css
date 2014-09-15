@@ -69,14 +69,6 @@ a:visited {
     text-decoration: none;
 }
 
-.menu li .fa {
-    margin-right: 0.5em;
-    font-size: 1.4em;
-    position: relative;
-    top: 3px;
-    width: 30px;
-}
-
 .menu img {
     width: 26px;
     margin-right: 0.7em;
@@ -614,9 +606,8 @@ ul.errorlist li {
 
     .menu.open {
         left: 0;
-    
         padding-top: 1em;
-}
+    }
 
     .menu img {
         display: none;
@@ -631,9 +622,8 @@ ul.errorlist li {
         font-size: 1.3em;
         margin: 1.3em 0 0 0;
         letter-spacing: 1px;
-    
         display: inline;
-}
+    }
 
     .menu li a {
         cursor: pointer;
@@ -646,27 +636,10 @@ ul.errorlist li {
         text-decoration: none;
     }
 
-    .menu li .fa {
-        margin-right: 0.5em;
-        font-size: 2em;
-        position: relative;
-        top: 6px;
-        width: 50px;
-        text-align: center;
-    }
-
-/*     ul.profile:before {
-        content: "Profile";
-        position: relative;
-        top: 1em;
-        color: #D1EEFC;
-    } */
-
     .menu .profile {
         float: none;
-    
         width: 90%;
-}
+    }
 
     .menu li+li {
         border-left: none;
