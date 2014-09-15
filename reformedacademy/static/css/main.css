@@ -91,6 +91,9 @@ a:visited {
 
 .menu li+li {
     border-left: 1px solid #D1EEFC;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: rgba(209, 238, 252, 0.50);
     padding-left: 0.7em;
 }
 
