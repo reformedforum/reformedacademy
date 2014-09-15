@@ -39,6 +39,9 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
 
+    class Meta:
+        verbose_name_plural = "categories"
+
     def __unicode__(self):
         return self.name
 
