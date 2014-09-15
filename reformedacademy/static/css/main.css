@@ -55,6 +55,7 @@ a:visited {
     padding-right: 0.5em;
     display: inline-block;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .menu li a {
