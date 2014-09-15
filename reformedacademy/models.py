@@ -46,6 +46,18 @@ class Category(models.Model):
         return self.name
 
 
+class User(AbstractUser):
+    biography = models.TextField(blank=True)
+    profile_image = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __unicode__(self):
+        return '{} {}'.format(self.first_name, self.last_name);
+
+    # def progress_for_course(self, course):
+    #     """Gets the progress for a course."""
+    #     return self.courseprogress_set.filter(course=course).first()
+
+
 class Course(models.Model):
     """Describes a course.
 
@@ -55,6 +67,7 @@ class Course(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     description = models.TextField()
+    instructors = models.ManyToManyField(User, blank=True, related_name='courses')
 
     def progress_for_user(self, user):
         """Gets the progress for this course for user."""
@@ -105,19 +118,6 @@ class Course(models.Model):
             return other.course.id == self.id
         elif isinstance(other, Course):
             return other.id == self.id
-
-
-class User(AbstractUser):
-    course = models.ManyToManyField(Course, blank=True, related_name='instructors')
-    biography = models.TextField(blank=True)
-    profile_image = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __unicode__(self):
-        return '{} {}'.format(self.first_name, self.last_name);
-
-    # def progress_for_course(self, course):
-    #     """Gets the progress for a course."""
-    #     return self.courseprogress_set.filter(course=course).first()
 
 
 class ActivationKey(models.Model):

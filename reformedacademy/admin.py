@@ -32,6 +32,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class CourseAdmin(admin.ModelAdmin):
     model = models.Course
     prepopulated_fields = {"slug": ("name",)}
+    filter_horizontal = ('instructors',)
 
 
 class TaskInline(admin.TabularInline):

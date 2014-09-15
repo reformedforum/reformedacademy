@@ -610,7 +610,9 @@ ul.errorlist li {
 
     .menu.open {
         left: 0;
-    }
+    
+        padding-top: 1em;
+}
 
     .menu img {
         display: none;
