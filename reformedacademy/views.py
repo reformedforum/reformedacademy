@@ -178,7 +178,7 @@ def welcome(request):
 def index(request):
     """The home page."""
     courses = Course.objects.all()
-    instructors = User.objects.filter(course__isnull=False)
+    instructors = User.objects.filter(courses__isnull=False)
     if request.user.is_authenticated():
         progresses = request.user.courseprogress_set.all
     else:
