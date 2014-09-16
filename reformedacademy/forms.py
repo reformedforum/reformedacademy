@@ -58,6 +58,9 @@ class ProfileForm(forms.Form):
     # password = forms.CharField(widget=widgets.PasswordInput, required=True)
     # password_confirmation = forms.CharField(widget=widgets.PasswordInput, required=True)
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ProfileForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = super(ProfileForm, self).clean()
@@ -66,7 +69,7 @@ class ProfileForm(forms.Form):
         # password_confirmation = cleaned_data.get('password_confirmation')
 
         # Check if email address is unique
-        if User.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exclude(pk=self.user.pk).exists():
             raise forms.ValidationError('Email address is already in use.')
 
         # Check if passwords are the same

@@ -328,46 +328,14 @@ class ProfileFormView(LoginRequiredMixin):
 
     def post(self, request, *args, **kwargs):
         """HTTP POST"""
-        form = self.form_class(request.POST)
+        form = self.form_class(data=request.POST, user=request.user)
         if form.is_valid():
-            """Create user account. Since we use emails for authentication and django requires
-            usernames, we'll create a random username."""
-            choices = 'abcdefghijklmnopqrstuvwxyz0123456789'
-            username = ''.join([random.choice(choices) for i in range(0, 30)])
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password')
-            user = User.objects.create_user(username=username, email=email, password=password)
-
-            if user:
-                # User is_active is set to True by default. Set this to false because
-                # they need to activate.
-                user.is_active = False
-                user.save()
-
-                # Send out activation email
-                self.send_activation_email(request, user)
-                return HttpResponseRedirect(reverse('account_created'))
-            else:
-                message = """Something went oddly wrong with creating your account. Try creating
-                your account again, and if it continues not to work please contact support."""
-                messages.error(request, message)
+            user = request.user
+            user.email = form.cleaned_data.get('email')
+            user.save()
+            return HttpResponseRedirect(reverse('profile'))
 
         return render(request, self.template_name, {'form': form})
-
-    def send_activation_email(self, request, user):
-        """Sends an activation email with a generated key to the user."""
-        # Generate activation key
-        key = uuid.uuid1().hex
-
-        # Save key to database
-        ActivationKey.objects.create(user=user, key=key)
-
-        subject = "Reformed Academy Account Activation"
-        url = request.build_absolute_uri(reverse('activate', args=(user.pk, key)))
-        html = render_to_string('reformedacademy/email/activation.html', {
-            'url': url
-        })
-        send_html_mail(subject, html, settings.FROM_EMAIL_ADDRESS, [user.email])
 
 
 def support(request):
