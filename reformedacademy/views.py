@@ -222,6 +222,7 @@ def courses(request, category_slug=None):
 
 @login_required
 def enroll(request, course_id):
+    """Enrolls a user in a course."""
     course = get_object_or_404(Course, pk=course_id)
 
     # Check to see if a user isn't already enrolled in the course.
@@ -235,6 +236,7 @@ def enroll(request, course_id):
 
 @login_required
 def complete_task(request, task_id):
+    """Completes a task."""
     task = get_object_or_404(Task, pk=task_id)
 
     # Check to see if a user isn't already enrolled in the course
@@ -260,6 +262,7 @@ def complete_task(request, task_id):
 
 @login_required
 def uncomplete_task(request, task_id):
+    """Uncompletes a task."""
     task = get_object_or_404(Task, pk=task_id)
     task_progress = task.progress_for_user(request.user)
     if task_progress:
