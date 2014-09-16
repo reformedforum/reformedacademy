@@ -22,7 +22,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
-from reformedacademy.views import SignUpFormView, LoginFormView
+from reformedacademy.views import SignUpFormView, LoginFormView, ProfileFormView
 
 admin.autodiscover()
 
@@ -52,6 +52,7 @@ urlpatterns = patterns('',
         name='uncomplete_task'),
     url(r'^progress/$', 'reformedacademy.views.progress', name='progress'),
     url(r'^support/', 'reformedacademy.views.support', name='support'),
+    url(r'^profile/', ProfileFormView.as_view(), name='profile'),
 
     # Media system
     url(r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)',

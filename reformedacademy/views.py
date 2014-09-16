@@ -37,8 +37,16 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Lesson, Category, \
     Task, LessonProgress, CourseLog, User
-from reformedacademy.forms import SignUpForm, LoginForm
+from reformedacademy.forms import SignUpForm, LoginForm, ProfileForm
 from reformedacademy.utils import send_html_mail
+
+
+class LoginRequiredMixin(View):
+    """Mixin used to decorate class based views with login_required."""
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)
 
 
 class SignUpFormView(View):
@@ -140,13 +148,16 @@ def account_created(request):
     """Shows the account created template."""
     return render(request, 'reformedacademy/account_created.html')
 
+
 def service(request):
     """Shows the service template."""
     return render(request, 'reformedacademy/service.html')
 
+
 def privacy(request):
     """Shows the privacy template."""
     return render(request, 'reformedacademy/privacy.html')
+
 
 def activate(request, user_id, key):
     """Activates a user account."""
@@ -302,6 +313,61 @@ def progress(request):
 
     return render(request, 'reformedacademy/progress.html',
                   {'enrolled': enrolled, 'completed': completed})
+
+
+class ProfileFormView(LoginRequiredMixin):
+    """Provides a user a way to edit their profile."""
+    form_class = ProfileForm
+    template_name = 'reformedacademy/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        """HTTP GET"""
+        form = self.form_class()
+        form.fields['email'].initial = request.user.email
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        """HTTP POST"""
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            """Create user account. Since we use emails for authentication and django requires
+            usernames, we'll create a random username."""
+            choices = 'abcdefghijklmnopqrstuvwxyz0123456789'
+            username = ''.join([random.choice(choices) for i in range(0, 30)])
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password')
+            user = User.objects.create_user(username=username, email=email, password=password)
+
+            if user:
+                # User is_active is set to True by default. Set this to false because
+                # they need to activate.
+                user.is_active = False
+                user.save()
+
+                # Send out activation email
+                self.send_activation_email(request, user)
+                return HttpResponseRedirect(reverse('account_created'))
+            else:
+                message = """Something went oddly wrong with creating your account. Try creating
+                your account again, and if it continues not to work please contact support."""
+                messages.error(request, message)
+
+        return render(request, self.template_name, {'form': form})
+
+    def send_activation_email(self, request, user):
+        """Sends an activation email with a generated key to the user."""
+        # Generate activation key
+        key = uuid.uuid1().hex
+
+        # Save key to database
+        ActivationKey.objects.create(user=user, key=key)
+
+        subject = "Reformed Academy Account Activation"
+        url = request.build_absolute_uri(reverse('activate', args=(user.pk, key)))
+        html = render_to_string('reformedacademy/email/activation.html', {
+            'url': url
+        })
+        send_html_mail(subject, html, settings.FROM_EMAIL_ADDRESS, [user.email])
 
 
 def support(request):
