@@ -37,7 +37,7 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Lesson, Category, \
     Task, LessonProgress, CourseLog, User
-from reformedacademy.forms import SignUpForm, LoginForm, ProfileForm
+from reformedacademy.forms import SignUpForm, LoginForm, ProfileForm, PasswordForm
 from reformedacademy.utils import send_html_mail
 
 
@@ -121,7 +121,6 @@ class LoginFormView(View):
             email = request.POST.get('email')
             password = request.POST.get('password')
             user = authenticate(username=email, password=password)
-            print user
             if user is not None:
                 if user.is_active:
                     auth_login(request, user)
@@ -333,6 +332,30 @@ class ProfileFormView(LoginRequiredMixin):
             user = request.user
             user.email = form.cleaned_data.get('email')
             user.save()
+            messages.info(request, 'You profile has been saved.')
+            return HttpResponseRedirect(reverse('profile'))
+
+        return render(request, self.template_name, {'form': form})
+
+
+class PasswordFormView(LoginRequiredMixin):
+    """Provides a user a way to edit their profile."""
+    form_class = PasswordForm
+    template_name = 'reformedacademy/password.html'
+
+    def get(self, request, *args, **kwargs):
+        """HTTP GET"""
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        """HTTP POST"""
+        form = self.form_class(data=request.POST, user=request.user)
+        if form.is_valid():
+            user = request.user
+            user.set_password(form.cleaned_data.get('password'))
+            user.save()
+            messages.info(request, 'Your password has been changed.')
             return HttpResponseRedirect(reverse('profile'))
 
         return render(request, self.template_name, {'form': form})
