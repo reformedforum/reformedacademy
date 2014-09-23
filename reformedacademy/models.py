@@ -321,6 +321,13 @@ class CourseProgress(models.Model):
     percentage_complete = models.PositiveIntegerField(max_length=3, default=0,
                                                       help_text="Always a whole number.")
 
+    def total_tasks(self):
+        total_tasks = 0
+        for lesson in self.course.lesson_set.all():
+            for task in lesson.task_set.all():
+                total_tasks += 1
+        return total_tasks
+
     def calc_progress(self, user):
         """Calculates the percentage complete for a course and saves to percentage_complete."""
 
