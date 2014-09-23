@@ -119,6 +119,14 @@ class Course(models.Model):
         elif isinstance(other, Course):
             return other.id == self.id
 
+    def total_tasks(self):
+        total_tasks = 0
+        for lesson in self.lesson_set.all():
+            for task in lesson.task_set.all():
+                total_tasks += 1
+        return int(total_tasks)
+
+
 
 class ActivationKey(models.Model):
     """Describes an activation key.
@@ -320,13 +328,6 @@ class CourseProgress(models.Model):
     completed = models.DateTimeField(null=True)
     percentage_complete = models.PositiveIntegerField(max_length=3, default=0,
                                                       help_text="Always a whole number.")
-
-    def total_tasks(self):
-        total_tasks = 0
-        for lesson in self.course.lesson_set.all():
-            for task in lesson.task_set.all():
-                total_tasks += 1
-        return total_tasks
 
     def calc_progress(self, user):
         """Calculates the percentage complete for a course and saves to percentage_complete."""

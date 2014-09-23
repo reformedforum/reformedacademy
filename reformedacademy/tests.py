@@ -117,13 +117,14 @@ class CourseProgress_test(TestCase):
         self.assertEqual(self.courseprogress.percentage_complete, float(0))
         TaskProgress.objects.create(user = self.user, task=self.task1)
         self.courseprogress.calc_progress(self.user)
-        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(100/float(3.0)) )
+        taskstot=self.course.total_tasks() 
+        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(100.0/taskstot) )
         TaskProgress.objects.create(user = self.user, task=self.task3)
         self.courseprogress.calc_progress(self.user)
-        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(200/float(3.0)) )
+        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(200.0/taskstot) )
         TaskProgress.objects.create(user = self.user, task=self.task2)
         self.courseprogress.calc_progress(self.user)
-        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(300/float(3.0)) )
+        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(300.0/taskstot) )
 
 """
     def test_task_passage_create(self):
