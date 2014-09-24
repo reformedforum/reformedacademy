@@ -67,9 +67,22 @@ class Task_test(TestCase):
         self.assertEqual(self.task.book.title, "What a bohr")
         self.assertEqual(self.task.asset.type.name, "Type 1")
 
-#    def test_complete(self):
-#        """Verify that a Task can be completed"""
-#        self.task.complete(self.user, self.course.progress_for_user(self.user))
+#   def test_verify_create(self):
+#       """Verify that a Task can be created and that valid database
+#       information is returned. """
+#       task = Task.objects.create(lesson=self.lesson)
+#       self.assertIsNot(manufacturer.id, None)
+#       self.assertEqual(manufacturer.name, name)
+#       self.assertEqual(manufacturer.abbreviation, abbreviation)
+#       self.assertEqual(unicode(manufacturer), abbreviation)
+#     
+#       # Clear out abbreviation and test the unicode method again
+#       manufacturer.abbreviation = ''
+#       self.assertEqual(unicode(manufacturer), name)
+
+#   def test_complete(self):
+#       """Verify that a Task can be completed"""
+#       self.task.complete(self.user, self.course.progress_for_user(self.user))
   
 class TaskProgress_test(TestCase):
     def setUp(self):
