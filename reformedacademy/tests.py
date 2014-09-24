@@ -23,6 +23,46 @@ from bible.models import Verse
 from django.test import TestCase
 from reformedacademy.models import *
 from rfmedia.models import *
+from django.template.defaultfilters import slugify
+
+class Course_test(TestCase):
+    def setUp(self):
+        """"setup the course"""
+        self.category = Category.objects.create(name = "Computers")
+        self.instructor1 = User.objects.create(first_name = "ender", last_name = "man", username="enderman")
+        self.instructor2 = User.objects.create(first_name = "Kohn", last_name = "Sham", username="dftguys")
+        self.course = Course.objects.create(category = self.category, name = "Games and DFT", 
+                                            slug = 'Computers', description = "Fun with computers")
+        self.course.instructors.add(self.instructor1)
+        self.course.instructors.add(self.instructor2)
+
+        """Let's add some more stuff to play with later"""
+        self.lesson1 = Lesson.objects.create(course = self.course, name = "Minecraft")
+        self.lesson2 = Lesson.objects.create(course = self.course, name = "DFT")
+        self.task1 = Task.objects.create(lesson = self.lesson1, name = "Punch the tree")
+        self.task2 = Task.objects.create(lesson = self.lesson1, name = "Dig")
+        self.task3 = Task.objects.create(lesson = self.lesson2, name = "Compute Energy")
+        self.user = User.objects.create(first_name = "Steve", last_name = "Notch")
+
+    def test_verify_create(self):
+        """Verify that a Course can be created and that valid database
+        information is returned. """
+        self.assertTrue(isinstance(self.course, Course))
+        self.assertEqual(self.course.name, "Games and DFT")
+        self.assertEqual(self.course.slug, 'Computers')
+        self.assertEqual(self.course.description, "Fun with computers")
+        self.assertEqual(self.course.category.name, "Computers")
+
+    def test_progress_for_user_and_check_complete(self):
+        """Test the progress_for_user function"""
+        """Steve hasn't done jack in this course let's see his progress"""
+        self.assertEqual(self.course.progress_for_user(self.user), None)
+        """Now he is working"""
+        TaskProgress.objects.create(user = self.user, task=self.task1)
+        TaskProgress.objects.create(user = self.user, task=self.task2)
+        TaskProgress.objects.create(user = self.user, task=self.task3)
+        self.course.check_complete(self.user)
+ #       self.assertEqual(
 
 class User_test(TestCase):
     def setUp(self):
@@ -121,11 +161,9 @@ class CourseProgress_test(TestCase):
         self.assertTrue(isinstance(self.courseprogress, CourseProgress))
         self.assertEqual(self.courseprogress.user.first_name, "ender")
         self.assertEqual(self.courseprogress.course.name, "Course 1")
-#        print self.courseprogress.completed
-#        print self.courseprogress.percentage_complete
 
     def test_calc_progress(self):
-        """Make sure that Mr. ender man can complete the course"""
+        """Make sure that Mr. enderman can complete the course"""
         self.courseprogress.calc_progress(self.user)
         self.assertEqual(self.courseprogress.percentage_complete, float(0))
         TaskProgress.objects.create(user = self.user, task=self.task1)
@@ -138,6 +176,11 @@ class CourseProgress_test(TestCase):
         TaskProgress.objects.create(user = self.user, task=self.task2)
         self.courseprogress.calc_progress(self.user)
         self.assertEqual(self.courseprogress.percentage_complete, math.ceil(300.0/taskstot) )
+        """Mr. enderman has completed all the tasks time to complete the course."""
+        self.assertEqual(self.courseprogress.completed, None)
+        self.courseprogress.complete()
+        self.assertNotEqual(self.courseprogress.completed, None)
+
 
 """
     def test_task_passage_create(self):
