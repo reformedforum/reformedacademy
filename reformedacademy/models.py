@@ -119,6 +119,15 @@ class Course(models.Model):
         elif isinstance(other, Course):
             return other.id == self.id
 
+    def total_tasks(self):
+        """Returns the total number of tasks (int) for
+           a given course."""
+        total_tasks = 0
+        for lesson in self.lesson_set.all():
+            for task in lesson.task_set.all():
+                total_tasks += 1
+        return int(total_tasks)
+
 
 class ActivationKey(models.Model):
     """Describes an activation key.
