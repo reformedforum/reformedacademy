@@ -349,7 +349,7 @@ class CourseProgress(models.Model):
                     completed_tasks += 1
 
         # Calculate the percentage completed and save to the database
-        self.percentage_complete = math.ceil(completed_tasks / float(total_tasks) * 100)
+        self.percentage_complete = round(completed_tasks / float(total_tasks) * 100)
         self.save()
 
     def complete(self):

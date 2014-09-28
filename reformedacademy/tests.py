@@ -19,30 +19,31 @@ You should have received a copy of the GNU General Public License
 along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-from bible.models import Verse
 from django.test import TestCase
 from reformedacademy.models import *
 from rfmedia.models import *
-from django.template.defaultfilters import slugify
 
-class Course_test(TestCase):
+
+class CourseTest(TestCase):
     def setUp(self):
         """"setup the course"""
-        self.category = Category.objects.create(name = "Computers")
-        self.instructor1 = User.objects.create(first_name = "ender", last_name = "man", username="enderman")
-        self.instructor2 = User.objects.create(first_name = "Kohn", last_name = "Sham", username="dftguys")
-        self.course = Course.objects.create(category = self.category, name = "Games and DFT", 
-                                            slug = 'Computers', description = "Fun with computers")
+        self.category = Category.objects.create(name="Computers")
+        self.instructor1 = User.objects.create(first_name="ender", last_name="man",
+                                               username="enderman")
+        self.instructor2 = User.objects.create(first_name="Kohn", last_name="Sham",
+                                               username="dftguys")
+        self.course = Course.objects.create(category=self.category, name="Games and DFT",
+                                            slug='Computers', description="Fun with computers")
         self.course.instructors.add(self.instructor1)
         self.course.instructors.add(self.instructor2)
 
         """Let's add some more stuff to play with later"""
-        self.lesson1 = Lesson.objects.create(course = self.course, name = "Minecraft")
-        self.lesson2 = Lesson.objects.create(course = self.course, name = "DFT")
-        self.task1 = Task.objects.create(lesson = self.lesson1, name = "Punch the tree")
-        self.task2 = Task.objects.create(lesson = self.lesson1, name = "Dig")
-        self.task3 = Task.objects.create(lesson = self.lesson2, name = "Compute Energy")
-        self.user = User.objects.create(first_name = "Steve", last_name = "Notch")
+        self.lesson1 = Lesson.objects.create(course=self.course, name="Minecraft")
+        self.lesson2 = Lesson.objects.create(course=self.course, name="DFT")
+        self.task1 = Task.objects.create(lesson=self.lesson1, name="Punch the tree")
+        self.task2 = Task.objects.create(lesson=self.lesson1, name="Dig")
+        self.task3 = Task.objects.create(lesson=self.lesson2, name="Compute Energy")
+        self.user = User.objects.create(first_name="Steve", last_name="Notch")
 
     def test_verify_create(self):
         """Verify that a Course can be created and that valid database
@@ -62,9 +63,9 @@ class Course_test(TestCase):
         TaskProgress.objects.create(user = self.user, task=self.task2)
         TaskProgress.objects.create(user = self.user, task=self.task3)
         self.course.check_complete(self.user)
- #       self.assertEqual(
 
-class User_test(TestCase):
+
+class UserTest(TestCase):
     def setUp(self):
         self.category1 = Category.objects.create(name="Category 1")
         self.category2 = Category.objects.create(name="Category 2")
@@ -80,21 +81,19 @@ class User_test(TestCase):
         self.assertEqual(self.user.last_name, "Ising")
 #        self.assertTrue(self.course1 and self.course2 in self.user.course.all())
 
-class Task_test(TestCase):
+
+class TaskTest(TestCase):
     def setUp(self):
         self.category = Category.objects.create(name="Category 1")
         self.course = Course.objects.create(category=self.category, name="Course 1")
         self.description = "Lorem ipsum dolor sit amet consectetur."
         self.lesson = Lesson.objects.create(course=self.course, name="Lesson 1")
         self.book = Book.objects.create(title="What a bohr")
-        self.type = Type.objects.create(name = "Type 1", created = '1900-5-10')
-        self.asset = Asset.objects.create(type = self.type, active = 1, created = '1900-5-12')
-        self.task =  Task.objects.create(lesson=self.lesson,
-                                        name = "Task 1", 
-                                        description = self.description, 
-                                        order = 0, 
-                                        book = self.book,
-                                        asset = self.asset)
+        self.type = Type.objects.create(name = "Type 1", created='1900-5-10')
+        self.asset = Asset.objects.create(type = self.type, active=1, created='1900-5-12')
+        self.task =  Task.objects.create(lesson=self.lesson, name="Task 1",
+                                         description=self.description, order=0, book=self.book,
+                                         asset=self.asset)
 
     def test_verify_create(self):
         """Verify that a Task can be created and that valid database
@@ -115,7 +114,7 @@ class Task_test(TestCase):
 #       self.assertEqual(manufacturer.name, name)
 #       self.assertEqual(manufacturer.abbreviation, abbreviation)
 #       self.assertEqual(unicode(manufacturer), abbreviation)
-#     
+#
 #       # Clear out abbreviation and test the unicode method again
 #       manufacturer.abbreviation = ''
 #       self.assertEqual(unicode(manufacturer), name)
@@ -123,14 +122,15 @@ class Task_test(TestCase):
 #   def test_complete(self):
 #       """Verify that a Task can be completed"""
 #       self.task.complete(self.user, self.course.progress_for_user(self.user))
-  
-class TaskProgress_test(TestCase):
+
+
+class TaskProgressTest(TestCase):
     def setUp(self):
         """Create required objects"""
         self.category = Category.objects.create(name="Category 1")
         self.course = Course.objects.create(category=self.category, name="Course 1")
         self.lesson = Lesson.objects.create(course=self.course, name="Lesson 1")
-        self.task = Task.objects.create(lesson=self.lesson, name = "Task 1")
+        self.task = Task.objects.create(lesson=self.lesson, name="Task 1")
         self.user = User.objects.create(first_name="Ernst", last_name="Ising")
         self.taskprogress = TaskProgress.objects.create(user=self.user, task=self.task)
 
@@ -142,19 +142,20 @@ class TaskProgress_test(TestCase):
         self.assertEqual(self.taskprogress.task.name, "Task 1")
         self.assertNotEqual(self.taskprogress.completed, None)
 
-class CourseProgress_test(TestCase):
+
+class CourseProgressTest(TestCase):
     def setUp(self):
         """Create required objects"""
         self.category = Category.objects.create(name="Category 1")
         self.course = Course.objects.create(category=self.category, name="Course 1")
         self.lesson1 = Lesson.objects.create(course=self.course, name="Minecraft 101")
         self.lesson2 = Lesson.objects.create(course=self.course, name="Minecraft 102")
-        self.task1 = Task.objects.create(lesson=self.lesson1, name = "Punch the tree")
-        self.task2 = Task.objects.create(lesson=self.lesson1, name = "Dig")
-        self.task3 = Task.objects.create(lesson=self.lesson2, name = "Build cabin")
+        self.task1 = Task.objects.create(lesson=self.lesson1, name="Punch the tree")
+        self.task2 = Task.objects.create(lesson=self.lesson1, name="Dig")
+        self.task3 = Task.objects.create(lesson=self.lesson2, name="Build cabin")
         self.user = User.objects.create(first_name="ender", last_name="man")
         self.courseprogress = CourseProgress.objects.create(user=self.user, course=self.course)
-    
+
     def test_verify_create(self):
         """Verify that a CourseProgress can be created and that valid database
         information is returned. """
@@ -166,16 +167,16 @@ class CourseProgress_test(TestCase):
         """Make sure that Mr. enderman can complete the course"""
         self.courseprogress.calc_progress(self.user)
         self.assertEqual(self.courseprogress.percentage_complete, float(0))
-        TaskProgress.objects.create(user = self.user, task=self.task1)
+        TaskProgress.objects.create(user=self.user, task=self.task1)
         self.courseprogress.calc_progress(self.user)
-        taskstot=self.course.total_tasks() 
-        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(100.0/taskstot) )
-        TaskProgress.objects.create(user = self.user, task=self.task3)
+        taskstot=self.course.total_tasks()
+        self.assertEqual(self.courseprogress.percentage_complete, round(100.0/taskstot))
+        TaskProgress.objects.create(user=self.user, task=self.task3)
         self.courseprogress.calc_progress(self.user)
-        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(200.0/taskstot) )
-        TaskProgress.objects.create(user = self.user, task=self.task2)
+        self.assertEqual(self.courseprogress.percentage_complete, round(200.0/taskstot))
+        TaskProgress.objects.create(user=self.user, task=self.task2)
         self.courseprogress.calc_progress(self.user)
-        self.assertEqual(self.courseprogress.percentage_complete, math.ceil(300.0/taskstot) )
+        self.assertEqual(self.courseprogress.percentage_complete, round(300.0/taskstot))
         """Mr. enderman has completed all the tasks time to complete the course."""
         self.assertEqual(self.courseprogress.completed, None)
         self.courseprogress.complete()
