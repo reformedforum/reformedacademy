@@ -244,6 +244,7 @@ def enroll(request, course_id):
     messages.info(request, 'You are now enrolled in {}!'.format(course))
     return HttpResponseRedirect(reverse('course', args=(course.slug,)))
 
+
 @login_required
 def complete_task(request, task_id):
     """Completes a task."""
@@ -270,6 +271,7 @@ def complete_task(request, task_id):
 
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
 
+
 @login_required
 def uncomplete_task(request, task_id):
     """Uncompletes a task."""
@@ -290,9 +292,11 @@ def uncomplete_task(request, task_id):
         course_progress = task.lesson.course.progress_for_user(request.user)
         if course_progress and course_progress.completed:
             course_progress.completed = None
+            course_progress.calc_progress(request.user)
             course_progress.save()
 
     return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
+
 
 @login_required
 def progress(request):
