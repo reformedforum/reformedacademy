@@ -89,8 +89,8 @@ class TaskTest(TestCase):
         self.description = "Lorem ipsum dolor sit amet consectetur."
         self.lesson = Lesson.objects.create(course=self.course, name="Lesson 1")
         self.book = Book.objects.create(title="What a bohr")
-        self.type = Type.objects.create(name = "Type 1", created='1900-5-10')
-        self.asset = Asset.objects.create(type = self.type, active=1, created='1900-5-12')
+        self.type = Type.objects.create(name="Type 1", created='1900-5-10')
+        self.asset = Asset.objects.create(type=self.type, active=1, created='1900-5-12')
         self.task =  Task.objects.create(lesson=self.lesson, name="Task 1",
                                          description=self.description, order=0, book=self.book,
                                          asset=self.asset)
