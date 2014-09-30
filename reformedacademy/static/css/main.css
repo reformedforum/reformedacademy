@@ -571,6 +571,8 @@ ul.errorlist li {
 
 .progress-bar {
     background-color: #34aadc;
+    text-transform: uppercase;
+    font-size: 11px;
 }
 
 .progress {
@@ -581,6 +583,17 @@ ul.errorlist li {
 
 .content {
     margin: 6em;
+}
+
+.top-container .progress h1 {
+    font-size: 0em;
+}
+.top-container .progress {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+.top-container .progress .progress-bar {
+    background-color: #fff;
+    color: #34AADC;
 }
 
 @media(max-width:800px) {
