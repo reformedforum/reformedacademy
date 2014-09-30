@@ -54,7 +54,7 @@
         {% for lesson in course.lesson_set.all %}
         {% progress lesson as progress %}
         <div class="section">
-            <a href="{% url 'lesson' lesson.slug %}">
+            <a href="{% url 'lesson' course.slug lesson.slug %}">
                 <div class="inner">
                     {% if progress.completed %}
                     <i class="fa fa-check-circle-o"></i>
