@@ -204,6 +204,11 @@ a:visited {
 
 }
 
+.top-container .inner .nocaps a {
+    text-transform: none;
+    text-decoration: underline;
+}
+
 .top-container a {
     color: #fff;
     text-transform: uppercase;
