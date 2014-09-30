@@ -6,7 +6,11 @@
     <div class="top-container">
         <div class="inner">
             <h1>Your Progress</h1>
-
+            {% if enrolled|length == 0 and enrolled|length == completed|length %}
+                <div class="description">
+                This page displays the progress you have made in your courses. To enroll in a course and begin making progress <a href="{% url 'courses' %}">click here</a>.
+                </div>
+            {% endif %}
         </div>
     </div>
     <div class="outline lesson">
