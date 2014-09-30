@@ -32,6 +32,21 @@
                 <i class="fa fa-tasks"></i> Enrolled on {{ progress.started|date:'DATE_FORMAT' }}
                 {% endif %}
             </div>
+            <br>
+            <br>
+            <div class="description">
+               Progress
+            </div>
+            <div class="progress">
+                <div class="progress-bar"
+                     role="progressbar"
+                     aria-valuenow="{{ progress.percentage_complete }}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width: {{ progress.percentage_complete }}%;">
+                    {{ progress.percentage_complete }}%
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>
