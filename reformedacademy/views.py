@@ -111,7 +111,10 @@ class LoginFormView(View):
     def get(self, request, *args, **kwargs):
         """HTTP GET"""
         form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {
+            'form': form,
+            'beta_enabled': settings.BETA_ENABLED
+        })
 
     def post(self, request, *args, **kwargs):
         """HTTP POST"""
@@ -183,6 +186,24 @@ def activate(request, user_id, key):
 def welcome(request):
     """Displays a welcome page for newly activated users."""
     return render(request, 'reformedacademy/welcome.html')
+
+
+def closed_index(request):
+    """The home page during beta testing."""
+    return render(request, 'reformedacademy/closed_index.html', {
+        'beta_enabled': settings.BETA_ENABLED
+    })
+
+
+def beta_verify(request, code):
+    """Beta verification view used to verify beta codes."""
+    if code:
+        request.session['beta_invited'] = True
+        return HttpResponseRedirect(reverse('signup'))
+    else:
+        return render(request, 'reformedacademy/beta_verify.html', {
+            'beta_enabled': settings.BETA_ENABLED
+        })
 
 
 def index(request):
