@@ -32,11 +32,12 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import timezone
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Lesson, Category, \
-    Task, LessonProgress, CourseLog, User
+    Task, LessonProgress, CourseLog, User, BetaToken
 from reformedacademy.forms import SignUpForm, LoginForm, ProfileForm, PasswordForm
 from reformedacademy.utils import send_html_mail
 
@@ -77,6 +78,14 @@ class SignUpFormView(View):
                 user.is_active = False
                 user.save()
 
+                # If the beta is enabled, mark the token as redeemed by user
+                if settings.BETA_ENABLED:
+                    beta_token_id = request.session['beta_token_id']
+                    beta_token = BetaToken.objects.get(pk=beta_token_id)
+                    beta_token.redeemed_by = user
+                    beta_token.redeemed = timezone.now()
+                    beta_token.save()
+
                 # Send out activation email
                 self.send_activation_email(request, user)
                 return HttpResponseRedirect(reverse('account_created'))
@@ -111,7 +120,10 @@ class LoginFormView(View):
     def get(self, request, *args, **kwargs):
         """HTTP GET"""
         form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {
+            'form': form,
+            'beta_enabled': settings.BETA_ENABLED
+        })
 
     def post(self, request, *args, **kwargs):
         """HTTP POST"""
@@ -134,7 +146,10 @@ class LoginFormView(View):
                 errors = form._errors.setdefault(forms.forms.NON_FIELD_ERRORS, ErrorList())
                 errors.append('Invalid login.')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {
+            'form': form,
+            'beta_enabled': settings.BETA_ENABLED
+        })
 
 
 def logout(request):
@@ -183,6 +198,27 @@ def activate(request, user_id, key):
 def welcome(request):
     """Displays a welcome page for newly activated users."""
     return render(request, 'reformedacademy/welcome.html')
+
+
+def closed_index(request):
+    """The home page during beta testing."""
+    return render(request, 'reformedacademy/closed_index.html', {
+        'beta_enabled': settings.BETA_ENABLED
+    })
+
+
+def beta_verify(request, token):
+    """Beta verification view used to verify beta codes."""
+    try:
+        # Find an unused BetaToken
+        beta_token = BetaToken.objects.get(token=token, redeemed_by__isnull=True)
+        request.session['beta_token_id'] = beta_token.pk
+        return HttpResponseRedirect(reverse('signup'))
+    except BetaToken.DoesNotExist:
+        return render(request, 'reformedacademy/beta_verify.html', {
+            'token': token,
+            'beta_enabled': settings.BETA_ENABLED
+        })
 
 
 def index(request):

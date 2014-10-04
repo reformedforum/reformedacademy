@@ -214,6 +214,10 @@ a:visited {
     text-transform: uppercase;
 }
 
+.top-container.nocaps a {
+    text-transform: none;
+}
+
 .top-container.courses {
     padding-bottom: 1em;
 }
@@ -400,6 +404,10 @@ a:visited {
 
 .top-container.centered.wide .inner .description {
     max-width: 500px;
+}
+
+.top-container.centered .signup a {
+    text-decoration: none;
 }
 
 .main-container input[type=text],

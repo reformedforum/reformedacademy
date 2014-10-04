@@ -41,6 +41,9 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy',
                  'media.reformedforum.org']
 
+# Beta
+BETA_ENABLED = True
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -64,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'reformedacademy.middleware.BetaMiddleware'
 )
 
 ROOT_URLCONF = 'reformedacademy.urls'

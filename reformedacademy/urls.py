@@ -28,7 +28,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'reformedacademy.views.index', name='index'),
+    url(r'^$', 'reformedacademy.views.closed_index', name='closed_index'),
+    url(r'^beta/$', 'reformedacademy.views.index', name='index'),
+    url(r'^beta/(?P<token>[\w-]+)/$', 'reformedacademy.views.beta_verify', name='beta_verify'),
     url(r'^admin/', include(admin.site.urls)),
 
     # Reformed Academy

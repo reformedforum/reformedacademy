@@ -430,3 +430,10 @@ class CourseLog(models.Model):
     @staticmethod
     def drop_task(user):
         CourseLog.objects.create(user=user, type=CourseLog.TASK, action=CourseLog.DROPPED)
+
+
+class BetaToken(models.Model):
+    token = models.CharField(max_length=6)
+    redeemed_by = models.ForeignKey(User, blank=True, null=True, related_name="redeemed_token")
+    invited_by = models.ForeignKey(User, blank=True, null=True, related_name="invited_token")
+    redeemed = models.DateTimeField(blank=True, null=True)
