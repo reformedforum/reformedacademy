@@ -63,8 +63,7 @@ class BetaMiddleware(object):
         if '%s' % view_func.__module__ in whitelisted_modules:
             return
 
-        if (full_view_name in self.always_allow_views or
-            view_name in self.always_allow_views):
+        if full_view_name in self.always_allow_views or view_name in self.always_allow_views:
             return
 
         if request.session.get('beta_invited') and \
@@ -74,7 +73,7 @@ class BetaMiddleware(object):
         if request.user.is_authenticated():
             return
 
-        return redirect(reverse(self.redirect))
+        return redirect(self.redirect)
 
     @staticmethod
     def _get_view_name(request):
