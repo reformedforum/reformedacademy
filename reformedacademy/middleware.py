@@ -36,7 +36,8 @@ class BetaMiddleware(object):
             'reformedacademy.views.closed_index',
             'reformedacademy.views.beta_verify',
             'reformedacademy.views.LoginFormView',
-            'reformedacademy.views.activate'
+            'reformedacademy.views.activate',
+            'reformedacademy.views.account_created'
         ]
         self.always_allow_modules = None
         self.redirect = 'closed_index'
@@ -66,7 +67,7 @@ class BetaMiddleware(object):
         if full_view_name in self.always_allow_views or view_name in self.always_allow_views:
             return
 
-        if request.session.get('beta_invited') and \
+        if request.session.get('beta_token_id') and \
                         full_view_name == 'reformedacademy.views.SignUpFormView':
             return
 

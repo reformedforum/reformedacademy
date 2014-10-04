@@ -6,7 +6,8 @@
         <div class="inner">
             <img src="{% static 'images/logo.png' %}" alt="Logo">
             <h1>Beta Code Verification Error</h1>
-            <div>The provided code is invalid, however, it may just be a simple typo. While you are here, sign up for our mailing list!</div>
+            <div>The provided code is invalid, however, it may just be a simple typo. You entered {{ token }}.</div>
+            <div style="margin-top:1em;">While you are here, sign up for our mailing list!</div>
         </div>
     </div>
     <div class="main-container centered">

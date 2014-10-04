@@ -6,6 +6,13 @@
         <div class="inner">
             <img src="{% static 'images/logo.png' %}" alt="Logo">
             <h1>{% if beta_enabled %}Beta {% endif %}Log In</h1>
+            {% if beta_enabled %}
+            <div class="description nocaps">
+                <div>Reformed Academy is currently in beta, which means the site isn't quite ready for everyone to use...but we're close!</div>
+                <div style="margin-top:1em;">If you are part of the beta, log in below. If not, <a href="{% url 'closed_index' %}">sign up for our mailing list</a> and you'll be invited when we open
+                it up to more testers.</div>
+            </div>
+            {% endif %}
         </div>
     </div>
     <div class="main-container centered">
