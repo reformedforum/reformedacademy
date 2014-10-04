@@ -37,7 +37,8 @@ class BetaMiddleware(object):
             'reformedacademy.views.beta_verify',
             'reformedacademy.views.LoginFormView',
             'reformedacademy.views.activate',
-            'reformedacademy.views.account_created'
+            'reformedacademy.views.account_created',
+            'tastypie.resources.wrapper'
         ]
         self.always_allow_modules = None
         self.redirect = 'closed_index'
