@@ -40,7 +40,9 @@ class BetaMiddleware(object):
             'reformedacademy.views.account_created',
             'tastypie.resources.wrapper'
         ]
-        self.always_allow_modules = None
+        self.always_allow_modules = [
+            'rfmedia'
+        ]
         self.redirect = 'closed_index'
 
     def process_view(self, request, view_func, view_args, view_kwargs):
