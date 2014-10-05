@@ -35,6 +35,8 @@ v1_api.register(AssetResource())
 urlpatterns = patterns('',
     url(r'^$', 'reformedacademy.views.closed_index', name='closed_index'),
     url(r'^beta/$', 'reformedacademy.views.index', name='index'),
+    url(r'^beta/handle_token_form/$', 'reformedacademy.views.beta_handle_token_form',
+        name='beta_handle_token_form'),
     url(r'^beta/(?P<token>[\w-]+)/$', 'reformedacademy.views.beta_verify', name='beta_verify'),
     url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include(v1_api.urls)),

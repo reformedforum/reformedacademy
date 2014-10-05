@@ -34,7 +34,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.views.generic.base import View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Lesson, Category, \
     Task, LessonProgress, CourseLog, User, BetaToken
@@ -219,6 +219,15 @@ def beta_verify(request, token):
             'token': token,
             'beta_enabled': settings.BETA_ENABLED
         })
+
+
+def beta_handle_token_form(request):
+    """Handles the beta token form POST request."""
+    token = request.POST.get('token')
+    if token:
+        return HttpResponseRedirect(reverse('beta_verify', args=(token,)))
+    else:
+        return HttpResponseRedirect(reverse('closed_index'))
 
 
 def index(request):

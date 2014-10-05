@@ -42,31 +42,42 @@
             <div class="description">
                 <div>A website for theological learning.</div>
                 <div>Reformed Academy is a project of <a href="http://reformedforum.org">Reformed Forum</a>, a 501(c)(3) organization. Learn more about Reformed Academy <a href="http://reformedforum.org/need-help-new-christian-education-initiative/?utm_content=buffer4137a&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer">here</a> and <a href="https://medium.com/@ReformedAcademy/something-different-896fe9b02648">here</a>.</div>
-                {% if beta_enabled %}
-                <div class="signup">
-                    <a href="{% url 'login' %}">Beta Log In</a>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>
     <div class="main-container centered">
         <div class="inner">
             <div class="signup-form">
-            <div id="mc_embed_signup">
-            <form action="//reformedforum.us2.list-manage.com/subscribe/post?u=14186c205d6f7604ade1f3155&amp;id=45bbbe36dd" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                <label for="mce-EMAIL">Subscribe to our mailing list</label>
-                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                <div style="position: absolute; left: -5000px;"><input type="text" name="b_f3d57ec181c2e66831b41ddff_15cdb0f60f" tabindex="-1" value=""></div>
-                <div class="terms-and-conditions">
-                    Please read our <a href="http://reformedforum.org/about/privacy/" target="_blank">Privacy Policy</a> for more information on how your email address will be protected.
+                <div id="mc_embed_signup">
+                    <form action="//reformedforum.us2.list-manage.com/subscribe/post?u=14186c205d6f7604ade1f3155&amp;id=45bbbe36dd" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <label for="mce-EMAIL">Subscribe to our mailing list</label>
+                        <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;"><input type="text" name="b_f3d57ec181c2e66831b41ddff_15cdb0f60f" tabindex="-1" value=""></div>
+                        <div class="terms-and-conditions">
+                            Please read our <a href="http://reformedforum.org/about/privacy/" target="_blank">Privacy Policy</a> for more information on how your email address will be protected.
+                        </div>
+                        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                    </form>
                 </div>
-                <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-            </form>
             </div>
+            {% if beta_enabled %}
+            <div class="beta-form">
+                <form action="{% url 'beta_handle_token_form' %}" method="POST">
+                    {% csrf_token %}
+                    <label for="token">Have a beta code?</label>
+                    <input type="text" value="" name="token" class="token" placeholder="enter it here" required>
+                    <div class="clear"><input type="submit" value="Create Beta Account" name="submit" class="button"></div>
+                </form>
+            </div>
+            <div class="beta-login-form">
+                <form action="{% url 'login' %}" method="GET">
+                    <input type="submit" value="Log In" name="submit" class="button">
+                </form>
+            </div>
+            {% endif %}
             <div class="social">
-                <a href="http://twitter.com/ReformedAcademy"><i class="fa fa-twitter"></i></ad>
+                <a href="http://twitter.com/ReformedAcademy"><i class="fa fa-twitter"></i></a>
             </div>
         </div>
     </div>

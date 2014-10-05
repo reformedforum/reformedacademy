@@ -222,6 +222,23 @@ a:visited {
     padding-bottom: 1em;
 }
 
+.beta-form {
+    margin-top: 4em;
+}
+
+.beta-login-form {
+    margin-top: 2em;
+}
+
+.beta-login-form:before {
+    content: 'or';
+    text-align: center;
+    display: inherit;
+    margin-bottom: 1em;
+    font-size: 1.3em;
+    color: #ccc;
+}
+
 .instructors {
     margin-top: 2.5em;
 }
