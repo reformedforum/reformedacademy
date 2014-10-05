@@ -78,13 +78,20 @@ class SignUpFormView(View):
                 user.is_active = False
                 user.save()
 
-                # If the beta is enabled, mark the token as redeemed by user
+                # If the beta is enabled, mark the token as redeemed by user.
                 if settings.BETA_ENABLED:
-                    beta_token_id = request.session['beta_token_id']
+                    beta_token_id = request.session.get('beta_token_id')
                     beta_token = BetaToken.objects.get(pk=beta_token_id)
                     beta_token.redeemed_by = user
                     beta_token.redeemed = timezone.now()
                     beta_token.save()
+
+                    # Delete the beta session variable to prevent multiple sign ups.
+                    # Catch the KeyError and ignore because we don't care if it doesn't exist.
+                    try:
+                        del request.session['beta_token_id']
+                    except KeyError:
+                        pass
 
                 # Send out activation email
                 self.send_activation_email(request, user)
