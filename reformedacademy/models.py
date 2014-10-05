@@ -25,6 +25,7 @@ from bible.djangoforms import VerseField
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
+from django.utils.crypto import random
 from reformedacademy import utils
 from rfmedia.models import Asset
 import scriptures
@@ -441,3 +442,8 @@ class BetaToken(models.Model):
     redeemed_by = models.ForeignKey(User, blank=True, null=True, related_name="redeemed_token")
     invited_by = models.ForeignKey(User, blank=True, null=True, related_name="invited_token")
     redeemed = models.DateTimeField(blank=True, null=True)
+
+    @staticmethod
+    def generate():
+        choices = 'abcdefghjkmnpqrstuvwxyz23456789'
+        return ''.join([random.choice(choices) for i in range(0, 6)])
