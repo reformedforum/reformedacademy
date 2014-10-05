@@ -38,6 +38,7 @@ class BetaMiddleware(object):
             'reformedacademy.views.LoginFormView',
             'reformedacademy.views.activate',
             'reformedacademy.views.account_created',
+            'reformedacademy.views.beta_handle_token_form',
             'tastypie.resources.wrapper'
         ]
         self.always_allow_modules = [
