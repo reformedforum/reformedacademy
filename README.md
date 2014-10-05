@@ -1,6 +1,20 @@
 Reformed Academy
 ======
 
+Reformed Academy is a free and open learning experience.
+Reformed Academy is a project of Reformed Forum, a 501(c)(3) organization.
+
+License Information
+---------------------------
+Reformed Academy is licensed under GPLv3. You are free to modify the source code and
+use it in your own project, however you must also adopt GPLv3. Reformed Academy is a free and open
+learning experience, and we believe the software should coincide with these values.
+
+NOTICE: ALL COURSE CONTENT ON THE REFORMED ACADEMY WEBSITE AND THE REFORMED ACADEMY LOGO ARE
+PROPERTY OF REFORMED FORUM AND DO NOT FALL UNDER GPLV3. THE REFORMED ACADEMY LOGO MUST BE 
+REPLACED WHEN DISTRIBUTING REFORMED ACADEMY.
+
+
 Check out the project
 ---------------------------
 
@@ -28,6 +42,10 @@ Fix any errors if need be.
 
 For a fresh MySQL install run the commands below. Otherwise ignore the commands below and just create an 'academy' database.
 
+    mysql.server start
+
+If MySQL doesn't start for you, give this a try: http://stackoverflow.com/a/11061487
+
     mysql -u root
     mysql> create database academy;
     mysql> quit
@@ -51,32 +69,29 @@ Updated local_settings.py.
 
 ###Sync the database
 
-    ./manage.py syncdb --settings=reformedacademy.local_settings
+    ./local.sh migrate
 
 ###Run the local web server
 
-    ./runserver.sh
+    ./local.sh runserver
 
 ###Post installation instructions
 
 After everything is set up, all that needs to be done is run runserver.sh
 
     cd /path/to/project/directory
-    ./runserver.sh
+    ./local.sh runserver
 
 If there are database changes after you pull the latest from the repo you'll have to perform a database migration.
 
-    ./migrate.sh
+    ./manage.py migrate --settings=reformedacademy.local_settings
 
 If you make a model change, be sure to run the commands below, otherwise production will not be updated.
 
-    ./create_migration.sh
-    ./migrate.sh
+    ./manage.py makemigrations --settings=reformedacademy.local_settings
+    ./manage.py migrate --settings=reformedacademy.local_settings
 
 Scripts
 -------------------------------
 
-* create_migration.sh - Creates a migration. Run this after model changes, but before deploying to production!
-* migrate.sh - Applies a migration. Run this when another developer updates the database and you pull the changes. Also, run this after you create a migration using create_migration.sh.
-* runserver.sh - Starts a development server.
-* test.sh - Runs all unit tests.
+* local.sh - Runs manage.py commands using local settings. (e.g. ./local.sh runserver

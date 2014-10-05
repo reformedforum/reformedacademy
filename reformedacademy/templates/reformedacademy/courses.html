@@ -1,0 +1,60 @@
+{% extends 'reformedacademy/base.html' %}
+{% load staticfiles %}
+{% load courseutils %}
+
+{% block content %}
+    <div class="top-container courses">
+        <div class="inner">
+            <h1>Reformed Academy Courses</h1>
+        </div>
+    </div>
+    <div class="outline">
+        <nav class="h1-container">
+            <ul>
+                <li{% if category_slug == None %} class="selected"{% endif %}>
+                    <a href="{% url 'courses' %}">
+                        All
+                    </a>
+                </li>
+                <i class="fa fa-circle"></i>
+                {% for category in categories %}
+                    <li{% if category_slug == category.slug %} class="selected"{% endif %}>
+                        <a href="{% url 'courses-category' category.slug %}">
+                            {{ category }}
+                        </a>
+                    </li>
+                    {% if not forloop.last %}
+                        <i class="fa fa-circle"></i>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+        {% for course in courses %}
+        {% progress course as progress %}
+        <a href="{% url 'course' course.slug %}">
+            <div class="section home">
+                <div class="inner">
+                    {% if progress.completed %}
+                    <i class="fa fa-check-circle-o"></i>
+                    {% else %}
+                    <i class="fa fa-circle-o"></i>
+                    {% endif %}
+                    <h1>{{ course.name }}</h1>
+                    <h2>{{ course.category }}</h2>
+                    <div class="description">
+                        {{ course.description }}
+                    </div>
+                    <div class="instructors">
+                        {% for instructor in course.instructor_set.all %}
+                        <div class="instructor">
+                            <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}" class="profile-image" alt="{{ instructor }} profile image">
+                            {{ instructor }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}

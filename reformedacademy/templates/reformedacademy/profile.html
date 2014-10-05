@@ -1,0 +1,22 @@
+{% extends 'reformedacademy/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="top-container centered">
+        <div class="inner">
+            <h1>Edit Profile</h1>
+        </div>
+    </div>
+    <div class="main-container centered">
+        <div class="inner">
+            <form action="" method="POST" class="edit-profile-form">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Save Profile">
+            <a class="change-password" href="{% url 'password' %}">
+                Change your password
+            </a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

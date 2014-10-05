@@ -35,15 +35,8 @@ a:visited {
 
 .menu {
     position: absolute;
-    background: rgba(0, 0, 0, 0.64);
-    color: #fff;
-    height: 100%;
-    text-transform: uppercase;
-    width: 250px;
-    left: -250px;
-
-    transition: all 300ms;
-    z-index: 1;
+    height: 45px;
+    width: 100%;
 }
 
 .menu.open {
@@ -52,13 +45,17 @@ a:visited {
 
 .menu ul {
     list-style: none;
-    margin-left: -10px;
+    display: inline-block;
+    padding-left: 2em;
 }
 
 .menu li {
-    font-size: 1.3em;
-    margin: 1.3em 0 1.3em 0;
-    letter-spacing: 1px;
+    font-size: 1em;
+    margin: 1em 0 1em 0;
+    padding-right: 0.5em;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .menu li a {
@@ -72,18 +69,30 @@ a:visited {
     text-decoration: none;
 }
 
-.menu li .fa {
-    margin-right: 0.5em;
-    font-size: 2em;
+.menu img {
+    width: 26px;
+    margin-right: 0.7em;
     position: relative;
-    top: 6px;
-    width: 50px;
-    text-align: center;
+    bottom: 2px;
+}
+
+.menu .profile {
+    float: right;
+    padding-top: 0.4em;
+    padding-right: 1em;
+}
+
+.menu li+li {
+    border-left: 1px solid #D1EEFC;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: rgba(209, 238, 252, 0.50);
+    padding-left: 0.7em;
 }
 
 .header  {
     background-color: #34aadc;
-    height: 3em;
+    height: 4em;
     font-size: 1.2em;
     padding-top: 0.8em;
 }
@@ -118,6 +127,7 @@ a:visited {
 
 .header .logo {
     float: left;
+    display: none;
 }
 
 .header .search input[type=text] {
@@ -131,8 +141,9 @@ a:visited {
 }
 
 .header .logo i {
-    color: #ff9500;
+    color: #fff;
     margin-right: 0em;
+    margin-left: 0.3em;
 }
 
 .header .logo span.first {
@@ -154,65 +165,95 @@ a:visited {
     padding: 4.6em 0;
 }
 
-.course-top-container, .signup-top-container, .profile-top-container {
+.top-container {
     background-color: #34aadc;
     color: #fff;
-    padding: 3em 10em 6em 10em;
+    padding: 3em 0 6em 0;
 }
 
-.course-top-container .inner,
-.signup-top-container .inner,
-.signup-container .inner,
- profile-top-container .inner {
+.top-container .inner,
+.signup-container .inner {
     margin: 0 auto;
     max-width: 650px;
     /* text-align: center; */
 }
 
-.course-top-container .inner h1,
-.signup-top-container .inner h1,
-.profile-top-container .inner h1 {
+.top-container .inner h1 {
     font-size: 4em;
     margin-top: 0;
     margin-bottom: .5em;
 }
 
-.course-top-container .inner .back {
+.top-container .inner .back {
     text-transform: uppercase;
     margin-bottom: 1.5em;
     display: table;
 }
 
-.course-top-container .inner .back a {
+.top-container .inner .back a {
     color: #fff;
     margin-left: 0.2em;
 }
 
-.course-top-container .inner .back .fa {
+.top-container .inner .back .fa {
     display: table-cell;
     width: 0.8em;
 }
 
-.course-top-container .inner .description {
+.top-container .inner .description {
 
 }
 
-.speakers {
+.top-container .inner .nocaps a {
+    text-transform: none;
+    text-decoration: underline;
+}
+
+.top-container a {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.top-container.nocaps a {
+    text-transform: none;
+}
+
+.top-container.courses {
+    padding-bottom: 1em;
+}
+
+.beta-form {
+    margin-top: 4em;
+}
+
+.beta-login-form {
+    margin-top: 2em;
+}
+
+.beta-login-form:before {
+    content: 'or';
+    text-align: center;
+    display: inherit;
+    margin-bottom: 1em;
+    font-size: 1.3em;
+    color: #ccc;
+}
+
+.instructors {
     margin-top: 2.5em;
 }
 
-.speakers h2 {
+.instructors h2 {
     font-size: 2.5em;
-
     margin-bottom: 0.6em;
 }
 
-.speaker {
+.instructor {
     display: inline-block;
     margin-right: 3em;
 }
 
-.speaker .profile-image {
+.instructor .profile-image {
     width: 2em;
     height: 2em;
     position: relative;
@@ -224,10 +265,10 @@ a:visited {
 }
 
 .outline .h1-container {
-    margin: 0 10em 1.5em 10em;
+    margin: 0 0 1.5em 0;
 }
 
-.outline .h1-container h1 {
+.outline .h1-container h1, .outline .h1-container ul {
     text-transform: uppercase;
     color: #888;
     font-size: 1em;
@@ -235,11 +276,43 @@ a:visited {
     max-width: 650px;
 }
 
+.outline .h1-container i {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.outline .h1-container .fa-circle {
+    font-size: .3em;
+    position: relative;
+    bottom: 3px;
+}
+
+.outline .h1-container ul {
+    padding: 0;
+}
+
+.outline .h1-container ul li {
+    display: inline;
+}
+
+.outline .h1-container ul li.selected {
+    font-weight: 700;
+    letter-spacing: 0px;
+    font-size: 1.4em;
+}
+
 .section {
     border-top: 1px solid rgba(52, 170, 220, 0.13);
-    border-bottom: 1px solid rgba(52, 170, 220, 0.13);
+    /* border-bottom: 1px solid rgba(52, 170, 220, 0.13); */
     cursor: pointer;
-    padding: 0 10em 0 10em;
+}
+
+.section:hover {
+    background-color: rgba(52, 170, 220, 0.13);
+}
+
+.section a {
+    display: block;
 }
 
 .section p {
@@ -248,14 +321,6 @@ a:visited {
 
 .outline.lesson .section {
     cursor: auto;
-}
-
-.section ~ .section {
-    border-top: none;
-}
-
-.section:hover {
-    background-color: rgba(52, 170, 220, 0.13);
 }
 
 .outline.lesson .section:hover {
@@ -306,6 +371,10 @@ a:visited {
     margin-top: 0.2em;
 }
 
+.section.home .inner h3 {
+    font-size: 1em;
+}
+
 .section-description .description {
     padding-left: .3em;
 }
@@ -314,86 +383,55 @@ a:visited {
     margin-top: 1em;
 }
 
-@media(max-width:800px) {
-    .course-top-container, .signup-top-container, .profile-top-container {
-        padding: 3em 2em 6em 2em;
-    }
-
-    .header .logo img {
-        margin-left: 1.6em;
-    }
-
-    .profile-image {
-        margin-right: 1.6em;
-    }
-
-    .course-top-container {
-        padding: 3em 2em 3em 2em;
-    }
-
-    .course-top-container .inner h1 {
-        font-size: 3em;
-    }
-
-    .outline .h1-container {
-        margin: 0 2em 1.5em 2em;
-    }
-
-    .section {
-        padding: 0 2em 0 2em;
-    }
-}
-
-.signup-top-container, .profile-top-container {
+.top-container.centered {
     padding-top: 3em;
     padding-bottom: 3em;
     text-align: center;
 }
 
-.signup-container .inner label,
-.profile-container .inner label {
+.main-container .inner label {
     display: block;
     text-align: left;
     text-transform: uppercase;
     margin-top: 2em;
 }
 
-.signup-top-container .inner img {
+.top-container.centered .inner img {
     width: 111px;
     margin-bottom: 2em;
 }
 
-.signup-top-container .inner {
+.top-container.centered .inner {
     max-width: 300px;
 }
 
-.signup-top-container a {
+.top-container.centered a {
     color: #fff;
     text-decoration: underline;
 }
 
-.signup-top-container .inner .description,
-.profile-top-container .inner .description {
+.top-container.centered .inner .description {
     max-width: 300px;
     margin: 0 auto;
 }
 
-.signup-container .inner input[type=text],
-.signup-container .inner input[type=password],
-.profile-container .inner input[type=text],
-.profile-container .inner input[type=password] {
-    border: 1px solid #34aadc;
-    width: 100%;
-    height: 3em;
-    padding: 1em;
-    border-radius: 6px;
+.top-container.centered.wide .inner {
+    max-width: 500px;
 }
 
-.signup-container input[type=button],
-.signup-container input[type=submit],
-.signup-container input[type=email],
-.profile-container input[type=button],
-.profile-container input[type=submit] {
+.top-container.centered.wide .inner .description {
+    max-width: 500px;
+}
+
+.top-container.centered .signup a {
+    text-decoration: none;
+}
+
+.main-container input[type=text],
+.main-container input[type=password],
+.main-container input[type=email],
+.main-container input[type=button],
+.main-container input[type=submit] {
     margin-top: 0.3em;
     font-size: 1.7em;
     background-color: #fff;
@@ -422,33 +460,36 @@ a:visited {
     color: #eee;
 }
 
-.signup-container .inner .signup-form,
-.profile-container .inner .profile-form {
+form {
     max-width: 300px;
     margin: 0 auto;
 }
 
-.signup-container .terms-and-conditions {
+.main-container.centered .terms-and-conditions {
     text-align: left;
     margin-top: 2em;
     font-size: 0.9em;
 }
 
-.signup-container .previous-account, .signup-container .social {
+.main-container.centered .previous-account, .main-container.centered .social {
     margin-top: 3em;
     font-size: 0.9em;
     text-align: center;
 }
 
-.signup-container .social {
+.main-container.centered .social {
     font-size: 3em;
     margin-top: 1.5em;
     margin-bottom: 1em;
 }
 
-.signup-container .previous-account a {
+.main-container.centered .previous-account a {
     display: block;
     font-size: 1.3em;
+}
+
+.previous-account {
+    margin-bottom: 4em;
 }
 
 .profile-container .inner input[type=submit] {
@@ -457,4 +498,238 @@ a:visited {
 
 .description div:first-of-type {
     margin-bottom: 1em;
+}
+
+ul.errorlist {
+    border: 1px solid red;
+    border-left: 5px solid red;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+ul.errorlist li {
+    list-style: none;
+}
+
+.login-form input[type="submit"] {
+    margin-top: 1em;
+}
+
+.book img {
+    float: left;
+    width: 6em;
+    margin-right: 1em;
+}
+
+.book h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.2em;
+}
+
+.book h3 {
+    font-size: 1em;
+    color: gray;
+    margin-top: 0;
+}
+
+.sources {
+    padding-top: 1em;
+}
+
+.sources:before {
+    content: "SOLD BY";
+    color: #888;
+    position:relative;
+    bottom: .3em;
+    font-size: .9em
+}
+
+.enrollment, .signup {
+    text-align: center;
+    margin-top: 3em;
+}
+
+.enrollment.enrolled {
+    text-align: left;
+    margin-top: 2.5em;
+}
+
+.enrollment.enrolled i {
+    margin-right: 0.5em;
+}
+
+.task-completion {
+    text-align: center;
+    clear: both;
+}
+
+.enrollment a, .task-completion a, .signup a {
+    border: 1px solid #fff;
+    padding: 1em;
+    border-radius: 2em;
+    font-size: 1.3em;
+    text-transform: none;
+    letter-spacing: 0.07em;
+}
+
+.task-completion a {
+    border: 1px solid #34aadc;
+    margin: 0 auto;
+    width: 150px;
+    margin-top: 2em;
+}
+
+.enrollment a:hover, .task-completion a:hover, .signup a:hover {
+    background-color: #fff;
+    color: #34aadc;
+    text-decoration: none;
+}
+
+.task-completion a:hover {
+    background-color: #34aadc;
+    color: #fff;
+}
+
+.section .enrollment.enrolled i {
+    color: #000;
+    display: inline;
+    margin-right: 0;
+}
+.section .enrollment.enrolled {
+    margin-top: 1em;
+}
+
+.progress-bar {
+    background-color: #34aadc;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.progress {
+    box-shadow: none;
+    margin-top: 1.5em;
+    margin-bottom: 0;
+}
+
+.content {
+    margin: 6em;
+}
+
+.top-container .progress h1 {
+    font-size: 0em;
+}
+.top-container .progress {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+.top-container .progress .progress-bar {
+    background-color: #fff;
+    color: #34AADC;
+}
+
+@media(max-width:800px) {
+    .header {
+        height: 3em;
+    }
+
+    .header .logo {
+        display: inline;
+    }
+
+    .menu {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.70);
+        color: #fff;
+        height: 100%;
+        text-transform: uppercase;
+        width: 250px;
+        left: -250px;
+        transition: all 300ms;
+        z-index: 1;
+    }
+
+    .menu.open {
+        left: 0;
+        padding-top: 1em;
+    }
+
+    .menu img {
+        display: none;
+    }
+
+    .menu ul {
+        list-style: none;
+        margin-left: -10px;
+    }
+
+    .menu li {
+        font-size: 1.3em;
+        margin: 1.3em 0 0 0;
+        letter-spacing: 1px;
+        display: inline;
+    }
+
+    .menu li a {
+        cursor: pointer;
+        color: #fff;
+        display: block;
+    }
+
+    .menu li a:hover {
+        color: #D1EEFC;
+        text-decoration: none;
+    }
+
+    .menu .profile {
+        float: none;
+        width: 90%;
+    }
+
+    .menu li+li {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .top-container {
+        padding: 3em 2em 6em 2em;
+    }
+
+    .top-container.centered .inner img {
+        width: 85px;
+    }
+
+    .top-container.centered .inner h1 {
+        font-size: 3em;
+    }
+
+    .top-container .inner h1 {
+        font-size: 3em;
+    }
+
+    .instructors h2 {
+        font-size: 2em;
+    }
+
+    .header .logo img {
+        margin-left: 1.6em;
+    }
+
+    .course-top-container {
+        padding: 3em 2em 3em 2em;
+    }
+
+    .course-top-container .inner h1 {
+        font-size: 3em;
+    }
+
+    .outline .h1-container {
+        margin: 0 2em 1.5em 2em;
+    }
+
+    .section {
+        padding: 0 2em 0 2em;
+    }
+
+    .content {
+        margin: 2em;
+    }
 }

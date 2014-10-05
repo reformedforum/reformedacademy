@@ -1,0 +1,91 @@
+{% extends 'reformedacademy/base.html' %}
+{% load staticfiles %}
+{% load courseutils %}
+
+{% block content %}
+    <div class="top-container">
+        <div class="inner">
+            <div class="back">
+                <i class="fa fa-angle-left"></i>
+                <a href="{% url 'course' lesson.course.slug %}">{{ lesson.course }}</a>
+            </div>
+            <h1>{{ lesson.name }}</h1>
+            <div class="description">
+                {{ lesson.description }}
+            </div>
+            <div class="instructors">
+            {% for instructor in lesson.course.instructors.all %}
+            <div class="instructor">
+                <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}"
+                     class="profile-image"
+                     alt="{{ instructor }} profile image">
+                {{ instructor }}
+            </div>
+            {% endfor %}
+            </div>
+            {% progress lesson as progress %}
+            {% if progress and progress.completed %}
+            <div class="enrollment enrolled">
+                <i class="fa fa-tasks"></i> Completed on {{ progress.completed|date:'DATE_FORMAT' }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="outline lesson">
+        <div class="h1-container">
+            <h1>Outline</h1>
+        </div>
+        {% for task in lesson.task_set.all %}
+        {% progress task as progress %}
+        <div class="section">
+            <div class="inner">
+                {% if progress.completed %}
+                <i class="fa fa-check-circle-o"></i>
+                {% else %}
+                <i class="fa fa-circle-o"></i>
+                {% endif %}
+                <h1>{{ task.name }}</h1>
+                {% if task.description %}
+                <p>
+                    {{ task.description }}
+                </p>
+                {% endif %}
+                {% if task.asset and 'audio' in task.asset.mime_type %}
+                    <audio controls="controls">
+                    <source src="{{ task.asset.download_url }}" type="{{ task.asset.mime_type }}" />
+                        Your browser does not support the audio element.
+                    </audio>
+                {% endif %}
+                {% if task.asset and 'video' in task.asset.mime_type %}
+                    <iframe width="560" height="315" src="{{ task.asset.download_url }}" frameborder="0" allowfullscreen></iframe>
+                {% endif %}
+                {% if task.book %}
+                    <div class="book">
+                        <img src="{{ MEDIA_URL }}{{ task.book.cover_image }}" alt="{{ task.book }} Book Image">
+                        <h2>{{ task.book.title }}</h2>
+                        <h3>
+                            {% for user in task.book.authors.all %}
+                                {{ user }}
+                            {% endfor %}
+                        </h3>
+                        {% if task.book.bookurl_set.all|length > 0 %}
+                        <div class="sources">
+                            {% for book_url in task.book.bookurl_set.all %}
+                                <a href="{{ book_url.url }}">{{ book_url.website }}</a>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <div class="task-completion">
+                    {% if not progress.completed %}
+                    <a href="{% url 'complete_task' task.pk %}">Complete</a>
+                    {% else %}
+                    <a href="{% url 'uncomplete_task' task.pk %}">Uncomplete</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

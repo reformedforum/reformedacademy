@@ -1,0 +1,70 @@
+{% extends 'reformedacademy/base.html' %}
+{% load staticfiles %}
+{% load courseutils %}
+
+{% block content %}
+    <div class="top-container">
+        <div class="inner">
+            <h1>{{ course }}</h1>
+            <div class="description">
+                {{ course.description }}
+            </div>
+            <div class="instructors">
+                {% for instructor in course.instructors.all %}
+                <div class="instructor">
+                    <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}"
+                         class="profile-image"
+                         alt="{{ instructor }} profile image">
+                    {{ instructor }}
+                </div>
+                {% endfor %}
+            </div>
+            {% progress course as progress %}
+            {% if progress == None %}
+            <div class="enrollment">
+                <a href="{% url 'enroll' course.pk %}">Enroll</a>
+            </div>
+            {% else %}
+            <div class="enrollment enrolled">
+                {% if progress.completed %}
+                <i class="fa fa-tasks"></i> Completed on {{ progress.completed|date:'DATE_FORMAT' }}
+                {% else %}
+                <i class="fa fa-tasks"></i> Enrolled on {{ progress.started|date:'DATE_FORMAT' }}
+                {% endif %}
+            </div>
+            {% if progress.percentage_complete > 0 %}
+            <div class="progress">
+                <div class="progress-bar"
+                     role="progressbar"
+                     aria-valuenow="{{ progress.percentage_complete }}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width: {{ progress.percentage_complete }}%;">
+                    {{ progress.percentage_complete }}% Complete
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="outline">
+        <div class="h1-container">
+            <h1>Lessons</h1>
+        </div>
+        {% for lesson in course.lesson_set.all %}
+        {% progress lesson as progress %}
+        <div class="section">
+            <a href="{% url 'lesson' course.slug lesson.slug %}">
+                <div class="inner">
+                    {% if progress.completed %}
+                    <i class="fa fa-check-circle-o"></i>
+                    {% else %}
+                    <i class="fa fa-circle-o"></i>
+                    {% endif %}
+                    <h1>{{ lesson.name }}</h1>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

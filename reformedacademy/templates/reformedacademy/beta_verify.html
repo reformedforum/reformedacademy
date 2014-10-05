@@ -1,0 +1,30 @@
+{% extends 'reformedacademy/base_no_menu.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="top-container centered">
+        <div class="inner">
+            <img src="{% static 'images/logo.png' %}" alt="Logo">
+            <h1>Beta Code Verification Error</h1>
+            <div>The provided code is invalid, however, it may just be a simple typo. You entered {{ token }}.</div>
+            <div style="margin-top:1em;">While you are here, sign up for our mailing list!</div>
+        </div>
+    </div>
+    <div class="main-container centered">
+        <div class="inner">
+            <div class="signup-form">
+            <div id="mc_embed_signup">
+            <form action="//reformedforum.us2.list-manage.com/subscribe/post?u=14186c205d6f7604ade1f3155&amp;id=45bbbe36dd" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                <label for="mce-EMAIL">Subscribe to our mailing list</label>
+                <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;"><input type="text" name="b_f3d57ec181c2e66831b41ddff_15cdb0f60f" tabindex="-1" value=""></div>
+                <div class="terms-and-conditions">
+                    Please read our <a href="http://reformedforum.org/about/privacy/" target="_blank">Privacy Policy</a> for more information on how your email address will be protected.
+                </div>
+                <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+            </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

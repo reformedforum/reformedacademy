@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'reformedacademy/includes/head.html' %}
+  </head>
+  <body>
+    <nav class="menu">
+        <ul class="main">
+            <li>
+                <a href="{% url 'index' %}"><i><img src="{% static 'images/logo.png' %}" alt=Logo"></i>Home</a>
+            </li>
+            <li>
+                <a href="{% url 'courses' %}">Courses</a>
+            </li>
+        </ul>
+
+        <ul class="profile">
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'progress' %}">Progress</a>
+            </li>
+            <li>
+                <a href="{% url 'profile' %}">Edit Profile</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Log Out</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'login' %}">Log In</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="header">
+        <div class="logo">
+            <img id="logo" src="{% static 'images/logo.png' %}" alt=Logo">
+            <i class="fa fa-angle-right"></i>
+        </div>
+        <!--
+<div class="profile">
+            <img src="static/images/portrait.png" class="profile-image">
+        </div>
+ -->
+    </div>
+    {% block content %}{% endblock %}
+  </body>
+</html>

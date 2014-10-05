@@ -1,0 +1,21 @@
+{
+  "name": "reformedacademy",
+  "version": "1.0.0",
+  "homepage": "https://github.com/reformedforum/reformedacademy",
+  "authors": [
+    "Kel Bucey <kel@reformed.academy>"
+  ],
+  "license": "GPLv3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "toastr": "~2.0.3",
+    "bootstrap": "~3.2.0",
+    "font-awesome": "~4.1.0"
+  }
+}
