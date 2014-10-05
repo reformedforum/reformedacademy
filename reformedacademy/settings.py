@@ -133,6 +133,6 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_USER_MODEL = 'reformedacademy.User'
 
-FROM_EMAIL_ADDRESS = 'support@reformed.academy'
+FROM_EMAIL_ADDRESS = 'Reformed Academy <support@reformed.academy>'
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/login'
