@@ -18,6 +18,9 @@
         <ul class="profile">
             {% if user.is_authenticated %}
             <li>
+                <a href="mailto:support@reformed.academy?subject=Feedback">Feedback</a>
+            </li>
+            <li>
                 <a href="{% url 'progress' %}">Progress</a>
             </li>
             <li>
