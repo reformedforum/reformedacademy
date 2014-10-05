@@ -21,8 +21,8 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 """
 from settings import *
 
-DEBUG = True
-TEMPLATE_DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['reformedacademy-develop-pmcfdpkypx.elasticbeanstalk.com',
                  'staging.reformed.academy']
