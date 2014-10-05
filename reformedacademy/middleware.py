@@ -41,7 +41,7 @@ class BetaMiddleware(object):
             'tastypie.resources.wrapper'
         ]
         self.always_allow_modules = [
-            'rfmedia'
+            'rfmedia.views'
         ]
         self.redirect = 'closed_index'
 
