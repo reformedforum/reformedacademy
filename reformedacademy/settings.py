@@ -113,6 +113,9 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_SECURE_URLS = True
 AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
 
+# Email
+EMAIL_BACKEND = 'django_ses.SESBackend'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_ROOT = '/static/'
