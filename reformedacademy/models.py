@@ -50,7 +50,12 @@ class User(AbstractUser):
     profile_image = models.ImageField(upload_to='profile_images', blank=True)
 
     def __unicode__(self):
-        return '{} {}'.format(self.first_name, self.last_name);
+        if self.email:
+            return self.email
+        elif self.first_name and self.last_name:
+            return '{} {}'.format(self.first_name, self.last_name)
+        else:
+            return self.username
 
     # def progress_for_course(self, course):
     #     """Gets the progress for a course."""
