@@ -75,7 +75,8 @@ class BetaMiddleware(object):
                         full_view_name == 'reformedacademy.views.SignUpFormView':
             return
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated() and \
+                        full_view_name != 'reformedacademy.views.SignUpFormView':
             return
 
         return redirect(self.redirect)
