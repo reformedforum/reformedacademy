@@ -24,6 +24,7 @@ import uuid
 import random
 
 from django import forms
+from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.forms.util import ErrorList
@@ -34,12 +35,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.views.generic.base import View
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Lesson, Category, \
     Task, LessonProgress, CourseLog, User, BetaToken
 from reformedacademy.forms import SignUpForm, LoginForm, ProfileForm, PasswordForm
-from reformedacademy.utils import send_html_mail
 
 
 class LoginRequiredMixin(View):
@@ -113,10 +113,14 @@ class SignUpFormView(View):
 
         subject = "Reformed Academy Account Activation"
         url = request.build_absolute_uri(reverse('activate', args=(user.pk, key)))
+        text = render_to_string('reformedacademy/email/activation.txt', {
+            'url': url
+        })
         html = render_to_string('reformedacademy/email/activation.html', {
             'url': url
         })
-        send_html_mail(subject, html, settings.FROM_EMAIL_ADDRESS, [user.email])
+        send_mail(subject, text, settings.FROM_EMAIL_ADDRESS, [user.email], False, None, None, None,
+                  html)
 
 
 class LoginFormView(View):

@@ -19,20 +19,11 @@ You should have received a copy of the GNU General Public License
 along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-from django.core.mail import EmailMessage
 
 
 def str2bool(v):
     """Converts a string to a boolean."""
     return v.lower() in ("yes", "true", "t", "1")
-
-
-def send_html_mail(subject, message, sender, to_list):
-    """This function won't be necessary in Django 1.7, but currently there isn't a way to
-    send html email."""
-    msg = EmailMessage(subject, message, sender, to_list)
-    msg.content_subtype = "html"  # Main content is now text/html
-    return msg.send()
 
 
 def find_using_property(list, object, property):
