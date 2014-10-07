@@ -6,8 +6,33 @@
         <div class="inner">
             <h1>Welcome</h1>
             <div class="description">
-                Welcome to Reformed Academy! Your account has been activated.
+                Welcome to Reformed Academy! We hope you find Reformed Academy to be a beneficial learning experience.
             </div>
+        </div>
+    </div>
+    <div class="outline">
+        <div class="h1-container">
+            <h1>What's Next?</h1>
+        </div>
+        <div class="inner">
+            <div class="courses">
+                <h2>Enroll in Courses</h2>
+                Get started by enrolling in a course. A list of courses can be accessed by clicking on courses at the top left of the screen.
+            </div>
+            <div class="track-progress">
+                <h2>Track Your Progress</h2>
+                Once enrolled in courses, track your progress by visiting the course progress page using the link at the top right of the screen.
+            </div>
+            <div class="free nocaps">
+                <h2>Support Reformed Academy</h2>
+                Reformed Academy is a free and <a href="http://github.com/reformedforum/reformedacademy">open website</a>. We don't charge for this service, but we do ask for your support by <a href="http://reformedforum.org/donate">donating</a>. Reformed Academy is a project of Reformed Forum, a 501(c)(3) organization.
+            </div>
+            {% if beta_enabled %}
+            <div class="feedback">
+                <h2>Give Us Feedback</h2>
+                Reformed Academy is in beta right now, and we would appreciate any feedback you have to give to us. Whether you are encountering some problems with the site, or if you have some great ideas for Reformed Academy, we would <a href="mailto:support@reformed.academy?subject=Feedback">love to hear from you</a>.
+            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -208,7 +208,9 @@ def activate(request, user_id, key):
 @login_required
 def welcome(request):
     """Displays a welcome page for newly activated users."""
-    return render(request, 'reformedacademy/welcome.html')
+    return render(request, 'reformedacademy/welcome.html', {
+        'beta_enabled': settings.BETA_ENABLED
+    })
 
 
 def closed_index(request):

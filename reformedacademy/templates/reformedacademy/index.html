@@ -7,16 +7,25 @@
         <div class="inner">
             <h1>Reformed Academy</h1>
             <div class="description">
-                What is Reformed Academy? How does it work? How much does it cost? All of that information will go here.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
             <div class="instructors">
-                <h2>Instructors</h2>
+                <h2>Instructors You Can Trust</h2>
+                <p>All Reformed Academy courses are taught by reformed instructors you can trust.</p>
                 {% for instructor in instructors %}
                 <div class="instructor">
                     <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}" class="profile-image" alt="{{ instructor }} profile image">
                     {{ instructor }}
                 </div>
                 {% endfor %}
+            </div>
+            <div class="track-progress">
+                <h2>Track Your Progress</h2>
+                Enroll in courses and complete course lessons. Your progress is tracked automatically and shown on the progress page.
+            </div>
+            <div class="free nocaps">
+                <h2>A Free and Open Learning Experience</h2>
+                Reformed Academy is a free and <a href="http://github.com/reformedforum/reformedacademy">open website</a>. We don't charge for this service, but we do ask for your support by <a href="http://reformedforum.org/donate">donating</a>. Reformed Academy is a project of Reformed Forum, a 501(c)(3) organization.
             </div>
             {% if not user.is_authenticated %}
             <div class="signup">

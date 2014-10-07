@@ -171,8 +171,7 @@ a:visited {
     padding: 3em 0 6em 0;
 }
 
-.top-container .inner,
-.signup-container .inner {
+.top-container .inner, .signup-container .inner, .outline .inner {
     margin: 0 auto;
     max-width: 650px;
     /* text-align: center; */
@@ -239,13 +238,12 @@ a:visited {
     color: #ccc;
 }
 
-.instructors {
+.instructors, .track-progress, .free {
     margin-top: 2.5em;
 }
 
 .instructors h2 {
-    font-size: 2.5em;
-    margin-bottom: 0.6em;
+    /* margin-bottom: 0.6em; */
 }
 
 .instructor {
@@ -618,12 +616,18 @@ ul.errorlist li {
 .top-container .progress h1 {
     font-size: 0em;
 }
+
 .top-container .progress {
     background-color: rgba(255, 255, 255, 0.25);
 }
+
 .top-container .progress .progress-bar {
     background-color: #fff;
     color: #34AADC;
+}
+
+.footer {
+    margin-top: 4em;
 }
 
 @media(max-width:800px) {
