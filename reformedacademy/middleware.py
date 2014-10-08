@@ -52,6 +52,7 @@ class BetaMiddleware(object):
 
         whitelisted_modules = ['django.contrib.auth.views',
                                'django.contrib.admin.sites',
+                               'django.contrib.admin.options',
                                'django.views.static',
                                'django.contrib.staticfiles.views']
 
