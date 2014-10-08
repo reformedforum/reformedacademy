@@ -6,7 +6,7 @@
         <div class="inner">
             <h1>Welcome</h1>
             <div class="description">
-                Welcome to Reformed Academy! We hope you find Reformed Academy to be a beneficial learning experience.
+                Welcome to Reformed Academy! Your account has been activated and you have been logged in. Below you'll find some helpful information starting out with Reformed Academy.
             </div>
         </div>
     </div>
@@ -17,11 +17,11 @@
         <div class="inner">
             <div class="courses">
                 <h2>Enroll in Courses</h2>
-                Get started by enrolling in a course. A list of courses can be accessed by clicking on courses at the top left of the screen.
+                Get started by <a href="{% url 'courses' %}">enrolling in a course</a>. A list of courses can be accessed by clicking on courses at the top left of the screen.
             </div>
             <div class="track-progress">
                 <h2>Track Your Progress</h2>
-                Once enrolled in courses, track your progress by visiting the course progress page using the link at the top right of the screen.
+                Once enrolled in courses, <a href="{% url 'progress' %}">track your progress</a> by visiting the course progress page using the link at the top right of the screen.
             </div>
             <div class="free nocaps">
                 <h2>Support Reformed Academy</h2>
@@ -30,7 +30,7 @@
             {% if beta_enabled %}
             <div class="feedback">
                 <h2>Give Us Feedback</h2>
-                Reformed Academy is in beta right now, and we would appreciate any feedback you have to give to us. Whether you are encountering some problems with the site, or if you have some great ideas for Reformed Academy, we would <a href="mailto:support@reformed.academy?subject=Feedback">love to hear from you</a>.
+                Reformed Academy is in beta right now, and we would appreciate any feedback you have to give to us. Whether you are encountering some problems with the site, or if you have some great ideas for Reformed Academy, we would love to <a href="mailto:support@reformed.academy?subject=Feedback">hear from you</a>.
             </div>
             {% endif %}
         </div>

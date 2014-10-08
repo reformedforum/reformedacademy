@@ -628,6 +628,24 @@ ul.errorlist li {
 
 .footer {
     margin-top: 4em;
+    background-color: #8E8E93;
+    height: 15em;
+    color: #fff;
+    padding: 2em;
+    text-align: right;
+}
+
+.footer:after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+.footer .content {
+    vertical-align: bottom;
+    display: inline-block;
+    margin: 0;
 }
 
 @media(max-width:800px) {
