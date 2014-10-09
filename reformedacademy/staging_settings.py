@@ -30,3 +30,4 @@ ALLOWED_HOSTS = ['reformedacademy-develop-pmcfdpkypx.elasticbeanstalk.com',
 SECURE_PROXY_SSL_HEADER = None
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
