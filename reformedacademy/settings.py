@@ -124,7 +124,7 @@ EMAIL_BACKEND = 'django_ses.SESBackend'
 STATIC_ROOT = '/static/'
 MEDIA_ROOT = '/media/'
 
-S3_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
+S3_URL = 'https://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = S3_URL + STATIC_ROOT
 MEDIA_URL = S3_URL + MEDIA_ROOT
 
