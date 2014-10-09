@@ -106,7 +106,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
-SECURE_REDIRECT_EXEMPT = ['media.reformedforum.org']
+SECURE_REDIRECT_EXEMPT = ['media.reformedforum.org.*']
 
 # Amazon storage settings
 DEFAULT_FILE_STORAGE = 'reformedacademy.s3utils.MediaRootS3BotoStorage'
