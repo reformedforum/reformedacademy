@@ -103,10 +103,10 @@ USE_TZ = True
 
 # HTTPS
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_SSL_REDIRECT = False
-SECURE_REDIRECT_EXEMPT = [r'.*media.reformedforum.org.*']
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_REDIRECT_EXEMPT = [r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)']
 
 # Amazon storage settings
 DEFAULT_FILE_STORAGE = 'reformedacademy.s3utils.MediaRootS3BotoStorage'
