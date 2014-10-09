@@ -57,7 +57,7 @@ INSTALLED_APPS = (
     'rfmedia',
     'tastypie',
     'storages',
-    'djangosecure',
+    # 'djangosecure',
     'django_cleanup'
 )
 
@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'djangosecure.middleware.SecurityMiddleware',
+    # 'djangosecure.middleware.SecurityMiddleware',
     'reformedacademy.middleware.BetaMiddleware'
 )
 
@@ -105,8 +105,8 @@ USE_TZ = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = False
-SECURE_REDIRECT_EXEMPT = [r'.*assets\/download.*']
+# SECURE_SSL_REDIRECT = False
+# SECURE_REDIRECT_EXEMPT = [r'.*assets\/download.*']
 
 # Amazon storage settings
 DEFAULT_FILE_STORAGE = 'reformedacademy.s3utils.MediaRootS3BotoStorage'
