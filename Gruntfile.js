@@ -12,8 +12,8 @@ module.exports = function (grunt) {
                     // Keys are destinations (prefixed with `options.destPrefix`)
                     // Values are sources (prefixed with `options.srcPrefix`); One source per destination
                     // e.g. 'bower_components/chai/lib/chai.js' will be copied to 'test/js/libs/chai.js'
-                    'js/jquery.min.js': 'jquery/dist/jquery.js',
-                    'js/bootstrap.min.js': 'bootstrap/dist/js/bootstrap.js',
+                    'js/jquery.min.js': 'jquery/dist/jquery.min.js',
+                    'js/bootstrap.min.js': 'bootstrap/dist/js/bootstrap.min.js',
                     'css/bootstrap.min.css': 'bootstrap/dist/css/bootstrap.min.css',
                     'js/toastr.min.js': 'toastr/toastr.min.js',
                     'css/toastr.min.css': 'toastr/toastr.min.css',

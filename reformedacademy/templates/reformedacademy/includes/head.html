@@ -20,21 +20,4 @@
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/toastr.min.js' %}"></script>
-<script>
-    $(document).mouseup(function (e) {
-        var container = $(".menu");
-
-        if (container.hasClass('open') && !container.is(e.target)
-            && container.has(e.target).length === 0) {
-            container.removeClass('open');
-        }
-    });
-    $(document).ready(function() {
-        $("#logo").click(function() {
-            $('.menu').toggleClass('open');
-        });
-        {% for message in messages %}
-        toastr.{{ message.tags }}('{{ message }}')
-        {% endfor %}
-    });
-</script>
+<script src="{% static 'js/main.js' %}"></script>
