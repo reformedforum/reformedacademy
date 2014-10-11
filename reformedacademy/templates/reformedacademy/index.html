@@ -57,6 +57,14 @@
                     {% endif %}
                     <h1>{{ course.name }}</h1>
                     <h2>{{ course.category }}</h2>
+                    <div class="instructors">
+                        {% for instructor in course.instructors.all %}
+                        <div class="instructor">
+                            <img src="{{ MEDIA_URL }}{{ instructor.profile_image }}" class="profile-image" alt="{{ instructor }} profile image">
+                            {{ instructor }}
+                        </div>
+                        {% endfor %}
+                    </div>
                     <div class="description">
                         {{ course.description }}
                     </div>

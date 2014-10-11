@@ -238,6 +238,10 @@ a:visited {
     color: #ccc;
 }
 
+.outline .instructors {
+    margin-top: 1em;
+}
+
 .instructors, .track-progress, .free {
     margin-top: 2.5em;
 }
