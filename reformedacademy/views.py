@@ -25,7 +25,8 @@ import random
 
 from django import forms
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.db.models import Sum, Q
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.forms.util import ErrorList
 from django.shortcuts import render
@@ -35,7 +36,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 from django.views.generic.base import View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.conf import settings
 from reformedacademy.models import ActivationKey, Course, Lesson, Category, \
     Task, LessonProgress, CourseLog, User, BetaToken
@@ -245,7 +246,7 @@ def beta_handle_token_form(request):
 
 def index(request):
     """The home page."""
-    courses = Course.objects.all()
+    courses = Course.objects.filter(published__isnull=False)
     instructors = User.objects.filter(courses__isnull=False)
     if request.user.is_authenticated():
         progresses = request.user.courseprogress_set.all
@@ -269,8 +270,9 @@ def course(request, slug):
 def lesson(request, course_slug, lesson_slug):
     """The lesson page."""
     lesson = get_object_or_404(Lesson, slug=lesson_slug)
-    return render(request, 'reformedacademy/lesson.html',
-                  {'lesson': lesson})
+    return render(request, 'reformedacademy/lesson.html', {
+        'lesson': lesson
+    })
 
 
 def courses(request, category_slug=None):
@@ -279,15 +281,24 @@ def courses(request, category_slug=None):
     If category_slug is define, only grab courses for that category.
 
     """
-    categories = get_list_or_404(Category)
+
+    # Get all categories that have at least one course
+    categories = Category.objects.all().annotate(nb_courses=Sum('course'))\
+        .filter(~Q(nb_courses=0))
+
     if category_slug:
-        courses = get_list_or_404(Course, category__slug=category_slug)
+        # We want to throw a 404 if the supplied category doesn't exist
+        if not Category.objects.filter(slug=category_slug).exists():
+            raise Http404
+
+        courses = Course.objects.filter(published__isnull=False, category__slug=category_slug)
     else:
-        courses = get_list_or_404(Course)
-    return render(request, 'reformedacademy/courses.html',
-                  {'categories': categories,
-                   'courses': courses,
-                   'category_slug': category_slug})
+        courses = Course.objects.filter(published__isnull=False)
+    return render(request, 'reformedacademy/courses.html', {
+        'categories': categories,
+        'courses': courses,
+        'category_slug': category_slug
+    })
 
 
 @login_required

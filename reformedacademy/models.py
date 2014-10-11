@@ -68,6 +68,7 @@ class Course(models.Model):
     slug = models.SlugField(max_length=255)
     description = models.TextField()
     instructors = models.ManyToManyField(User, blank=True, related_name='courses')
+    published = models.DateTimeField(null=True, blank=True)
 
     def progress_for_user(self, user):
         """Gets the progress for this course for user."""

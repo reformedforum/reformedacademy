@@ -12,16 +12,12 @@
         <nav class="h1-container">
             <ul>
                 <li{% if category_slug == None %} class="selected"{% endif %}>
-                    <a href="{% url 'courses' %}">
-                        All
-                    </a>
+                    <a href="{% url 'courses' %}">All</a>
                 </li>
                 <i class="fa fa-circle"></i>
                 {% for category in categories %}
                     <li{% if category_slug == category.slug %} class="selected"{% endif %}>
-                        <a href="{% url 'courses-category' category.slug %}">
-                            {{ category }}
-                        </a>
+                        <a href="{% url 'courses-category' category.slug %}">{{ category }}</a>
                     </li>
                     {% if not forloop.last %}
                         <i class="fa fa-circle"></i>
