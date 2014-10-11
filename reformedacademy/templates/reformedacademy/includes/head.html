@@ -21,3 +21,12 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/toastr.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+{% if messages|length > 0 %}
+<script>
+    $(document).ready(function() {
+        {% for message in messages %}
+        toastr.{{ message.tags }}('{{ message }}')
+        {% endfor %}
+    });
+</script>
+{% endif %}
