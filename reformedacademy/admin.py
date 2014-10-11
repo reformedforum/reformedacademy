@@ -20,6 +20,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.core.urlresolvers import reverse
 from reformedacademy import models
 
@@ -99,7 +100,7 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(UserAdmin):
     list_display = ('email',)
 
 admin.site.register(models.User, UserAdmin)
