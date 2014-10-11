@@ -7,7 +7,7 @@
         <div class="inner">
             <h1>Reformed Academy</h1>
             <div class="description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Welcome to Reformed Forum's new endeavor, Reformed Academy: A website for theological learning. We are collecting and organizing our theological resources into course modules or structured collections of media that would better assist people in growing in their knowledge of the bible and its teachings.
             </div>
             <div class="instructors">
                 <h2>Instructors You Can Trust</h2>
@@ -27,6 +27,13 @@
                 <h2>A Free and Open Learning Experience</h2>
                 Reformed Academy is a free and <a href="http://github.com/reformedforum/reformedacademy">open website</a>. We don't charge for this service, but we do ask for your support by <a href="http://reformedforum.org/donate">donating</a>. Reformed Academy is a project of Reformed Forum, a 501(c)(3) organization.
             </div>
+            {% if beta_enabled %}
+            <div class="feedback nocaps">
+                <h2>Give Us Feedback</h2>
+                Reformed Academy is in beta right now, and we would appreciate any feedback you have to give to us. Whether you are encountering some problems with the site, or if you have some great ideas for Reformed Academy, we would love to <a href="mailto:support@reformed.academy?subject=Feedback">hear from you</a>.
+                <p style="margin-top: 1em;">Please keep in mind the website is still unfinished, so it may not behave as expected or there may be placeholders in different areas of the site.</p>
+            </div>
+            {% endif %}
             {% if not user.is_authenticated %}
             <div class="signup">
                 <a href="{% url 'signup' %}">Sign Up</a>

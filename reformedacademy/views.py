@@ -251,10 +251,12 @@ def index(request):
         progresses = request.user.courseprogress_set.all
     else:
         progresses = None
-    return render(request, 'reformedacademy/index.html',
-                  {'courses': courses,
-                   'instructors': instructors,
-                   'progresses': progresses})
+    return render(request, 'reformedacademy/index.html', {
+        'courses': courses,
+        'instructors': instructors,
+        'progresses': progresses,
+        'beta_enabled': settings.BETA_ENABLED
+    })
 
 
 def course(request, slug):
