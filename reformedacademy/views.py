@@ -25,7 +25,7 @@ import random
 
 from django import forms
 from django.core.mail import send_mail
-from django.db.models import Sum, Q
+from django.db.models import Sum, Q, Count
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.forms.util import ErrorList
@@ -282,9 +282,10 @@ def courses(request, category_slug=None):
 
     """
 
-    # Get all categories that have at least one course
-    categories = Category.objects.all().annotate(nb_courses=Sum('course'))\
-        .filter(~Q(nb_courses=0))
+    # Get all categories that have at least one course that is published
+    categories = Category.objects.all().filter(course__published__isnull=False)\
+        .annotate(num_courses=Count('course'))\
+        .filter(~Q(num_courses=0))
 
     if category_slug:
         # We want to throw a 404 if the supplied category doesn't exist
