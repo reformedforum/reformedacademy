@@ -9,6 +9,18 @@
             <div class="description">
                 Welcome to Reformed Forum's new endeavor, Reformed Academy: A website for theological learning. We are collecting and organizing our theological resources into course modules or structured collections of media that will better assist people in growing in their knowledge of the bible and its teachings.
             </div>
+            {% if not user.is_authenticated %}
+            <div class="signup">
+                <a href="{% url 'signup' %}">Sign Up</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="outline">
+        <div class="h1-container">
+            <h1>Overview</h1>
+        </div>
+        <div class="inner">
             <div class="instructors">
                 <h2>Instructors You Can Trust</h2>
                 <p>All Reformed Academy courses are taught by reformed instructors you can trust.</p>
@@ -34,14 +46,7 @@
                 <p style="margin-top: 1em;">Please keep in mind the website is still unfinished, so it may not behave as expected or there may be placeholders in different areas of the site.</p>
             </div>
             {% endif %}
-            {% if not user.is_authenticated %}
-            <div class="signup">
-                <a href="{% url 'signup' %}">Sign Up</a>
-            </div>
-            {% endif %}
         </div>
-    </div>
-    <div class="outline">
         <div class="h1-container">
             <h1>Available Courses</h1>
         </div>

@@ -168,13 +168,17 @@ a:visited {
 .top-container {
     background-color: #34aadc;
     color: #fff;
-    padding: 3em 0 6em 0;
+    padding: 3em 0 2.5em 0;
 }
 
 .top-container .inner, .signup-container .inner, .outline .inner {
     margin: 0 auto;
     max-width: 650px;
-    /* text-align: center; */
+    font-size: 1.1em;
+}
+
+.outline .inner {
+    margin-bottom: 5em;
 }
 
 .top-container .inner h1 {
