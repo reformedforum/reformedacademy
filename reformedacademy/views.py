@@ -369,7 +369,9 @@ def uncomplete_task(request, task_id):
             course_progress.calc_progress(request.user)
             course_progress.save()
 
-    return HttpResponseRedirect(reverse('lesson', args=(task.lesson.slug,)))
+    return HttpResponseRedirect(
+        reverse('lesson', args=(task.lesson.course.slug, task.lesson.slug,))
+    )
 
 
 @login_required
