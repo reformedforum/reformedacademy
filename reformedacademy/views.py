@@ -295,6 +295,7 @@ def courses(request, category_slug=None):
         courses = Course.objects.filter(published__isnull=False, category__slug=category_slug)
     else:
         courses = Course.objects.filter(published__isnull=False)
+        
     return render(request, 'reformedacademy/courses.html', {
         'categories': categories,
         'courses': courses,
