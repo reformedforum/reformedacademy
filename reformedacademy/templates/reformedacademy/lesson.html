@@ -55,6 +55,9 @@
                     <source src="{{ task.asset.download_url }}" type="{{ task.asset.mime_type }}" />
                         Your browser does not support the audio element.
                     </audio>
+                    <div class="download">
+                        <a href="{{ task.asset.download_url }}">Download Audio</a>
+                    </div>
                 {% endif %}
                 {% if task.asset and 'video' in task.asset.mime_type %}
                     <iframe width="560" height="315" src="{{ task.asset.download_url }}" frameborder="0" allowfullscreen></iframe>
