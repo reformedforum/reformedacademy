@@ -247,7 +247,7 @@ def beta_handle_token_form(request):
 def index(request):
     """The home page."""
     courses = Course.objects.filter(published__isnull=False)
-    instructors = User.objects.filter(courses__isnull=False)
+    instructors = User.objects.filter(courses__isnull=False).distinct()
     if request.user.is_authenticated():
         progresses = request.user.courseprogress_set.all
     else:
