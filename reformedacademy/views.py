@@ -366,8 +366,9 @@ def uncomplete_task(request, task_id):
         course_progress = task.lesson.course.progress_for_user(request.user)
         if course_progress and course_progress.completed:
             course_progress.completed = None
-            course_progress.calc_progress(request.user)
-            course_progress.save()
+
+        course_progress.calc_progress(request.user)
+        course_progress.save()
 
     return HttpResponseRedirect(
         reverse('lesson', args=(task.lesson.course.slug, task.lesson.slug,))
