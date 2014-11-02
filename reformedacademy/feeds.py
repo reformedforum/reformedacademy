@@ -1,9 +1,10 @@
+import datetime
+
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.feedgenerator import Rss201rev2Feed
-from reformedacademy import settings
-from reformedacademy.models import Course, Lesson, Task
+from reformedacademy.models import Course, Task
 
 
 class CourseFeed(Feed):
@@ -13,10 +14,12 @@ class CourseFeed(Feed):
 
     def __init__(self):
         self.request = None
+        self.course = None
 
     def get_object(self, request, slug):
         self.request = request
-        return get_object_or_404(Course, slug=slug)
+        self.course = get_object_or_404(Course, slug=slug)
+        return self.course
 
     def title(self, obj):
         return obj.name
@@ -31,13 +34,16 @@ class CourseFeed(Feed):
         return Task.objects.filter(lesson__course=obj).order_by('lesson__order', 'order')
 
     def item_link(self, item):
-        return reverse('lesson', args=(item.lesson.course.slug, item.lesson.slug,))
+        return reverse('lesson', args=(self.course.slug, item.lesson.slug,))
 
     def item_title(self, item):
         return '{}: {}'.format(item.lesson.name, item.name)
 
     def item_description(self, item):
         return item.description
+
+    def item_pubdate(self, item):
+        return self.course.published + datetime.timedelta(0, item.lesson.order + item.order)
 
     def item_enclosure_url(self, item):
         if item.asset:
