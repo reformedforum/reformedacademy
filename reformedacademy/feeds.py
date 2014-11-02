@@ -1,13 +1,21 @@
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.utils.feedgenerator import Rss201rev2Feed
+from reformedacademy import settings
 from reformedacademy.models import Course, Lesson, Task
 
 
 class CourseFeed(Feed):
     """Defines a feed for a course."""
 
+    feed_type = Rss201rev2Feed
+
+    def __init__(self):
+        self.request = None
+
     def get_object(self, request, slug):
+        self.request = request
         return get_object_or_404(Course, slug=slug)
 
     def title(self, obj):
@@ -33,7 +41,7 @@ class CourseFeed(Feed):
 
     def item_enclosure_url(self, item):
         if item.asset:
-            return item.asset.download_url
+            return 'http://{}{}'.format(self.request.get_host(), item.asset.download_url)
         else:
             return None
 
