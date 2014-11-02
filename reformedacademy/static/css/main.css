@@ -282,6 +282,14 @@ a:visited {
     max-width: 650px;
 }
 
+.outline .h1-container img.feed {
+    height: 15px;
+    width: 15px;
+    margin-left: 10px;
+    position: relative;
+    bottom: 1px;
+}
+
 .outline .h1-container i {
     margin-left: 2em;
     margin-right: 2em;

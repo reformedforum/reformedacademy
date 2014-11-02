@@ -42,7 +42,8 @@ class BetaMiddleware(object):
             'tastypie.resources.wrapper'
         ]
         self.always_allow_modules = [
-            'rfmedia.views'
+            'rfmedia.views',
+            'reformedacademy.feeds'
         ]
         self.redirect = 'closed_index'
 

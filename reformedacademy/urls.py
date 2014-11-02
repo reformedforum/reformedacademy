@@ -22,6 +22,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
+from reformedacademy.feeds import CourseFeed
 from reformedacademy.views import SignUpFormView, LoginFormView, ProfileFormView, PasswordFormView
 from rfmedia.api import StatResource, AssetResource
 from tastypie.api import Api
@@ -51,6 +52,7 @@ urlpatterns = patterns('',
     url(r'^login/', LoginFormView.as_view(), name='login'),
     url(r'^logout/', 'reformedacademy.views.logout', name='logout'),
     url(r'^course/(?P<slug>[\w-]+)/$', 'reformedacademy.views.course', name='course'),
+    url(r'^course/(?P<slug>[\w-]+)/rss/$', CourseFeed(), name='course_feed'),
     url(r'^course/(?P<course_slug>[\w-]+)/(?P<lesson_slug>[\w-]+)/$',
         'reformedacademy.views.lesson', name='lesson'),
     url(r'^courses/$', 'reformedacademy.views.courses', name='courses'),

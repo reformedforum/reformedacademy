@@ -49,7 +49,12 @@
     </div>
     <div class="outline">
         <div class="h1-container">
-            <h1>Lessons</h1>
+            <h1>
+                Lessons
+                <a href="{% url 'course_feed' course.slug %}">
+                    <img src="{% static 'images/feed-icon-28x28.png' %}" class="feed">
+                </a>
+            </h1>
         </div>
         {% for lesson in course.lesson_set.all %}
         {% progress lesson as progress %}
