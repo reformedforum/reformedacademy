@@ -14,6 +14,9 @@ NOTICE: ALL COURSE CONTENT ON THE REFORMED ACADEMY WEBSITE AND THE REFORMED ACAD
 PROPERTY OF REFORMED FORUM AND DO NOT FALL UNDER GPLV3. THE REFORMED ACADEMY LOGO MUST BE 
 REPLACED WHEN DISTRIBUTING REFORMED ACADEMY.
 
+Project Notes
+---------------------------
+The following directions are specfic to Mac OSX. If you would like to contribute by providing instructions for other platforms, it would be greatly appreciated!
 
 Check out the project
 ---------------------------
