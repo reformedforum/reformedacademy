@@ -21,11 +21,14 @@ class RFFeed(Rss201rev2Feed):
     """Reformed Forum Feed."""
     def add_root_elements(self, handler):
         super(RFFeed, self).add_root_elements(handler)
+        
         handler.startElement('image', {})
         handler.addQuickElement('url', self.feed['image_url'])
         handler.addQuickElement('title', self.feed['title'])
         handler.addQuickElement('link', self.feed['link'])
         handler.endElement('image')
+
+        handler.addQuickElement('itunes:author', self.feed['author'])
 
 
 class CourseFeed(Feed):
@@ -43,7 +46,8 @@ class CourseFeed(Feed):
 
     def feed_extra_kwargs(self, obj):
         url = static_url(self.request, 'images/logo_bg.png')
-        return {'image_url': url}
+        author = ', '.join([unicode(i) for i in obj.instructors.all()])
+        return {'image_url': url, 'author': author}
 
     def title(self, obj):
         return obj.name
