@@ -111,6 +111,16 @@ class Course(models.Model):
         CourseLog.start_course(user)
         return course_progress
 
+    def drop(self, user):
+        """Drops a course for a user.
+
+        :param user: User
+
+        """
+        progress = self.progress_for_user(user)
+        if progress:
+            progress.delete()
+
     def __unicode__(self):
         return self.name
 
@@ -324,6 +334,7 @@ class PassageIndex(models.Model):
 
 
 class CourseProgress(models.Model):
+    """Describes progress for a course."""
     user = models.ForeignKey(User)
     course = models.ForeignKey(Course)
     started = models.DateTimeField(auto_now=True)
@@ -363,6 +374,7 @@ class CourseProgress(models.Model):
 
 
 class LessonProgress(models.Model):
+    """Describes progress for a lesson."""
     user = models.ForeignKey(User)
     lesson = models.ForeignKey(Lesson)
     started = models.DateTimeField(auto_now_add=True)
@@ -375,12 +387,14 @@ class LessonProgress(models.Model):
 
 
 class TaskProgress(models.Model):
+    """Describes progress for a task."""
     user = models.ForeignKey(User)
     task = models.ForeignKey(Task)
     completed = models.DateTimeField(auto_now=True)
 
 
 class CourseLog(models.Model):
+    """Describes a log for a course."""
     user = models.ForeignKey(User)
 
     COURSE = 'course'
@@ -434,6 +448,7 @@ class CourseLog(models.Model):
 
 
 class BetaToken(models.Model):
+    """Describes a beta token used to register for an account."""
     token = models.CharField(max_length=6)
     redeemed_by = models.ForeignKey(User, blank=True, null=True, related_name="redeemed_token")
     invited_by = models.ForeignKey(User, blank=True, null=True, related_name="invited_token")

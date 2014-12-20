@@ -30,6 +30,9 @@
                 <i class="fa fa-tasks"></i> Completed on {{ progress.completed|date:'DATE_FORMAT' }}
                 {% else %}
                 <i class="fa fa-tasks"></i> Enrolled on {{ progress.started|date:'DATE_FORMAT' }}
+                <a href="{% url 'drop' course.pk %}"
+                   class="drop"
+                   onclick="return confirm('Are you sure you want to drop this course?')">Drop This Course</a>
                 {% endif %}
             </div>
             {% if progress.percentage_complete > 0 %}

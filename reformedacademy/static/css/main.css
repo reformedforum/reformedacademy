@@ -594,6 +594,31 @@ ul.errorlist li {
     letter-spacing: 0.07em;
 }
 
+.enrollment a.drop {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em;
+    text-decoration: underline;
+    margin-left: 20px;
+    position: relative
+}
+
+.enrollment a.drop:before {
+    content: '-';
+    text-decoration: none;
+    margin: 0 7px 0 7px;
+    position: absolute;
+    right: 100%;
+    width: 8px;
+}
+
+.enrollment a.drop:hover {
+    background: none;
+    color: #fff;
+    text-decoration: none;
+}
+
 .task-completion a {
     border: 1px solid #34aadc;
     margin: 0 auto;

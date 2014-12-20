@@ -21,7 +21,7 @@ class RFFeed(Rss201rev2Feed):
     """Reformed Forum Feed."""
     def add_root_elements(self, handler):
         super(RFFeed, self).add_root_elements(handler)
-        
+
         handler.startElement('image', {})
         handler.addQuickElement('url', self.feed['image_url'])
         handler.addQuickElement('title', self.feed['title'])

@@ -319,6 +319,15 @@ def enroll(request, course_id):
 
 
 @login_required
+def drop(request, course_id):
+    """Drops a user from a course."""
+    course = get_object_or_404(Course, pk=course_id)
+    course.drop(request.user)
+    messages.info(request, 'You have dropped {}.'.format(course))
+    return HttpResponseRedirect(reverse('course', args=(course.slug,)))
+
+
+@login_required
 def complete_task(request, task_id):
     """Completes a task."""
     task = get_object_or_404(Task, pk=task_id)
