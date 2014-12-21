@@ -381,7 +381,7 @@ a:visited {
 }
 
 .section.home .inner h1 {
-    font-size: 2em;
+    font-size: 1.6em;
 
     text-transform: none;
 }
@@ -706,6 +706,10 @@ ul.errorlist li {
         display: inline;
     }
 
+    h2 {
+        font-size: 1.6em;
+    }
+
     .menu {
         position: absolute;
         background: rgba(0, 0, 0, 0.70);
@@ -773,11 +777,11 @@ ul.errorlist li {
     }
 
     .top-container .inner h1 {
-        font-size: 3em;
+        font-size: 2.2em;
     }
 
     .instructors h2 {
-        font-size: 2em;
+        /* font-size: 1.6em; */
     }
 
     .header .logo img {
