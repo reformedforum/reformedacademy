@@ -601,7 +601,7 @@ ul.errorlist li {
     font-size: 1em;
     text-decoration: underline;
     margin-left: 20px;
-    position: relative
+    position: relative;
 }
 
 .enrollment a.drop:before {
