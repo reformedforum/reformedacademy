@@ -148,6 +148,7 @@ class LoginFormView(View):
             if user is not None:
                 if user.is_active:
                     auth_login(request, user)
+                    request.session.set_expiry(settings.LOGGED_IN_DURATION)
                     messages.info(request, 'You are now logged in.')
                     return HttpResponseRedirect(reverse('index'))
                 else:

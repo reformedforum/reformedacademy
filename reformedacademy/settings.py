@@ -140,3 +140,6 @@ AUTH_USER_MODEL = 'reformedacademy.User'
 FROM_EMAIL_ADDRESS = 'Reformed Academy <support@reformed.academy>'
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/login'
+
+# 3 Months Log In Time
+LOGGED_IN_DURATION = 7776000
