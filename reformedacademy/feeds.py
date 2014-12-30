@@ -30,6 +30,11 @@ class RFFeed(Rss201rev2Feed):
 
         handler.addQuickElement('itunes:author', self.feed['author'])
 
+        handler.startElement('itunes:owner', {})
+        handler.addQuickElement('itunes:name', 'Reformed Academy / {}'.format(self.feed['author']))
+        handler.addQuickElement('itunes:email', 'support@reformed.academy')
+        handler.endElement('itunes:owner')
+
 
 class CourseFeed(Feed):
     """Defines a feed for a course."""
