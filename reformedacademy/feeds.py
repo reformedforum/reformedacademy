@@ -19,6 +19,10 @@ def static_url(request, path):
 
 class RFFeed(Rss201rev2Feed):
     """Reformed Forum Feed."""
+    def rss_attributes(self):
+        return {'version': self._version, 'xmlns:atom': 'http://www.w3.org/2005/Atom',
+                'xmlns:itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'}
+
     def add_root_elements(self, handler):
         super(RFFeed, self).add_root_elements(handler)
 
