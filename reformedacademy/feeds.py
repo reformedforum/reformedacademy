@@ -36,6 +36,9 @@ class RFFeed(Rss201rev2Feed):
         handler.addQuickElement('itunes:email', 'support@reformed.academy')
         handler.endElement('itunes:owner')
 
+        handler.addQuickElement('itunes:explicit', 'no')
+        handler.addQuickElement('itunes:category', 'Education')
+
     def add_item_elements(self, handler, item):
         super(RFFeed, self).add_item_elements(handler, item)
         handler.addQuickElement('itunes:author', item['author'])
