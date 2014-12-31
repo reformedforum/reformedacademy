@@ -28,12 +28,17 @@ class RFFeed(Rss201rev2Feed):
         handler.addQuickElement('link', self.feed['link'])
         handler.endElement('image')
 
-        handler.addQuickElement('itunes:author', self.feed['author'])
+        handler.addQuickElement('itunes:author',
+                                'Reformed Academy / {}'.format(self.feed['author']))
 
         handler.startElement('itunes:owner', {})
         handler.addQuickElement('itunes:name', 'Reformed Academy / {}'.format(self.feed['author']))
         handler.addQuickElement('itunes:email', 'support@reformed.academy')
         handler.endElement('itunes:owner')
+
+    def add_item_elements(self, handler, item):
+        super(RFFeed, self).add_item_elements(handler, item)
+        handler.addQuickElement('itunes:author', item['author'])
 
 
 class CourseFeed(Feed):
@@ -53,6 +58,9 @@ class CourseFeed(Feed):
         url = static_url(self.request, 'images/logo_bg.png')
         author = ', '.join([unicode(i) for i in obj.instructors.all()])
         return {'image_url': url, 'author': author}
+
+    def item_extra_kwargs(self, item):
+        return {'author': 'Reformed Academy'}
 
     def title(self, obj):
         return obj.name
