@@ -37,7 +37,7 @@ class RFFeed(Rss201rev2Feed):
         handler.endElement('itunes:owner')
 
         handler.addQuickElement('itunes:explicit', 'no')
-        handler.addQuickElement('itunes:category', 'Education')
+        handler.addQuickElement('itunes:category', None, {'text': 'Education'})
 
     def add_item_elements(self, handler, item):
         super(RFFeed, self).add_item_elements(handler, item)
