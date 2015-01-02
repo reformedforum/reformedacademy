@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'tastypie',
     'storages',
     'djangosecure',
+    'debug_toolbar',
     'django_cleanup'
 )
 

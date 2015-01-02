@@ -247,7 +247,7 @@ def beta_handle_token_form(request):
 
 def index(request):
     """The home page."""
-    courses = Course.objects.filter(published__isnull=False)
+    courses = Course.objects.filter(published__isnull=False).prefetch_related('instructors')
     instructors = User.objects.filter(courses__isnull=False).distinct()
     if request.user.is_authenticated():
         progresses = request.user.courseprogress_set.all
@@ -293,9 +293,12 @@ def courses(request, category_slug=None):
         if not Category.objects.filter(slug=category_slug).exists():
             raise Http404
 
-        courses = Course.objects.filter(published__isnull=False, category__slug=category_slug)
+        courses = Course.objects.filter(
+            published__isnull=False,
+            category__slug=category_slug
+        ).prefetch_related('instructors')
     else:
-        courses = Course.objects.filter(published__isnull=False)
+        courses = Course.objects.filter(published__isnull=False).prefetch_related('instructors')
 
     return render(request, 'reformedacademy/courses.html', {
         'categories': categories,
