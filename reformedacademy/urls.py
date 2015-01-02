@@ -68,6 +68,7 @@ urlpatterns = patterns('',
     url(r'^support/', 'reformedacademy.views.support', name='support'),
     url(r'^profile/', ProfileFormView.as_view(), name='profile'),
     url(r'^password/', PasswordFormView.as_view(), name='password'),
+    url(r'^instructor/(?P<user_id>[\d+])', 'reformedacademy.views.instructor', name='instructor'),
 
     # Media system
     url(r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)',

@@ -463,3 +463,15 @@ def support(request):
 def page_not_found(request):
     """Custom 404 view."""
     return render(request, 'reformedacademy/404.html')
+
+
+def instructor(request, user_id):
+    """The instructor view."""
+    user = get_object_or_404(User, pk=user_id)
+
+    # If a user isn't associated with any courses, raise a 404
+    if len(user.courses.all()) == 0:
+        raise Http404
+
+    return render(request, 'reformedacademy/instructor.html',
+                  {'instructor': user})

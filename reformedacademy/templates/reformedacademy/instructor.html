@@ -1,0 +1,38 @@
+{% extends 'reformedacademy/base.html' %}
+{% load staticfiles %}
+{% load courseutils %}
+
+{% block content %}
+    <div class="top-container">
+        <div class="inner">
+            <h1>{{ instructor }}</h1>
+            <div class="description">
+                {{ instructor.biography }}
+            </div>
+        </div>
+    </div>
+    <div class="outline">
+        <div class="h1-container">
+            <h1>Courses</h1>
+        </div>
+        {% for course in instructor.courses.all %}
+        {% progress course as progress %}
+        <a href="{% url 'course' course.slug %}">
+            <div class="section home">
+                <div class="inner">
+                    {% if progress.completed %}
+                    <i class="fa fa-check-circle-o"></i>
+                    {% else %}
+                    <i class="fa fa-circle-o"></i>
+                    {% endif %}
+                    <h1>{{ course.name }}</h1>
+                    <h2>{{ course.category }}</h2>
+                    <div class="description">
+                        {{ course.description }}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}
