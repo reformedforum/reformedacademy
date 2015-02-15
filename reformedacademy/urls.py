@@ -22,6 +22,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
+from reformedacademy.api import BookResource
 from reformedacademy.feeds import CourseFeed
 from reformedacademy.views import SignUpFormView, LoginFormView, ProfileFormView, PasswordFormView
 from rfmedia.api import StatResource, AssetResource
@@ -32,6 +33,7 @@ admin.autodiscover()
 v1_api = Api(api_name='v1')
 v1_api.register(StatResource())
 v1_api.register(AssetResource())
+v1_api.register(BookResource())
 
 urlpatterns = patterns('',
     url(r'^$', 'reformedacademy.views.closed_index', name='closed_index'),
