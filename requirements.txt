@@ -4,8 +4,10 @@ MySQL-python==1.2.5
 Pillow==2.5.3
 boto==2.32.1
 django-cleanup==0.1.10
+django-debug-toolbar==1.2.2
 django-filter==0.7
 django-ipware==0.0.8
+django-secure==1.0
 django-ses==0.6.0
 django-storages==1.1.8
 django-tastypie==0.12.0
@@ -13,4 +15,5 @@ python-dateutil==2.2
 python-mimeparse==0.1.4
 pytz==2014.7
 six==1.7.3
+sqlparse==0.1.14
 wsgiref==0.1.2
