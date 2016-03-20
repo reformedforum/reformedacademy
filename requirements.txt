@@ -10,7 +10,7 @@ django-ipware==0.0.8
 django-secure==1.0
 django-ses==0.6.0
 django-storages==1.1.8
-django-tastypie==0.12.0
+django-tastypie==0.12.2
 python-dateutil==2.2
 python-mimeparse==0.1.4
 pytz==2014.7
