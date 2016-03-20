@@ -29,7 +29,7 @@ TEMPLATE_DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'gomoto',                      # Name of the database to connect to.
+        'NAME': 'reformedacademy',                      # Name of the database to connect to.
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '',                            # Set to empty string for localhost. Not used with sqlite3.

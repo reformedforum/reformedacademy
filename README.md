@@ -63,8 +63,8 @@ Updated local_settings.py.
 ###Create and activate a virtual environment
 
     pip install virtualenv
-    virtualenv env
-    . env/bin/activate
+    virtualenv .venv
+    . .venv/bin/activate
 
 ###Install project dependencies
 

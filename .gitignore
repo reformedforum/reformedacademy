@@ -26,6 +26,9 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
+# Virtualenv
+.venv/
+
 # Unit test / coverage reports
 .tox/
 .coverage
@@ -63,3 +66,8 @@ bower_components/
 
 # NPM
 node_modules/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
