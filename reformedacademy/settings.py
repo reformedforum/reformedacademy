@@ -42,7 +42,7 @@ ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reforme
                  'media.reformedforum.org']
 
 # Beta
-BETA_ENABLED = False
+BETA_ENABLED = True
 
 # Application definition
 
