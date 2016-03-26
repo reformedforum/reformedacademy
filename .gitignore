@@ -71,3 +71,9 @@ node_modules/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Development SQL Files
+sql/*.sql
+
+# Ugh, these files
+*.DS_Store

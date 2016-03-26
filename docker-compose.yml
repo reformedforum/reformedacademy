@@ -6,3 +6,5 @@ db:
         MYSQL_USER: "root"
         MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
         MYSQL_DATABASE: "reformedacademy"
+    volumes:
+        - ./sql:/docker-entrypoint-initdb.d
