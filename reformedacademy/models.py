@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from bible.djangoforms import VerseField
 from django.db import models
@@ -339,8 +339,7 @@ class CourseProgress(models.Model):
     course = models.ForeignKey(Course)
     started = models.DateTimeField(auto_now=True)
     completed = models.DateTimeField(null=True)
-    percentage_complete = models.PositiveIntegerField(max_length=3, default=0,
-                                                      help_text="Always a whole number.")
+    percentage_complete = models.PositiveIntegerField(default=0, help_text="Always a whole number.")
 
     def calc_progress(self, user):
         """Calculates the percentage complete for a course and saves to percentage_complete."""

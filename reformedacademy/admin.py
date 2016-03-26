@@ -47,7 +47,6 @@ class TaskInline(admin.TabularInline):
             changeform_url = reverse(
                 'admin:reformedacademy_task_change', args=(instance.id,)
             )
-            print changeform_url
             return u'<a href="{}" onclick="return showAddAnotherPopup(this);">Details</a>'.format(changeform_url)
         return u'Details (save first)'
 

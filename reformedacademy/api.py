@@ -21,7 +21,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 """
 from tastypie.resources import ModelResource
 from tastypie.authentication import ApiKeyAuthentication
-from models import Book
+from .models import Book
 
 
 class BookResource(ModelResource):

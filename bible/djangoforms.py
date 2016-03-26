@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from models import Verse, RangeError
+from .models import Verse, RangeError
 
 class VerseFormField(forms.Field):
     def clean(self, value):
