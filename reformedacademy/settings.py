@@ -69,8 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'djangosecure.middleware.SecurityMiddleware',
-    'reformedacademy.middleware.BetaMiddleware'
+    'djangosecure.middleware.SecurityMiddleware'
 )
 
 ROOT_URLCONF = 'reformedacademy.urls'
