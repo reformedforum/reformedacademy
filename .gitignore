@@ -53,6 +53,7 @@ reports/
 *.pot
 local_settings.py
 media/
+static/
 
 # Amazon
 .elasticbeanstalk/
@@ -71,3 +72,9 @@ node_modules/
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Development SQL Files
+sql/*.sql
+
+# Ugh, these files
+*.DS_Store

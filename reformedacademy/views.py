@@ -28,7 +28,6 @@ from django.core.mail import send_mail
 from django.db.models import Sum, Q, Count
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.forms.util import ErrorList
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
@@ -152,16 +151,12 @@ class LoginFormView(View):
                     messages.info(request, 'You are now logged in.')
                     return HttpResponseRedirect(reverse('index'))
                 else:
-                    errors = form._errors.setdefault(forms.forms.NON_FIELD_ERRORS, ErrorList())
-                    message = 'You cannot login at this time because your account is disabled.'
-                    errors.append(message)
+                    form.add_error('email', 'You cannot login at this time because your account is disabled.')
             else:
-                errors = form._errors.setdefault(forms.forms.NON_FIELD_ERRORS, ErrorList())
-                errors.append('Invalid login.')
+                form.add_error('email', 'Invalid login.')
 
         return render(request, self.template_name, {
-            'form': form,
-            'beta_enabled': settings.BETA_ENABLED
+            'form': form
         })
 
 
