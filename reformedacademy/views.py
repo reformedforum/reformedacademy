@@ -265,7 +265,7 @@ def course(request, slug):
 
 def lesson(request, course_slug, lesson_slug):
     """The lesson page."""
-    lesson = get_object_or_404(Lesson, slug=lesson_slug)
+    lesson = get_object_or_404(Lesson, slug=lesson_slug, course__slug=course_slug)
     return render(request, 'reformedacademy/lesson.html', {
         'lesson': lesson
     })
