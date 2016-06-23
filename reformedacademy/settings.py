@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'reformedacademy',
     'rfmedia',
+    'publishing',
     'tastypie',
     'storages',
     'djangosecure',

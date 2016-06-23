@@ -25,6 +25,7 @@ from django.contrib import admin
 from reformedacademy.api import BookResource
 from reformedacademy.feeds import CourseFeed
 from reformedacademy.views import SignUpFormView, LoginFormView, ProfileFormView, PasswordFormView
+from publishing.views import TagMP3View
 from rfmedia.api import StatResource, AssetResource
 from tastypie.api import Api
 
@@ -74,6 +75,10 @@ urlpatterns = patterns('',
     # Media system
     url(r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)',
         'rfmedia.views.download', name='download_asset'),
+
+    # Publishing system
+    url(r'^publishing/tagmp3/', TagMP3View.as_view(), name='publishing_tagmp3'),
+    url(r'^publishing/', 'publishing.views.index', name='publishing_index'),
 )
 
 if settings.DEBUG:
