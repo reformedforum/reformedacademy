@@ -56,6 +56,8 @@ class Asset(models.Model):
             extension = 'mp3' if 'mpeg' in self.mime_type else 'ogg'
         elif 'video' in self.mime_type:
             extension = 'video'
+        elif 'pdf' in self.mime_type:
+            extension = 'pdf'
 
         return reverse('download_asset', args=['web', self.type.name,
                                                '{tag}.{extension}'.format(
