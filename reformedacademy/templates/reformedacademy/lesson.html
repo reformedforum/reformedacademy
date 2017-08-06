@@ -62,6 +62,11 @@
                 {% if task.asset and 'video' in task.asset.mime_type %}
                     <iframe width="560" height="315" src="{{ task.asset.download_url }}" frameborder="0" allowfullscreen></iframe>
                 {% endif %}
+                {% if task.asset and 'pdf' in task.asset.mime_type %}
+                    <div class="download">
+                        <a href="{{ task.asset.download_url }}">Download PDF</a>
+                    </div>
+                {% endif %}
                 {% if task.book %}
                     <div class="book">
                         <img src="{{ MEDIA_URL }}{{ task.book.cover_image }}" alt="{{ task.book }} Book Image">
