@@ -39,7 +39,7 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy',
-                 'media.reformedforum.org']
+                 'media.reformedforum.org', 'localhost']
 
 # Beta
 BETA_ENABLED = True

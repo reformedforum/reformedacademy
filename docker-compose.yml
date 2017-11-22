@@ -1,10 +1,6 @@
-db:
-    image: mysql
+reformedacademy:
+    build: .
     ports:
-        - "3306:3306"
-    environment:
-        MYSQL_USER: "root"
-        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-        MYSQL_DATABASE: "reformedacademy"
+        - "80:80"
     volumes:
-        - ./sql:/docker-entrypoint-initdb.d
+        - ./:/home/docker/code

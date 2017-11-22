@@ -1,9 +1,0 @@
-version: '2'
-services:
-    web:
-        environment:
-            - SERVER_ENVIRONMENT=prod
-            - DJANGO_SETTINGS_MODULE=reformedacademy.settings
-        ports:
-            - "443:443"
-        restart: always
