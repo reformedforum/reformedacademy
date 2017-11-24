@@ -1,6 +1,10 @@
-reformedacademy:
+version: '2'
+services:
+  reformedacademy:
     build: .
     ports:
-        - "80:80"
+      - "80:80"
+    environment:
+      DJANGO_SETTINGS_MODULE: reformedacademy.local_settings
     volumes:
-        - ./:/home/docker/code
+      - ./:/home/docker/code
