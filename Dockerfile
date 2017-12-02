@@ -47,7 +47,5 @@ COPY . /home/docker/code/
 RUN mkdir /var/log/uwsgi
 RUN chmod 777 /var/log/uwsgi
 
-RUN python3 /home/docker/code/manage.py collectstatic --settings=reformedacademy.local_settings --noinput
-
 EXPOSE 80
-CMD ["supervisord", "-n"]
+CMD ["/home/docker/code/run.sh"]

@@ -24,8 +24,7 @@ from .settings import *
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['reformedacademy-develop-pmcfdpkypx.elasticbeanstalk.com',
-                 'staging.reformed.academy']
+ALLOWED_HOSTS = ['*']
 
 # HTTPS
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

@@ -202,6 +202,11 @@ def activate(request, user_id, key):
     return HttpResponseRedirect(reverse('welcome'))
 
 
+def health(request):
+    """Checks to see if everything is healthy."""
+    return render(request, 'reformedacademy/health.html')
+
+
 @login_required
 def welcome(request):
     """Displays a welcome page for newly activated users."""
