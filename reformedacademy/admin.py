@@ -70,7 +70,7 @@ class LessonAdmin(admin.ModelAdmin):
     model = models.Lesson
     inlines = [TaskInline]
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ('__unicode__', 'course', 'order')
+    list_display = ('__str__', 'course', 'order')
     list_filter = ('course',)
     list_editable = ('order',)
     ordering = ('course', 'order')
@@ -101,6 +101,7 @@ class BookAdmin(admin.ModelAdmin):
 
 class UserAdmin(UserAdmin):
     list_display = ('email',)
+
 
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Category, CategoryAdmin)
