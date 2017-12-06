@@ -1,10 +1,10 @@
-db:
-    image: mysql
+version: '2'
+services:
+  reformedacademy:
+    build: .
     ports:
-        - "3306:3306"
+      - "8000:8000"
     environment:
-        MYSQL_USER: "root"
-        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-        MYSQL_DATABASE: "reformedacademy"
+      DJANGO_SETTINGS_MODULE: reformedacademy.local_settings
     volumes:
-        - ./sql:/docker-entrypoint-initdb.d
+      - ./:/home/docker/code

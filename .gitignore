@@ -77,3 +77,4 @@ sql/*.sql
 
 # Ugh, these files
 *.DS_Store
+/static

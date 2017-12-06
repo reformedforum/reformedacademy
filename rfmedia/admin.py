@@ -20,7 +20,7 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 from django.contrib import admin
-from models import Stat, Asset, Type
+from .models import Stat, Asset, Type
 
 
 class AssetAdmin(admin.ModelAdmin):

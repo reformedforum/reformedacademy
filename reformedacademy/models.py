@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from bible.djangoforms import VerseField
 from django.db import models
@@ -42,7 +42,7 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = "categories"
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -50,7 +50,7 @@ class User(AbstractUser):
     biography = models.TextField(blank=True)
     profile_image = models.ImageField(upload_to='profile_images', blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
 
     # def progress_for_course(self, course):
@@ -121,7 +121,7 @@ class Course(models.Model):
         if progress:
             progress.delete()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def __eq__(self, other):
@@ -195,7 +195,7 @@ class Lesson(models.Model):
     class Meta:
         ordering = ['order']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -205,7 +205,7 @@ class Book(models.Model):
     authors = models.ManyToManyField(User, blank=True)
     cover_image = models.ImageField(upload_to='cover_images')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -284,7 +284,7 @@ class Task(models.Model):
     class Meta:
         ordering = ['order']
 
-    def __unicode__(self):
+    def __str__(self):
         return '{}'.format(self.name)
 
 
@@ -339,8 +339,7 @@ class CourseProgress(models.Model):
     course = models.ForeignKey(Course)
     started = models.DateTimeField(auto_now=True)
     completed = models.DateTimeField(null=True)
-    percentage_complete = models.PositiveIntegerField(max_length=3, default=0,
-                                                      help_text="Always a whole number.")
+    percentage_complete = models.PositiveIntegerField(default=0, help_text="Always a whole number.")
 
     def calc_progress(self, user):
         """Calculates the percentage complete for a course and saves to percentage_complete."""
@@ -369,7 +368,7 @@ class CourseProgress(models.Model):
         self.completed = timezone.now()
         self.save()
 
-    def __unicode__(self):
+    def __str__(self):
         return '{user} {course}'.format(user=self.user, course=self.course)
 
 

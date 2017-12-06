@@ -38,11 +38,10 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['reformedacademy-env-52wzhrapqv.elasticbeanstalk.com', 'reformed.academy',
-                 'media.reformedforum.org']
+ALLOWED_HOSTS = ['*']
 
 # Beta
-BETA_ENABLED = True
+BETA_ENABLED = False
 
 # Application definition
 
@@ -106,7 +105,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
-SECURE_REDIRECT_EXEMPT = [r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)']
+SECURE_REDIRECT_EXEMPT = [r'^assets/download/(?P<method>[-% \w]+)/(?P<type>[-% \w]+)/(?P<asset>[-% \w]+)', r'^health/']
 
 # Amazon storage settings
 DEFAULT_FILE_STORAGE = 'reformedacademy.s3utils.MediaRootS3BotoStorage'

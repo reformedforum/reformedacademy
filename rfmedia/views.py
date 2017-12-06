@@ -20,8 +20,8 @@ along with Reformed Academy.  If not, see <http://www.gnu.org/licenses/>.
 
 """
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from models import Stat, Asset
-from django.http import HttpResponseRedirect
+from .models import Stat, Asset
+from django.http import HttpResponseRedirect, Http404
 from django.utils import timezone
 from django.shortcuts import redirect
 import os.path

@@ -1,5 +1,5 @@
 import re
-import data
+from . import data
 
 # regular expressions for matching a valid normalized verse string
 verse_re = re.compile(r'^\d{1,2}-\d{1,3}-\d{1,3}(-[a-zA-Z]{2,})?$')
