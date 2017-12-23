@@ -2,6 +2,7 @@ from django import forms
 from django.db import models
 from .models import Verse, RangeError
 
+
 class VerseFormField(forms.Field):
     def clean(self, value):
         """Form field for custom validation entering verses"""
@@ -17,7 +18,6 @@ class VerseFormField(forms.Field):
 
 class VerseField(models.Field):
     description = "A scripture reference to a specific verse"
-    __metaclass__ = models.SubfieldBase
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 8
@@ -28,6 +28,8 @@ class VerseField(models.Field):
 
     def get_prep_value(self, value):
         return hash(value)
+
+    # def from_db_value(self, value, expression, connection, context):
 
     def to_python(self, value):
         if value is None or type(value) is Verse:
