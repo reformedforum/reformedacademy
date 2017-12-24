@@ -36,8 +36,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-TEMPLATE_DEBUG = False
-
 ALLOWED_HOSTS = ['*']
 
 # Beta
@@ -68,7 +66,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'djangosecure.middleware.SecurityMiddleware'
+    'djangosecure.middleware.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'reformedacademy.urls'
@@ -88,6 +87,9 @@ if 'RDS_DB_NAME' in os.environ:
             'PASSWORD': os.environ['RDS_PASSWORD'],
             'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
         }
     }
 
@@ -127,6 +129,28 @@ MEDIA_ROOT = '/media/'
 S3_URL = 'https://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = S3_URL + STATIC_ROOT
 MEDIA_URL = S3_URL + MEDIA_ROOT
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.template.context_processors.request",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+]
 
 # Provide custom backend because we authenticate with email addresses
 AUTHENTICATION_BACKENDS = (
