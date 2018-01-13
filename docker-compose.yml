@@ -3,8 +3,9 @@ services:
   reformedacademy:
     build: .
     ports:
-      - "8000:8000"
+      - "80:80"
     environment:
       DJANGO_SETTINGS_MODULE: reformedacademy.local_settings
+      SERVER_ENVIRONMENT: prod
     volumes:
       - ./:/home/docker/code

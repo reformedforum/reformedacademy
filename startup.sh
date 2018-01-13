@@ -9,7 +9,8 @@ python3 manage.py collectstatic --noinput
 python3 manage.py migrate --noinput
 
 if [ "$SERVER_ENVIRONMENT" = "prod" ]; then
-    supervisord -n
+    nginx
+    uwsgi --ini /home/docker/code/uwsgi.ini
 else
     python3 manage.py runserver 0.0.0.0:8000
 fi

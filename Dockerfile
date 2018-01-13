@@ -1,51 +1,36 @@
-FROM ubuntu:16.04
+FROM alpine:3.7
 
-MAINTAINER Dockerfiles
+RUN apk update
+RUN apk add nginx \
+            python3 \
+            uwsgi \
+            uwsgi-python3 \
+            # mysql tools to build python connector
+            python3-dev \
+            mariadb-dev \
+            mariadb-client-libs \
+            g++ \
+            # libraries used by pillow
+            jpeg-dev \
+            zlib-dev
 
-# Install required packages and remove the apt packages cache when done.
+ENV LIBRARY_PATH=/lib:/usr/lib
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y \
-	git \
-	python3 \
-	python3-dev \
-	python3-setuptools \
-	python3-pip \
-	nginx \
-	supervisor \
-	libtiff5-dev \
-	libjpeg8-dev \
-	zlib1g-dev \
-    libfreetype6-dev \
-    liblcms2-dev \
-    libwebp-dev \
-    tcl8.6-dev \
-    tk8.6-dev \
-    python-tk \
-	libmysqlclient-dev && \
-	pip3 install -U pip setuptools && \
-   rm -rf /var/lib/apt/lists/*
+# pip
+ADD requirements.txt /tmp/requirements.txt
+WORKDIR /tmp
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
 
-# install uwsgi now because it takes a little while
-RUN pip3 install uwsgi
+# nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN mkdir -p /run/nginx
 
-# setup all the configfiles
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-COPY nginx-app.conf /etc/nginx/sites-available/default
-COPY supervisor-app.conf /etc/supervisor/conf.d/
-
-# COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
-# to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
-
-COPY requirements.txt /home/docker/code/
-RUN pip3 install -r /home/docker/code/requirements.txt
-
-# add (the rest of) our code
-COPY . /home/docker/code/
-
-RUN mkdir /var/log/uwsgi
-RUN chmod 777 /var/log/uwsgi
+# code
+RUN mkdir -p /code
+WORKDIR /code
+ADD . /code
 
 EXPOSE 80
-CMD ["/home/docker/code/run.sh"]
+
+CMD ["./startup.sh"]
