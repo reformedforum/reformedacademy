@@ -10,7 +10,7 @@ python3 manage.py migrate --noinput
 
 if [ "$SERVER_ENVIRONMENT" = "prod" ]; then
     nginx
-    uwsgi --ini /home/docker/code/uwsgi.ini
+    uwsgi --ini /code/uwsgi.ini
 else
     python3 manage.py runserver 0.0.0.0:8000
 fi

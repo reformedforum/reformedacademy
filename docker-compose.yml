@@ -8,4 +8,4 @@ services:
       DJANGO_SETTINGS_MODULE: reformedacademy.local_settings
       SERVER_ENVIRONMENT: prod
     volumes:
-      - ./:/home/docker/code
+      - ./:/code
